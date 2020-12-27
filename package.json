@@ -1,0 +1,22 @@
+{
+  "name": "twitter-clone-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "server": "node server.js",
+    "devServer": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "devStart": "concurrently \"npm run devServer\" \" npm run client \""
+  },
+  "author": "Milan Radinović",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "express": "^4.17.1",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
