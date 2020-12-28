@@ -7,7 +7,7 @@
     "server": "node server.js",
     "devServer": "nodemon server.js",
     "client": "npm start --prefix client",
-    "devStart": "concurrently \"npm run devServer\" \" npm run client \""
+    "devStart": "concurrently \"npm run devServer\" \"npm run client\""
   },
   "author": "Milan Radinović",
   "license": "MIT",
