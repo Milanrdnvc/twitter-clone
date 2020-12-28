@@ -5,10 +5,25 @@ export default styled.main`
   background-color: var(--color-bg, #15202b);
 `;
 
+export const FeedHeaderStyles = styled.header`
+  color: var(--color-primary, white);
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: var(--font-small);
+  position: sticky;
+  top: 0;
+  height: 50px;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid gray;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+`;
+
 export const CreateTweetBtnStyles = styled.div`
   width: 60px;
   height: 60px;
-  position: absolute;
+  position: fixed;
   bottom: 70px;
   right: 20px;
   background-color: var(--color-fg, #fa0095);
@@ -17,7 +32,6 @@ export const CreateTweetBtnStyles = styled.div`
 `;
 
 export const CreateTweetStyles = styled.div`
-  /* display: none; */
   position: fixed;
   left: 50%;
   top: 50%;
@@ -66,11 +80,50 @@ export const CreateTweetWrapperStyles = styled.div`
 `;
 
 export const CreateTweetBlurBgStyles = styled.div`
-  display: none;
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 20%;
+  bottom: 20%;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
+`;
+
+export const TweetStyles = styled.div`
+  display: flex;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 1rem 0.5rem;
+`;
+
+export const TweetInfoStyles = styled.div`
+  color: white;
+  font-family: sans-serif;
+  font-size: var(--font-small);
+  p {
+    margin: 0;
+  }
+
+  strong,
+  em {
+    color: var(--color-secondary, #b4b4b4);
+  }
+
+  strong {
+    cursor: pointer;
+  }
+`;
+
+export const TweetPfpStyles = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  cursor: pointer;
+`;
+
+export const TweetOptionsStyles = styled.div`
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  margin-top: 0.5rem;
 `;

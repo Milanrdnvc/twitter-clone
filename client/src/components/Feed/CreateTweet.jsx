@@ -10,7 +10,8 @@ import {
 } from '../styled/FeedStyles';
 import pfp from '../../pictures/pfp.jpg';
 
-function CreateTweet() {
+function CreateTweet({ openModal }) {
+  if (!openModal) return null;
   return ReactDOM.createPortal(
     <CreateTweetBlurBgStyles>
       <CreateTweetStyles>
@@ -21,7 +22,6 @@ function CreateTweet() {
             <svg
               style={{ width: '30px', cursor: 'pointer' }}
               viewBox="0 0 24 24"
-              class="r-13gxpu9 r-4qtqp9 r-yyyyoo r-1q142lx r-50lct3 r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1srniue"
             >
               <g>
                 <path

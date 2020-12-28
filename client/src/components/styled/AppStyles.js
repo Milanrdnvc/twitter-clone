@@ -15,6 +15,7 @@ body {
   --color-bg: #15202b;
   --color-fg: #fa0095;
   --color-primary: white;
+  --color-secondary: #b4b4b4;
   --font-large: 2rem;
   --font-medium: 1.5rem;
   --font-small: 1rem;
