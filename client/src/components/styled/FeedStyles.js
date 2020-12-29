@@ -29,14 +29,19 @@ export const CreateTweetBtnStyles = styled.div`
   background-color: var(--color-fg, #fa0095);
   border-radius: 50%;
   cursor: pointer;
+
+  @media (min-width: 500px) {
+    display: none;
+  }
 `;
 
 export const CreateTweetStyles = styled.div`
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
+
+  @media (min-width: 500px) {
+    flex-grow: 1;
+    padding: 1rem 0.5rem;
+  }
 `;
 
 export const CreateTweetFormStyles = styled.textarea`
@@ -47,6 +52,10 @@ export const CreateTweetFormStyles = styled.textarea`
   border-bottom: 1px solid white;
   resize: none;
   color: var(--color-primary, white);
+
+  @media (min-width: 500px) {
+    border: none;
+  }
 `;
 
 export const CreateTweetPfpStyles = styled.img`
@@ -77,15 +86,27 @@ export const TweetBtnStyles = styled.button`
 export const CreateTweetWrapperStyles = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (min-width: 500px) {
+    flex-grow: 1;
+  }
 `;
 
 export const CreateTweetBlurBgStyles = styled.div`
-  position: absolute;
+  position: fixed;
   top: 20%;
   bottom: 20%;
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 500px) {
+    position: static;
+    background-color: transparent;
+  }
 `;
 
 export const TweetStyles = styled.div`
@@ -124,6 +145,5 @@ export const TweetPfpStyles = styled.img`
 export const TweetOptionsStyles = styled.div`
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   margin-top: 0.5rem;
 `;

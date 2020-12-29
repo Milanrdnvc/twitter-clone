@@ -30,7 +30,6 @@ function Tweet() {
             <svg
               style={{ width: '25px', cursor: 'pointer' }}
               viewBox="0 0 24 24"
-              class="r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1hdv0qi"
             >
               <g>
                 <path
@@ -51,7 +50,6 @@ function Tweet() {
             <svg
               style={{ width: '25px', cursor: 'pointer' }}
               viewBox="0 0 24 24"
-              class="r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1hdv0qi"
             >
               <g>
                 <path

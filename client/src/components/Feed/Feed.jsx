@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FeedStyles from '../styled/FeedStyles';
 import CreateTweet from './CreateTweet';
 import Tweet from './Tweet';
@@ -10,6 +10,14 @@ function Feed() {
   function toggleCreateTweetModal() {
     setOpenModal(prev => !prev);
   }
+
+  useEffect(() => {
+    function handleWindowResize() {
+      if (window.innerWidth >= 500) setOpenModal(true);
+    }
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
 
   return (
     <FeedStyles>
@@ -31,6 +39,12 @@ function Feed() {
         </svg>
       </CreateTweetBtnStyles>
       <CreateTweet openModal={openModal} />
+      <Tweet />
+      <Tweet />
+      <Tweet />
+      <Tweet />
+      <Tweet />
+      <Tweet />
       <Tweet />
       <Tweet />
       <Tweet />

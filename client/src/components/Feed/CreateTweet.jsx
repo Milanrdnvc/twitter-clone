@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import {
   CreateTweetStyles,
   CreateTweetFormStyles,
@@ -12,7 +11,7 @@ import pfp from '../../pictures/pfp.jpg';
 
 function CreateTweet({ openModal }) {
   if (!openModal) return null;
-  return ReactDOM.createPortal(
+  return (
     <CreateTweetBlurBgStyles>
       <CreateTweetStyles>
         <CreateTweetPfpStyles src={pfp} />
@@ -35,8 +34,7 @@ function CreateTweet({ openModal }) {
           </CreateTweetOptionsStyles>
         </CreateTweetWrapperStyles>
       </CreateTweetStyles>
-    </CreateTweetBlurBgStyles>,
-    document.querySelector('#modal')
+    </CreateTweetBlurBgStyles>
   );
 }
 
