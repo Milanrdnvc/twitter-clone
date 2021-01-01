@@ -20,6 +20,10 @@ export default styled.aside`
     align-items: center;
     padding: 1rem 0;
   }
+
+  @media (min-width: 1000px) {
+    /* align-items: flex-end; */
+  }
 `;
 
 export const OptionsStyles = styled.ul`
@@ -56,4 +60,13 @@ export const ProfilePfpStyles = styled.img`
   cursor: pointer;
 `;
 
-export const SidebarWrapperStyles = styled.div``;
+export const LogoStyles = styled.img`
+  cursor: pointer;
+  width: 50px;
+  margin-bottom: 2rem;
+  display: none;
+
+  @media (min-width: 500px) {
+    display: block;
+  }
+`;

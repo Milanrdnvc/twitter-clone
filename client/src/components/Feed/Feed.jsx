@@ -13,16 +13,24 @@ function Feed() {
 
   useEffect(() => {
     function handleWindowResize() {
-      if (window.innerWidth >= 500) setOpenModal(true);
+      if (window.innerWidth >= 500 && !openModal) setOpenModal(true);
+      else if (!openModal) setOpenModal(false);
     }
-    window.addEventListener('resize', handleWindowResize);
-    return () => window.removeEventListener('resize', handleWindowResize);
-  }, []);
+    window.onresize = handleWindowResize;
+    // window.addEventListener('resize', handleWindowResize);
+    return () => (window.onresize = null);
+  }, [openModal]);
 
   return (
     <FeedStyles>
       <FeedHeaderStyles>Latest Tweets</FeedHeaderStyles>
-      <CreateTweetBtnStyles onClick={toggleCreateTweetModal}>
+      <CreateTweetBtnStyles
+        onClick={toggleCreateTweetModal}
+        onTouchEnd={e => {
+          e.preventDefault();
+          toggleCreateTweetModal();
+        }}
+      >
         <svg
           style={{
             maxWidth: '50%',

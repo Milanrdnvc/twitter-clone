@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export default styled.main`
   min-height: 100vh;
   background-color: var(--color-bg, #15202b);
+  max-width: 800px;
+  border-right: 1px solid gray;
 `;
 
 export const FeedHeaderStyles = styled.header`

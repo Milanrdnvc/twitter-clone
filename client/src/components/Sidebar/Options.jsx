@@ -1,8 +1,14 @@
-import { OptionsStyles, OptionStyles } from '../styled/SidebarStyles';
+import {
+  OptionsStyles,
+  OptionStyles,
+  LogoStyles,
+} from '../styled/SidebarStyles';
+import logo from '../../pictures/logo.png';
 
 function Options() {
   return (
     <OptionsStyles>
+      <LogoStyles src={logo} alt="logo" />
       <OptionStyles>
         <a href="#">
           <svg viewBox="0 0 24 24">
