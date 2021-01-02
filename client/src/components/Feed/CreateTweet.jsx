@@ -1,23 +1,23 @@
 import {
-  CreateTweetStyles,
-  CreateTweetFormStyles,
-  CreateTweetPfpStyles,
-  CreateTweetOptionsStyles,
-  CreateTweetWrapperStyles,
-  TweetBtnStyles,
-  CreateTweetBlurBgStyles,
+  CreateTweetWrapper,
+  CreateTweetForm,
+  CreateTweetPfp,
+  CreateTweetOptions,
+  CreateTweetFormWrapper,
+  TweetBtn,
+  CreateTweetBlurBg,
 } from '../styled/FeedStyles';
 import pfp from '../../pictures/pfp.jpg';
 
 function CreateTweet({ openModal }) {
   if (!openModal) return null;
   return (
-    <CreateTweetBlurBgStyles>
-      <CreateTweetStyles>
-        <CreateTweetPfpStyles src={pfp} />
-        <CreateTweetWrapperStyles>
-          <CreateTweetFormStyles placeholder="What's happening?" rows="5" />
-          <CreateTweetOptionsStyles>
+    <CreateTweetBlurBg>
+      <CreateTweetWrapper>
+        <CreateTweetPfp src={pfp} />
+        <CreateTweetFormWrapper>
+          <CreateTweetForm placeholder="What's happening?" rows="5" />
+          <CreateTweetOptions>
             <svg
               style={{ width: '30px', cursor: 'pointer' }}
               viewBox="0 0 24 24"
@@ -30,11 +30,11 @@ function CreateTweet({ openModal }) {
                 <circle fill="#fa0095" cx="8.868" cy="8.309" r="1.542"></circle>
               </g>
             </svg>
-            <TweetBtnStyles>Tuwueet</TweetBtnStyles>
-          </CreateTweetOptionsStyles>
-        </CreateTweetWrapperStyles>
-      </CreateTweetStyles>
-    </CreateTweetBlurBgStyles>
+            <TweetBtn>Tuwueet</TweetBtn>
+          </CreateTweetOptions>
+        </CreateTweetFormWrapper>
+      </CreateTweetWrapper>
+    </CreateTweetBlurBg>
   );
 }
 

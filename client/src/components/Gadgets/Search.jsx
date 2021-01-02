@@ -1,7 +1,7 @@
-import { SearchStyles } from '../styled/GadgetsStyles';
+import { SearchWrapper } from '../styled/GadgetsStyles';
 
 function Search() {
-  return <SearchStyles placeholder="Search Tuwuitter"></SearchStyles>;
+  return <SearchWrapper placeholder="Search Tuwuitter"></SearchWrapper>;
 }
 
 export default Search;

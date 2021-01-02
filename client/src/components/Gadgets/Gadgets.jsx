@@ -1,15 +1,15 @@
 import Search from './Search';
 import Trends from './Trends';
 import WhoToFollow from './WhoToFollow';
-import GadgetsStyles from '../styled/GadgetsStyles';
+import GadgetsWrapper from '../styled/GadgetsStyles';
 
 function Gadgets() {
   return (
-    <GadgetsStyles>
+    <GadgetsWrapper>
       <Search />
       <Trends />
       <WhoToFollow />
-    </GadgetsStyles>
+    </GadgetsWrapper>
   );
 }
 

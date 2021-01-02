@@ -7,7 +7,7 @@ export default styled.main`
   border-right: 1px solid gray;
 `;
 
-export const FeedHeaderStyles = styled.header`
+export const FeedHeader = styled.header`
   color: var(--color-primary, white);
   font-family: sans-serif;
   font-weight: 600;
@@ -22,7 +22,7 @@ export const FeedHeaderStyles = styled.header`
   padding: 0.5rem;
 `;
 
-export const CreateTweetBtnStyles = styled.div`
+export const CreateTweetBtn = styled.div`
   width: 60px;
   height: 60px;
   position: fixed;
@@ -37,7 +37,7 @@ export const CreateTweetBtnStyles = styled.div`
   }
 `;
 
-export const CreateTweetStyles = styled.div`
+export const CreateTweetWrapper = styled.div`
   display: flex;
 
   @media (min-width: 500px) {
@@ -46,7 +46,7 @@ export const CreateTweetStyles = styled.div`
   }
 `;
 
-export const CreateTweetFormStyles = styled.textarea`
+export const CreateTweetForm = styled.textarea`
   font-family: sans-serif;
   font-size: var(--font-medium, 1rem);
   background-color: transparent;
@@ -60,21 +60,21 @@ export const CreateTweetFormStyles = styled.textarea`
   }
 `;
 
-export const CreateTweetPfpStyles = styled.img`
+export const CreateTweetPfp = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 0.5rem;
 `;
 
-export const CreateTweetOptionsStyles = styled.div`
+export const CreateTweetOptions = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 0.5rem;
 `;
 
-export const TweetBtnStyles = styled.button`
+export const TweetBtn = styled.button`
   border: none;
   color: var(--color-primary, white);
   background-color: var(--color-fg, #fa0095);
@@ -85,7 +85,7 @@ export const TweetBtnStyles = styled.button`
   cursor: pointer;
 `;
 
-export const CreateTweetWrapperStyles = styled.div`
+export const CreateTweetFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -94,7 +94,7 @@ export const CreateTweetWrapperStyles = styled.div`
   }
 `;
 
-export const CreateTweetBlurBgStyles = styled.div`
+export const CreateTweetBlurBg = styled.div`
   position: fixed;
   top: 20%;
   bottom: 20%;
@@ -111,14 +111,14 @@ export const CreateTweetBlurBgStyles = styled.div`
   }
 `;
 
-export const TweetStyles = styled.div`
+export const TweetWrapper = styled.div`
   display: flex;
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
   padding: 1rem 0.5rem;
 `;
 
-export const TweetInfoStyles = styled.div`
+export const TweetInfo = styled.div`
   color: white;
   font-family: sans-serif;
   font-size: var(--font-small);
@@ -136,7 +136,7 @@ export const TweetInfoStyles = styled.div`
   }
 `;
 
-export const TweetPfpStyles = styled.img`
+export const TweetPfp = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -144,7 +144,7 @@ export const TweetPfpStyles = styled.img`
   cursor: pointer;
 `;
 
-export const TweetOptionsStyles = styled.div`
+export const TweetOptions = styled.div`
   display: flex;
   align-items: center;
   margin-top: 0.5rem;

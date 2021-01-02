@@ -26,7 +26,7 @@ export default styled.aside`
   }
 `;
 
-export const OptionsStyles = styled.ul`
+export const OptionsWrapper = styled.ul`
   list-style-type: none;
   display: flex;
   justify-content: space-around;
@@ -40,12 +40,12 @@ export const OptionsStyles = styled.ul`
   }
 `;
 
-export const OptionStyles = styled.li`
+export const Option = styled.li`
   max-width: 30px;
   margin: 0.5rem;
 `;
 
-export const ProfileStyles = styled.div`
+export const ProfileWrapper = styled.div`
   display: none;
 
   @media (min-width: 500px) {
@@ -53,14 +53,14 @@ export const ProfileStyles = styled.div`
   }
 `;
 
-export const ProfilePfpStyles = styled.img`
+export const ProfilePfp = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
 `;
 
-export const LogoStyles = styled.img`
+export const Logo = styled.img`
   cursor: pointer;
   width: 50px;
   margin-bottom: 2rem;

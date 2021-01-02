@@ -1,38 +1,34 @@
-import {
-  TrendsStyles,
-  TrendStyles,
-  TrendsHeaderStyles,
-} from '../styled/GadgetsStyles';
+import { TrendsWrapper, Trend, TrendsHeader } from '../styled/GadgetsStyles';
 
 function Trends() {
   return (
-    <TrendsStyles>
-      <TrendsHeaderStyles>TrendsForYou</TrendsHeaderStyles>
-      <TrendStyles>
+    <TrendsWrapper>
+      <TrendsHeader>TrendsForYou</TrendsHeader>
+      <Trend>
         <em>Politics - Trending</em>
         <br />
         <strong>Covid</strong> <br />
         <em>2.08M Tuwueets</em> <br />
-      </TrendStyles>
-      <TrendStyles>
+      </Trend>
+      <Trend>
         <em>Politics - Trending</em>
         <br />
         <strong>Covid</strong> <br />
         <em>2.08M Tuwueets</em> <br />
-      </TrendStyles>
-      <TrendStyles>
+      </Trend>
+      <Trend>
         <em>Politics - Trending</em>
         <br />
         <strong>Covid</strong> <br />
         <em>2.08M Tuwueets</em> <br />
-      </TrendStyles>
-      <TrendStyles>
+      </Trend>
+      <Trend>
         <em>Politics - Trending</em>
         <br />
         <strong>Covid</strong> <br />
         <em>2.08M Tuwueets</em> <br />
-      </TrendStyles>
-    </TrendsStyles>
+      </Trend>
+    </TrendsWrapper>
   );
 }
 

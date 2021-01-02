@@ -9,7 +9,7 @@ export default styled.div`
   }
 `;
 
-export const SearchStyles = styled.input`
+export const SearchWrapper = styled.input`
   background-color: transparent;
   border: 1px solid gray;
   border-radius: 10px;
@@ -19,11 +19,11 @@ export const SearchStyles = styled.input`
   margin-top: 0.5rem;
 `;
 
-export const TrendsStyles = styled.div`
+export const TrendsWrapper = styled.div`
   margin-top: 1rem;
 `;
 
-export const TrendsHeaderStyles = styled.div`
+export const TrendsHeader = styled.div`
   color: var(--color-primary, white);
   font-family: sans-serif;
   font-weight: 600;
@@ -32,7 +32,7 @@ export const TrendsHeaderStyles = styled.div`
   padding: 1rem;
 `;
 
-export const TrendStyles = styled.div`
+export const Trend = styled.div`
   color: var(--color-primary, white);
   font-family: sans-serif;
   border: 1px solid gray;
@@ -42,4 +42,4 @@ export const TrendStyles = styled.div`
   }
 `;
 
-export const WhoToFollowStyles = styled.div``;
+export const WhoToFollowWrapper = styled.div``;

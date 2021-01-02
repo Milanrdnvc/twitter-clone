@@ -1,16 +1,16 @@
 import {
-  TweetStyles,
-  TweetInfoStyles,
-  TweetPfpStyles,
-  TweetOptionsStyles,
+  TweetWrapper,
+  TweetInfo,
+  TweetPfp,
+  TweetOptions,
 } from '../styled/FeedStyles';
 import pfp from '../../pictures/pfp.jpg';
 
 function Tweet() {
   return (
-    <TweetStyles>
-      <TweetPfpStyles src={pfp} />
-      <TweetInfoStyles>
+    <TweetWrapper>
+      <TweetPfp src={pfp} />
+      <TweetInfo>
         <p>
           <strong>Milan Radinovic</strong> <em>18h</em>
           <br />
@@ -19,7 +19,7 @@ function Tweet() {
           provident perferendis alias laborum accusantium quia odio minima
           expedita numquam deserunt labore suscipit?
         </p>
-        <TweetOptionsStyles>
+        <TweetOptions>
           <div
             style={{
               display: 'flex',
@@ -60,9 +60,9 @@ function Tweet() {
             </svg>
             20
           </div>
-        </TweetOptionsStyles>
-      </TweetInfoStyles>
-    </TweetStyles>
+        </TweetOptions>
+      </TweetInfo>
+    </TweetWrapper>
   );
 }
 

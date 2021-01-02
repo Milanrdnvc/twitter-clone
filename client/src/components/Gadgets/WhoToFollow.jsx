@@ -1,7 +1,7 @@
-import { WhoToFollowStyles } from '../styled/GadgetsStyles';
+import { WhoToFollowWrapper } from '../styled/GadgetsStyles';
 
 function WhoToFollow() {
-  return <WhoToFollowStyles></WhoToFollowStyles>;
+  return <WhoToFollowWrapper></WhoToFollowWrapper>;
 }
 
 export default WhoToFollow;

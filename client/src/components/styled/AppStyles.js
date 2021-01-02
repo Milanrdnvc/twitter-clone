@@ -23,8 +23,9 @@ body {
 }
 `;
 
-export const AppWrapperStyles = styled.div`
+export const AppWrapper = styled.div`
   @media (min-width: 500px) {
+    justify-content: center;
     display: flex;
   }
 `;

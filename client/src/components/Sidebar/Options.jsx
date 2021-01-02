@@ -1,15 +1,11 @@
-import {
-  OptionsStyles,
-  OptionStyles,
-  LogoStyles,
-} from '../styled/SidebarStyles';
+import { OptionsWrapper, Option, Logo } from '../styled/SidebarStyles';
 import logo from '../../pictures/logo.png';
 
 function Options() {
   return (
-    <OptionsStyles>
-      <LogoStyles src={logo} alt="logo" />
-      <OptionStyles>
+    <OptionsWrapper>
+      <Logo src={logo} alt="logo" />
+      <Option>
         <a href="#">
           <svg viewBox="0 0 24 24">
             <g>
@@ -20,8 +16,8 @@ function Options() {
             </g>
           </svg>
         </a>
-      </OptionStyles>
-      <OptionStyles>
+      </Option>
+      <Option>
         <a href="#">
           <svg viewBox="0 0 24 24">
             <g>
@@ -32,8 +28,8 @@ function Options() {
             </g>
           </svg>
         </a>
-      </OptionStyles>
-      <OptionStyles>
+      </Option>
+      <Option>
         <a href="#">
           <svg viewBox="0 0 24 24">
             <g>
@@ -48,8 +44,8 @@ function Options() {
             </g>
           </svg>
         </a>
-      </OptionStyles>
-    </OptionsStyles>
+      </Option>
+    </OptionsWrapper>
   );
 }
 
