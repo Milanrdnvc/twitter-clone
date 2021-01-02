@@ -100,8 +100,9 @@ export const TweetInfo = styled.div`
   color: white;
   font-family: sans-serif;
   font-size: var(--font-small);
+
   p {
-    margin: 0;
+    margin: 0 0 1rem 0;
   }
 
   strong,
@@ -111,6 +112,11 @@ export const TweetInfo = styled.div`
 
   strong {
     cursor: pointer;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 20px;
   }
 `;
 

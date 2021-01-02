@@ -5,6 +5,7 @@ import {
   TweetOptions,
 } from '../styled/FeedStyles';
 import pfp from '../../pictures/pfp.jpg';
+import postPic from '../../pictures/post.png';
 
 function Tweet() {
   return (
@@ -19,6 +20,7 @@ function Tweet() {
           provident perferendis alias laborum accusantium quia odio minima
           expedita numquam deserunt labore suscipit?
         </p>
+        <img src={postPic} alt="Javascript picture" />
         <TweetOptions>
           <div
             style={{
