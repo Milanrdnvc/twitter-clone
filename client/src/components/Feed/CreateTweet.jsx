@@ -9,14 +9,13 @@ import {
 } from '../styled/FeedStyles';
 import pfp from '../../pictures/pfp.jpg';
 
-function CreateTweet({ openModal }) {
-  if (!openModal) return null;
+function CreateTweet() {
   return (
     <CreateTweetBlurBg>
       <CreateTweetWrapper>
         <CreateTweetPfp src={pfp} />
         <CreateTweetFormWrapper>
-          <CreateTweetForm placeholder="What's happening?" rows="5" />
+          <CreateTweetForm placeholder="What's happening?" rows="1" />
           <CreateTweetOptions>
             <svg
               style={{ width: '30px', cursor: 'pointer' }}

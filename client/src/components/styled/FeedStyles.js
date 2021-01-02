@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 
 export default styled.main`
-  min-height: 100vh;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  max-height: 100vh;
+  overflow-y: scroll;
+  -moz-scroll: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   background-color: var(--color-bg, #15202b);
-  max-width: 800px;
   border-right: 1px solid gray;
 `;
 
@@ -20,21 +27,6 @@ export const FeedHeader = styled.header`
   display: flex;
   align-items: center;
   padding: 0.5rem;
-`;
-
-export const CreateTweetBtn = styled.div`
-  width: 60px;
-  height: 60px;
-  position: fixed;
-  bottom: 70px;
-  right: 20px;
-  background-color: var(--color-fg, #fa0095);
-  border-radius: 50%;
-  cursor: pointer;
-
-  @media (min-width: 500px) {
-    display: none;
-  }
 `;
 
 export const CreateTweetWrapper = styled.div`
@@ -95,26 +87,17 @@ export const CreateTweetFormWrapper = styled.div`
 `;
 
 export const CreateTweetBlurBg = styled.div`
-  position: fixed;
-  top: 20%;
-  bottom: 20%;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+  padding: 1rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media (min-width: 500px) {
-    position: static;
-    background-color: transparent;
-  }
+  border-bottom: 0.5px solid gray;
 `;
 
 export const TweetWrapper = styled.div`
   display: flex;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+  border-top: 0.5px solid gray;
+  border-bottom: 0.5px solid gray;
   padding: 1rem 0.5rem;
 `;
 

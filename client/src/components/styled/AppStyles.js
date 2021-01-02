@@ -25,7 +25,8 @@ body {
 
 export const AppWrapper = styled.div`
   @media (min-width: 500px) {
-    justify-content: center;
+    max-width: 1000px;
+    margin: auto;
     display: flex;
   }
 `;

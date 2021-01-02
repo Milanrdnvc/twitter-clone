@@ -9,20 +9,14 @@ export default styled.aside`
   right: 0;
 
   @media (min-width: 500px) {
-    position: sticky;
-    top: 0;
-    width: 20rem;
+    position: static;
     height: 100vh;
     border-right: 1px solid gray;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
-  }
-
-  @media (min-width: 1000px) {
-    /* align-items: flex-end; */
+    padding: 1rem;
   }
 `;
 
