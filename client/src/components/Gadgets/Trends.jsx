@@ -3,7 +3,7 @@ import { TrendsWrapper, Trend, TrendsHeader } from '../styled/GadgetsStyles';
 function Trends() {
   return (
     <TrendsWrapper>
-      <TrendsHeader>TrendsForYou</TrendsHeader>
+      <TrendsHeader>Trends For You</TrendsHeader>
       <Trend>
         <em>Politics - Trending</em>
         <br />

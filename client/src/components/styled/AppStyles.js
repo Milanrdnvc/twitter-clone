@@ -14,6 +14,7 @@ body {
 
 :root {
   --color-bg: #15202b;
+  --color-bg-secondary: #192734;
   --color-fg: #fa0095;
   --color-primary: white;
   --color-secondary: #b4b4b4;
@@ -25,7 +26,7 @@ body {
 
 export const AppWrapper = styled.div`
   @media (min-width: 500px) {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: auto;
     display: flex;
   }

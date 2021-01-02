@@ -1,6 +1,5 @@
 import Search from './Search';
 import Trends from './Trends';
-import WhoToFollow from './WhoToFollow';
 import GadgetsWrapper from '../styled/GadgetsStyles';
 
 function Gadgets() {
@@ -8,7 +7,6 @@ function Gadgets() {
     <GadgetsWrapper>
       <Search />
       <Trends />
-      <WhoToFollow />
     </GadgetsWrapper>
   );
 }
