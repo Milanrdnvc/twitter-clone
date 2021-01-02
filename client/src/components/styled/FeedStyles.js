@@ -43,13 +43,8 @@ export const CreateTweetForm = styled.textarea`
   font-size: var(--font-medium, 1rem);
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid white;
   resize: none;
   color: var(--color-primary, white);
-
-  @media (min-width: 500px) {
-    border: none;
-  }
 `;
 
 export const CreateTweetPfp = styled.img`

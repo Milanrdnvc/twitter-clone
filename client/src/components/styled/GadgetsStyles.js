@@ -11,12 +11,12 @@ export default styled.div`
 `;
 
 export const SearchWrapper = styled.input`
-  background-color: transparent;
-  border: 1px solid gray;
-  border-radius: 10px;
+  background-color: var(--color-bg-tertiary, #253341);
+  border: none;
+  border-radius: 9999px;
   font-size: var(--font-small);
   color: var(--color-primary, white);
-  padding: 0.3rem;
+  padding: 0.5rem;
   margin-top: 1rem;
   width: 100%;
 `;

@@ -24,6 +24,7 @@ export const OptionsWrapper = styled.ul`
   list-style-type: none;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   padding: 0.5rem;
   margin: 0;
   border-top: 1px solid gray;
@@ -32,11 +33,44 @@ export const OptionsWrapper = styled.ul`
     flex-direction: column;
     border-top: none;
   }
+
+  @media (min-width: 1004px) {
+    align-items: flex-start;
+  }
 `;
 
-export const Option = styled.li`
-  max-width: 30px;
-  margin: 0.5rem;
+export const Option = styled.a`
+  margin: 1rem 0;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+  border-radius: 20px;
+
+  &:hover {
+    background-color: rgba(250, 0, 149, 0.3);
+  }
+
+  svg {
+    width: 30px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+`;
+
+export const OptionText = styled.div`
+  text-decoration: none;
+  color: var(--color-primary, white);
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: var(--font-medium);
+  display: none;
+
+  @media (min-width: 1004px) {
+    display: block;
+  }
 `;
 
 export const ProfileWrapper = styled.div`
