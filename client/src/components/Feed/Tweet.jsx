@@ -20,7 +20,7 @@ function Tweet() {
           provident perferendis alias laborum accusantium quia odio minima
           expedita numquam deserunt labore suscipit?
         </p>
-        <img src={postPic} alt="Javascript picture" />
+        <img src={postPic} alt="CSS" />
         <TweetOptions>
           <div
             style={{

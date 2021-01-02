@@ -94,6 +94,12 @@ export const TweetWrapper = styled.div`
   border-top: 0.5px solid gray;
   border-bottom: 0.5px solid gray;
   padding: 1rem 0.5rem;
+  transition: background-color 0.1s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-bg-tertiary);
+  }
 `;
 
 export const TweetInfo = styled.div`
