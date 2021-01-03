@@ -5,14 +5,13 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.use(express.json());
-app.use(cors());
 
 mongoose.connect(
   process.env.MONGODB_CONNECTION_STRING,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   },
   err => {
     if (err) throw err;
@@ -22,3 +21,7 @@ mongoose.connect(
     });
   }
 );
+
+app.use(express.json());
+app.use(cors());
+app.use('/users', require('./routes/user'));
