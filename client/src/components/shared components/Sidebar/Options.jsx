@@ -3,8 +3,8 @@ import {
   Option,
   Logo,
   OptionText,
-} from '../styled/SidebarStyles';
-import logo from '../../pictures/logo.png';
+} from '../../styled/SidebarStyles';
+import logo from '../../../pictures/logo.png';
 
 function Options() {
   return (

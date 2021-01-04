@@ -1,5 +1,5 @@
-import { ProfileWrapper, ProfilePfp } from '../styled/SidebarStyles';
-import pfp from '../../pictures/pfp.jpg';
+import { ProfileWrapper, ProfilePfp } from '../../styled/SidebarStyles';
+import pfp from '../../../pictures/pfp.jpg';
 
 function Profile() {
   return (

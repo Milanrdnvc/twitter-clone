@@ -1,4 +1,4 @@
-import SidebarWrapper from '../styled/SidebarStyles';
+import SidebarWrapper from '../../styled/SidebarStyles';
 import Options from './Options';
 import Profile from './Profile';
 

@@ -6,8 +6,8 @@ import {
   CreateTweetFormWrapper,
   TweetBtn,
   CreateTweetBlurBg,
-} from '../styled/FeedStyles';
-import pfp from '../../pictures/pfp.jpg';
+} from '../../styled/FeedStyles';
+import pfp from '../../../pictures/pfp.jpg';
 
 function CreateTweet() {
   return (

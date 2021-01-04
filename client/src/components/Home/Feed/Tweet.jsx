@@ -3,9 +3,9 @@ import {
   TweetInfo,
   TweetPfp,
   TweetOptions,
-} from '../styled/FeedStyles';
-import pfp from '../../pictures/pfp.jpg';
-import postPic from '../../pictures/post.png';
+} from '../../styled/FeedStyles';
+import pfp from '../../../pictures/pfp.jpg';
+import postPic from '../../../pictures/post.png';
 
 function Tweet() {
   return (

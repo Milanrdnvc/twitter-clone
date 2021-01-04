@@ -1,4 +1,4 @@
-import { TrendsWrapper, Trend, TrendsHeader } from '../styled/GadgetsStyles';
+import { TrendsWrapper, Trend, TrendsHeader } from '../../styled/GadgetsStyles';
 
 function Trends() {
   return (

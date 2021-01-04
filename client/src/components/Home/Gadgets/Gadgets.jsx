@@ -1,6 +1,6 @@
 import Search from './Search';
 import Trends from './Trends';
-import GadgetsWrapper from '../styled/GadgetsStyles';
+import GadgetsWrapper from '../../styled/GadgetsStyles';
 
 function Gadgets() {
   return (

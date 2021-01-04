@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 *, *::before, *::after {
@@ -23,12 +23,4 @@ body {
   --font-medium: 1.5rem;
   --font-small: 1rem;
 }
-`;
-
-export const AppWrapper = styled.div`
-  @media (min-width: 500px) {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-  }
 `;

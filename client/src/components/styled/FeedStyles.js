@@ -66,7 +66,7 @@ export const TweetBtn = styled.button`
   color: var(--color-primary, white);
   background-color: var(--color-fg, #fa0095);
   padding: 0.3rem 1rem;
-  font-size: var(--font-small, 1.5rem);
+  font-size: var(--font-small, 1rem);
   border-radius: 50000px;
   font-weight: 600;
   cursor: pointer;

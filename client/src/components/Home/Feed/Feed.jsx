@@ -1,7 +1,7 @@
 import CreateTweet from './CreateTweet';
 import Tweet from './Tweet';
-import FeedWrapper from '../styled/FeedStyles';
-import { FeedHeader } from '../styled/FeedStyles';
+import FeedWrapper from '../../styled/FeedStyles';
+import { FeedHeader } from '../../styled/FeedStyles';
 
 function Feed() {
   return (
