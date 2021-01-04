@@ -1,7 +1,13 @@
-POST http://localhost:5000/users/login
-Content-Type: application/json
+# POST http://localhost:5000/users/login 
+# Content-Type: application/json
 
-{
-    "email": "user2@gmail.com",
-    "password": "123233"
-}
+# {
+#     "email": "user2@gmail.com",
+#     "password": "123233"
+# }
+
+POST http://localhost:5000/users/tokenIsValid 
+Content-Type: application/json
+X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZjFlNWM1OTNmMjhlMjgxODdlMDI5ZiIsImlhdCI6MTYwOTc1NTQ4Mn0.-Ic5b4jopx_A3CNjbv_Ne6SMhvH6V3bLiMRr_IYwQYU
+
+
