@@ -6,15 +6,38 @@ import RegisterWrapper, {
   RegisterPasswordInput,
   RegisterSubmit,
 } from '../styled/RegisterStyles';
+import axios from 'axios';
+import UserContext from '../../context/UserContext';
+import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Register() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const { setUserData } = useContext(UserContext);
+  const history = useHistory();
+
+  async function handleRegisterSubmit(e) {
+    e.preventDefault();
+    const newUser = { username, email, password, passwordCheck };
+    await axios.post('/users/register', newUser);
+    const loginRes = await axios.post('/users/login', {
+      email,
+      password,
+    });
+    setUserData({
+      token: loginRes.data.token,
+      user: loginRes.data.user,
+    });
+    localStorage.setItem('auth-token', loginRes.data.token);
+    history.push('/');
+  }
   return (
     <RegisterWrapper>
       <RegisterHeading>
-        <svg
-          viewBox="0 0 24 24"
-          class="r-13gxpu9 r-4qtqp9 r-yyyyoo r-j66t93 r-dnmrzs r-bnwqim r-1plcrui r-lrvibr"
-        >
+        <svg viewBox="0 0 24 24">
           <g>
             <path
               fill="#fe1392"
@@ -24,10 +47,23 @@ function Register() {
         </svg>
         <span>Register</span>
       </RegisterHeading>
-      <RegisterForm>
-        <RegisterUsernameInput placeholder="Enter your username" />
-        <RegisterEmailInput placeholder="Enter your email" />
-        <RegisterPasswordInput placeholder="Enter your password" />
+      <RegisterForm onSubmit={handleRegisterSubmit}>
+        <RegisterUsernameInput
+          placeholder="Enter your username"
+          onChange={e => setUsername(e.target.value)}
+        />
+        <RegisterEmailInput
+          placeholder="Enter your email"
+          onChange={e => setEmail(e.target.value)}
+        />
+        <RegisterPasswordInput
+          placeholder="Enter your password"
+          onChange={e => setPassword(e.target.value)}
+        />
+        <RegisterPasswordInput
+          placeholder="Confirm your password"
+          onChange={e => setPasswordCheck(e.target.value)}
+        />
         <RegisterSubmit type="submit">Register</RegisterSubmit>
       </RegisterForm>
       <span>

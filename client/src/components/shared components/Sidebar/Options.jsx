@@ -1,5 +1,9 @@
-import { useState } from 'react';
 import ReactDOM from 'react-dom';
+import logo from '../../../pictures/logo.png';
+import UserContext from '../../../context/UserContext';
+import { useState } from 'react';
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   OptionsWrapper,
   Option,
@@ -8,13 +12,11 @@ import {
   SettingsTooltip,
   SettingsTooltipWrapper,
 } from '../../styled/SidebarStyles';
-import logo from '../../../pictures/logo.png';
-import { useContext } from 'react';
-import UserContext from '../../../context/UserContext';
 
 function Options() {
   const [showSettingsTooltip, setShowSettingsTooltip] = useState(false);
   const { userData, setUserData } = useContext(UserContext);
+  const history = useHistory();
 
   function logout() {
     localStorage.setItem('auth-token', '');
@@ -71,7 +73,7 @@ function Options() {
               {userData.user ? (
                 <div onClick={logout}>Logout</div>
               ) : (
-                <div>Login</div>
+                <div onClick={() => history.push('/login')}>Login</div>
               )}
               <div>Change Theme</div>
             </SettingsTooltip>

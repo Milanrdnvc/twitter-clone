@@ -5,15 +5,32 @@ import LoginWrapper, {
   LoginPasswordInput,
   LoginSubmit,
 } from '../styled/LoginStyles';
+import axios from 'axios';
+import UserContext from '../../context/UserContext';
+import { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { setUserData } = useContext(UserContext);
+  const history = useHistory();
+
+  async function handleLoginSubmit(e) {
+    e.preventDefault();
+    const loginUser = { email, password };
+    const loginRes = await axios.post('users/login', loginUser);
+    setUserData({
+      token: loginRes.data.token,
+      user: loginRes.data.user,
+    });
+    localStorage.setItem('auth-token', loginRes.data.token);
+    history.push('/');
+  }
   return (
     <LoginWrapper>
       <LoginHeading>
-        <svg
-          viewBox="0 0 24 24"
-          class="r-13gxpu9 r-4qtqp9 r-yyyyoo r-j66t93 r-dnmrzs r-bnwqim r-1plcrui r-lrvibr"
-        >
+        <svg viewBox="0 0 24 24">
           <g>
             <path
               fill="#fe1392"
@@ -23,9 +40,15 @@ function Login() {
         </svg>
         <span>Login</span>
       </LoginHeading>
-      <LoginForm>
-        <LoginEmailInput placeholder="Enter your email" />
-        <LoginPasswordInput placeholder="Enter your password" />
+      <LoginForm onSubmit={handleLoginSubmit}>
+        <LoginEmailInput
+          placeholder="Enter your email"
+          onChange={e => setEmail(e.target.value)}
+        />
+        <LoginPasswordInput
+          placeholder="Enter your password"
+          onChange={e => setPassword(e.target.value)}
+        />
         <LoginSubmit type="submit">Login</LoginSubmit>
       </LoginForm>
     </LoginWrapper>

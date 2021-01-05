@@ -1,4 +1,9 @@
-GET http://localhost:5000/users/
-X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZjQzZjBiZGNjZjhmMjY2NDZjOTMxZiIsImlhdCI6MTYwOTg0MjQ2MH0.SA_4CuUWDJ6rUcu2MAJlRbQVX9Mi3nMrkefL6AB9d-0
+POST http://localhost:5000/users/login
+Content-Type: application/json
+
+{
+    "email": "milan@gmail.com",
+    "password": "123456"
+}
 
 
