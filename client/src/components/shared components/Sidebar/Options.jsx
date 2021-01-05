@@ -1,12 +1,17 @@
+import { useState } from 'react';
 import {
   OptionsWrapper,
   Option,
   Logo,
   OptionText,
+  SettingsTooltip,
+  SettingsTooltipWrapper,
 } from '../../styled/SidebarStyles';
 import logo from '../../../pictures/logo.png';
 
 function Options() {
+  const [showSettingsTooltip, setShowSettingsTooltip] = useState(false);
+
   return (
     <OptionsWrapper>
       <Logo src={logo} alt="logo" />
@@ -32,7 +37,7 @@ function Options() {
         </svg>
         <OptionText>Messages</OptionText>
       </Option>
-      <Option href="#">
+      <Option onClick={() => setShowSettingsTooltip(prev => !prev)}>
         <svg viewBox="0 0 24 24">
           <g>
             <path
@@ -47,6 +52,14 @@ function Options() {
         </svg>
         <OptionText>Settings</OptionText>
       </Option>
+      {showSettingsTooltip && (
+        <SettingsTooltipWrapper onClick={() => setShowSettingsTooltip(false)}>
+          <SettingsTooltip>
+            <div>Logout</div>
+            <div>Change Theme</div>
+          </SettingsTooltip>
+        </SettingsTooltipWrapper>
+      )}
     </OptionsWrapper>
   );
 }

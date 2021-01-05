@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export default styled.aside`
-  color: red;
   background-color: var(--color-bg, #15202b);
   position: fixed;
   bottom: 0;
@@ -40,7 +39,6 @@ export const OptionsWrapper = styled.ul`
 `;
 
 export const Option = styled.a`
-  margin: 1rem 0;
   padding: 0.5rem;
   display: flex;
   align-items: center;
@@ -55,8 +53,17 @@ export const Option = styled.a`
 
   svg {
     width: 30px;
-    margin-right: 0.5rem;
     cursor: pointer;
+  }
+
+  @media (min-width: 500px) {
+    margin: 1rem 0;
+  }
+
+  @media (min-width: 1004px) {
+    svg {
+      margin-right: 0.5rem;
+    }
   }
 `;
 
@@ -70,6 +77,46 @@ export const OptionText = styled.div`
 
   @media (min-width: 1004px) {
     display: block;
+  }
+`;
+
+export const SettingsTooltipWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.8);
+`;
+
+export const SettingsTooltip = styled.div`
+  width: 200px;
+  position: absolute;
+  background-color: var(--color-bg);
+  border-radius: 10px;
+  box-shadow: 2px 1px 30px -5px rgba(255, 255, 255, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  div {
+    color: var(--color-primary, white);
+    font-family: sans-serif;
+    flex: 1;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  @media (min-width: 500px) {
   }
 `;
 
