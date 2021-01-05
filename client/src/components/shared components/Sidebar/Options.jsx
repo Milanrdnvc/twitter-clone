@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ReactDOM from 'react-dom';
 import {
   OptionsWrapper,
   Option,
@@ -8,9 +9,20 @@ import {
   SettingsTooltipWrapper,
 } from '../../styled/SidebarStyles';
 import logo from '../../../pictures/logo.png';
+import { useContext } from 'react';
+import UserContext from '../../../context/UserContext';
 
 function Options() {
   const [showSettingsTooltip, setShowSettingsTooltip] = useState(false);
+  const { userData, setUserData } = useContext(UserContext);
+
+  function logout() {
+    localStorage.setItem('auth-token', '');
+    setUserData({
+      token: null,
+      user: null,
+    });
+  }
 
   return (
     <OptionsWrapper>
@@ -52,14 +64,20 @@ function Options() {
         </svg>
         <OptionText>Settings</OptionText>
       </Option>
-      {showSettingsTooltip && (
-        <SettingsTooltipWrapper onClick={() => setShowSettingsTooltip(false)}>
-          <SettingsTooltip>
-            <div>Logout</div>
-            <div>Change Theme</div>
-          </SettingsTooltip>
-        </SettingsTooltipWrapper>
-      )}
+      {showSettingsTooltip &&
+        ReactDOM.createPortal(
+          <SettingsTooltipWrapper onClick={() => setShowSettingsTooltip(false)}>
+            <SettingsTooltip>
+              {userData.user ? (
+                <div onClick={logout}>Logout</div>
+              ) : (
+                <div>Login</div>
+              )}
+              <div>Change Theme</div>
+            </SettingsTooltip>
+          </SettingsTooltipWrapper>,
+          document.querySelector('#settings-tooltip')
+        )}
     </OptionsWrapper>
   );
 }

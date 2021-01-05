@@ -1,4 +1,4 @@
-const jwt = require('jwt');
+const jwt = require('jsonwebtoken');
 
 function auth(req, res, next) {
   try {
@@ -10,7 +10,7 @@ function auth(req, res, next) {
     req.user = verified.id;
     next();
   } catch (err) {
-    res.status(500).json({ errro: err.message });
+    res.status(500).json({ error: err.message });
   }
 }
 
