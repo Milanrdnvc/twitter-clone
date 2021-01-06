@@ -8,14 +8,14 @@ import LoginWrapper, {
 import axios from 'axios';
 import UserContext from '../../context/UserContext';
 import Error from '../shared components/Error';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
 
   async function handleLoginSubmit(e) {
@@ -33,6 +33,11 @@ function Login() {
       if (err.response.data.msg) setError(err.response.data.msg);
     }
   }
+
+  useEffect(() => {
+    if (userData.user) history.push('/');
+  });
+
   return (
     <LoginWrapper>
       <LoginHeading>

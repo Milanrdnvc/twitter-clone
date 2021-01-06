@@ -25,3 +25,4 @@ mongoose.connect(
 app.use(express.json());
 app.use(cors());
 app.use('/users', require('./routes/user'));
+app.use('/tuwueets', require('./routes/tuwueet'));

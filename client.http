@@ -1,9 +1,5 @@
-POST http://localhost:5000/users/login
+GET http://localhost:5000/tuwueets/all
 Content-Type: application/json
-
-{
-    "email": "milan@gmail.com",
-    "password": "123456"
-}
+X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZjQ0ZWZkNDMxNGQyMmEyODk3YmU5YSIsImlhdCI6MTYwOTkzODgzMH0.RB4RYh6w1AKuWG0YWx2xIhbyhD4rPY8bnJSpXfqEbdc
 
 
