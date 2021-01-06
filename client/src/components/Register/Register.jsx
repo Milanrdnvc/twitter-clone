@@ -1,3 +1,6 @@
+import axios from 'axios';
+import UserContext from '../../context/UserContext';
+import Error from '../shared components/Error';
 import RegisterWrapper, {
   RegisterHeading,
   RegisterForm,
@@ -6,8 +9,6 @@ import RegisterWrapper, {
   RegisterPasswordInput,
   RegisterSubmit,
 } from '../styled/RegisterStyles';
-import axios from 'axios';
-import UserContext from '../../context/UserContext';
 import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -16,24 +17,30 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
+  const [error, setError] = useState('');
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
 
   async function handleRegisterSubmit(e) {
     e.preventDefault();
-    const newUser = { username, email, password, passwordCheck };
-    await axios.post('/users/register', newUser);
-    const loginRes = await axios.post('/users/login', {
-      email,
-      password,
-    });
-    setUserData({
-      token: loginRes.data.token,
-      user: loginRes.data.user,
-    });
-    localStorage.setItem('auth-token', loginRes.data.token);
-    history.push('/');
+    try {
+      const newUser = { username, email, password, passwordCheck };
+      await axios.post('/users/register', newUser);
+      const loginRes = await axios.post('/users/login', {
+        email,
+        password,
+      });
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+      localStorage.setItem('auth-token', loginRes.data.token);
+      history.push('/');
+    } catch (err) {
+      if (err.response.data.msg) setError(err.response.data.msg);
+    }
   }
+
   return (
     <RegisterWrapper>
       <RegisterHeading>
@@ -69,6 +76,7 @@ function Register() {
       <span>
         Already have an account? <a href="/login">Login</a>
       </span>
+      {error && <Error errorMsg={error} />}
     </RegisterWrapper>
   );
 }

@@ -7,25 +7,31 @@ import LoginWrapper, {
 } from '../styled/LoginStyles';
 import axios from 'axios';
 import UserContext from '../../context/UserContext';
+import Error from '../shared components/Error';
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
 
   async function handleLoginSubmit(e) {
     e.preventDefault();
-    const loginUser = { email, password };
-    const loginRes = await axios.post('users/login', loginUser);
-    setUserData({
-      token: loginRes.data.token,
-      user: loginRes.data.user,
-    });
-    localStorage.setItem('auth-token', loginRes.data.token);
-    history.push('/');
+    try {
+      const loginUser = { email, password };
+      const loginRes = await axios.post('users/login', loginUser);
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+      localStorage.setItem('auth-token', loginRes.data.token);
+      history.push('/');
+    } catch (err) {
+      if (err.response.data.msg) setError(err.response.data.msg);
+    }
   }
   return (
     <LoginWrapper>
@@ -51,6 +57,7 @@ function Login() {
         />
         <LoginSubmit type="submit">Login</LoginSubmit>
       </LoginForm>
+      {error && <Error errorMsg={error} closeError={() => setError('')} />}
     </LoginWrapper>
   );
 }
