@@ -1,27 +1,35 @@
-import {
-  TweetWrapper,
-  TweetInfo,
-  TweetPfp,
-  TweetOptions,
-} from '../../styled/FeedStyles';
 import pfp from '../../../pictures/pfp.jpg';
 import postPic from '../../../pictures/post.png';
+import {
+  TuwueetWrapper,
+  TuwueetInfo,
+  TuwueetPfp,
+  TuwueetOptions,
+} from '../../styled/FeedStyles';
+import { useContext, useEffect, useState } from 'react';
+import UserContext from '../../../context/UserContext';
 
-function Tweet() {
+function Tuwueet({ text, image, createdAt }) {
+  const { userData } = useContext(UserContext);
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    if (userData.user) {
+      setUsername(userData.user.username);
+    }
+  }, [userData]);
+
   return (
-    <TweetWrapper>
-      <TweetPfp src={pfp} />
-      <TweetInfo>
+    <TuwueetWrapper>
+      <TuwueetPfp src={pfp} />
+      <TuwueetInfo>
         <p>
-          <strong>Milan Radinovic</strong> <em>18h</em>
+          <strong>{username}</strong> <em>{createdAt}</em>
           <br />
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti,
-          accusamus cumque laudantium quo cum, possimus doloremque distinctio
-          provident perferendis alias laborum accusantium quia odio minima
-          expedita numquam deserunt labore suscipit?
+          {text}
         </p>
-        <img src={postPic} alt="CSS" />
-        <TweetOptions>
+        <img src="#" alt={image} />
+        <TuwueetOptions>
           <div
             style={{
               display: 'flex',
@@ -62,10 +70,10 @@ function Tweet() {
             </svg>
             20
           </div>
-        </TweetOptions>
-      </TweetInfo>
-    </TweetWrapper>
+        </TuwueetOptions>
+      </TuwueetInfo>
+    </TuwueetWrapper>
   );
 }
 
-export default Tweet;
+export default Tuwueet;

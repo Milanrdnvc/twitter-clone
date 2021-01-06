@@ -1,5 +1,10 @@
-GET http://localhost:5000/tuwueets/all
+POST http://localhost:5000/tuwueets/create
+X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZjQzZjBiZGNjZjhmMjY2NDZjOTMxZiIsImlhdCI6MTYwOTkzMjkxN30.Bj1WlOfxSIV068_ypofkbiDhgEaVYzCzXDnflGB0JIA
 Content-Type: application/json
-X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZjQ0ZWZkNDMxNGQyMmEyODk3YmU5YSIsImlhdCI6MTYwOTkzODgzMH0.RB4RYh6w1AKuWG0YWx2xIhbyhD4rPY8bnJSpXfqEbdc
+
+{
+    "text": "text of my tuwueet2",
+    "img": "image of my tuwueet2"
+}
 
 

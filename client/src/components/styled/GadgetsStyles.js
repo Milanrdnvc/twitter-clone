@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export default styled.div`
   display: none;
   margin-left: 1rem;
-  width: 800px;
 
   @media (min-width: 1004px) {
     display: block;

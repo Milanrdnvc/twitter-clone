@@ -29,7 +29,7 @@ export const FeedHeader = styled.header`
   padding: 0.5rem;
 `;
 
-export const CreateTweetWrapper = styled.div`
+export const CreateTuwueetWrapper = styled.div`
   display: flex;
 
   @media (min-width: 500px) {
@@ -38,7 +38,7 @@ export const CreateTweetWrapper = styled.div`
   }
 `;
 
-export const CreateTweetForm = styled.textarea`
+export const CreateTuwueetTextInput = styled.textarea`
   font-family: sans-serif;
   font-size: var(--font-medium, 1rem);
   background-color: transparent;
@@ -47,21 +47,21 @@ export const CreateTweetForm = styled.textarea`
   color: var(--color-primary, white);
 `;
 
-export const CreateTweetPfp = styled.img`
+export const CreateTuwueetPfp = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 0.5rem;
 `;
 
-export const CreateTweetOptions = styled.div`
+export const CreateTuwueetOptions = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 0.5rem;
 `;
 
-export const TweetBtn = styled.button`
+export const TuwueetBtn = styled.button`
   border: none;
   color: var(--color-primary, white);
   background-color: var(--color-fg, #fa0095);
@@ -72,7 +72,7 @@ export const TweetBtn = styled.button`
   cursor: pointer;
 `;
 
-export const CreateTweetFormWrapper = styled.div`
+export const CreateTuwueetForm = styled.form`
   display: flex;
   flex-direction: column;
 
@@ -81,15 +81,7 @@ export const CreateTweetFormWrapper = styled.div`
   }
 `;
 
-export const CreateTweetBlurBg = styled.div`
-  padding: 1rem 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 0.5px solid gray;
-`;
-
-export const TweetWrapper = styled.div`
+export const TuwueetWrapper = styled.div`
   display: flex;
   border-top: 0.5px solid gray;
   border-bottom: 0.5px solid gray;
@@ -102,7 +94,7 @@ export const TweetWrapper = styled.div`
   }
 `;
 
-export const TweetInfo = styled.div`
+export const TuwueetInfo = styled.div`
   color: white;
   font-family: sans-serif;
   font-size: var(--font-small);
@@ -126,7 +118,7 @@ export const TweetInfo = styled.div`
   }
 `;
 
-export const TweetPfp = styled.img`
+export const TuwueetPfp = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -134,7 +126,7 @@ export const TweetPfp = styled.img`
   cursor: pointer;
 `;
 
-export const TweetOptions = styled.div`
+export const TuwueetOptions = styled.div`
   display: flex;
   align-items: center;
   margin-top: 0.5rem;
