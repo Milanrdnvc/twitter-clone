@@ -7,14 +7,29 @@ import {
   CreateTuwueetPfp,
   CreateTuwueetOptions,
   CreateTuwueetForm,
+  CreateTuwueetImgPreview,
   TuwueetBtn,
 } from '../../styled/FeedStyles';
 
 function CreateTuwueet({ getTuwueets }) {
   const [text, setText] = useState('');
-  const [img, setImg] = useState('img');
+  const [img, setImg] = useState(null);
+
+  function handleFileInputChange(e) {
+    const file = e.target.files[0];
+    previewFile(file);
+  }
+
+  function previewFile(file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImg(reader.result);
+    };
+  }
 
   async function postTuwueet(e) {
+    console.log(img);
     e.preventDefault();
     e.target.reset();
     let token = localStorage.getItem('auth-token');
@@ -38,9 +53,12 @@ function CreateTuwueet({ getTuwueets }) {
           },
         }
       );
+      setImg(null);
+      setText('');
       getTuwueets();
     }
   }
+
   return (
     <CreateTuwueetWrapper>
       <CreateTuwueetPfp src={pfp} />
@@ -50,6 +68,12 @@ function CreateTuwueet({ getTuwueets }) {
           rows="1"
           onChange={e => setText(e.target.value)}
         />
+        {img && (
+          <CreateTuwueetImgPreview>
+            <img src={img} alt="test" width="100%" />
+            <span onClick={() => setImg(null)}>&times;</span>
+          </CreateTuwueetImgPreview>
+        )}
         <CreateTuwueetOptions>
           <svg style={{ width: '30px', cursor: 'pointer' }} viewBox="0 0 24 24">
             <g>
@@ -60,6 +84,7 @@ function CreateTuwueet({ getTuwueets }) {
               <circle fill="#fa0095" cx="8.868" cy="8.309" r="1.542"></circle>
             </g>
           </svg>
+          <input type="file" onChange={handleFileInputChange} />
           <TuwueetBtn type="submit">Tuwueet</TuwueetBtn>
         </CreateTuwueetOptions>
       </CreateTuwueetForm>

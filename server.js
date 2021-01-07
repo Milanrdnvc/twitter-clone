@@ -1,10 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+app.use(express.json({ limit: '50mb' }));
+app.use(cors());
+app.use('/users', require('./routes/user'));
+app.use('/tuwueets', require('./routes/tuwueet'));
 
 mongoose.connect(
   process.env.MONGODB_CONNECTION_STRING,
@@ -21,8 +26,3 @@ mongoose.connect(
     });
   }
 );
-
-app.use(express.json());
-app.use(cors());
-app.use('/users', require('./routes/user'));
-app.use('/tuwueets', require('./routes/tuwueet'));

@@ -11,7 +11,7 @@ router.post('/create', auth, async (req, res) => {
         .json({ msg: 'Your tuwueet must contain some text' });
     const newTuwueet = new Tuwueet({
       text,
-      img,
+      img: img || 'no img',
       userId: req.user,
     });
     await newTuwueet.save();

@@ -9,7 +9,8 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import UserContext from '../../../context/UserContext';
 
-function Tuwueet({ text, image, createdAt }) {
+function Tuwueet({ text, img, createdAt }) {
+  console.log(img);
   const { userData } = useContext(UserContext);
   const [username, setUsername] = useState('');
 
@@ -28,7 +29,7 @@ function Tuwueet({ text, image, createdAt }) {
           <br />
           {text}
         </p>
-        <img src="#" alt={image} />
+        {img !== 'no img' && <img src={img} alt="Tuwueet post" />}
         <TuwueetOptions>
           <div
             style={{

@@ -37,10 +37,10 @@ export const FeedHeader = styled.header`
 export const CreateTuwueetWrapper = styled.div`
   display: flex;
   justify-content: center;
+  padding: 1rem 0.5rem;
 
   @media (min-width: 500px) {
     flex-grow: 1;
-    padding: 1rem 0.5rem;
   }
 `;
 
@@ -69,6 +69,35 @@ export const CreateTuwueetOptions = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 2rem;
+  position: relative;
+
+  input {
+    width: 30px;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+  }
+`;
+
+export const CreateTuwueetImgPreview = styled.div`
+  position: relative;
+
+  span {
+    font-size: var(--font-large, 2rem);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--color-primary, white);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+    right: 5px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
 `;
 
 export const TuwueetBtn = styled.button`
