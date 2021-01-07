@@ -2,13 +2,15 @@ import CreateTuwueet from './CreateTuwueet';
 import Tuwueet from './Tuwueet';
 import FeedWrapper from '../../styled/FeedStyles';
 import axios from 'axios';
+import loadingGif from '../../../pictures/loading.gif';
 import { FeedHeader } from '../../styled/FeedStyles';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 function Feed() {
   const [tuwueetsData, setTuwueetsData] = useState([]);
-  const tuwueets = tuwueetsData.map(
-    ({ text, img, createdAt, updatedAt }, idx) => {
+  const loadingGifImg = useRef(null);
+  const tuwueets = tuwueetsData
+    .map(({ text, img, createdAt, updatedAt }, idx) => {
       return (
         <Tuwueet
           text={text}
@@ -18,8 +20,8 @@ function Feed() {
           key={idx}
         />
       );
-    }
-  );
+    })
+    .reverse();
 
   async function getTuwueets() {
     let token = localStorage.getItem('auth-token');
@@ -39,6 +41,7 @@ function Feed() {
         },
       });
       setTuwueetsData(tuwueets.data.tuwueets);
+      loadingGifImg.current.style.display = 'none';
     }
   }
 
@@ -50,6 +53,7 @@ function Feed() {
     <FeedWrapper>
       <FeedHeader>Latest Tuwueets</FeedHeader>
       <CreateTuwueet getTuwueets={getTuwueets} />
+      <img ref={loadingGifImg} src={loadingGif} alt="loading" width="200px" />
       {tuwueets}
     </FeedWrapper>
   );

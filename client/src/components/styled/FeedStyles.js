@@ -12,6 +12,11 @@ export default styled.main`
   scrollbar-width: none;
   background-color: var(--color-bg, #15202b);
   border-right: 1px solid gray;
+
+  & > img {
+    display: block;
+    margin: auto;
+  }
 `;
 
 export const FeedHeader = styled.header`
@@ -31,6 +36,7 @@ export const FeedHeader = styled.header`
 
 export const CreateTuwueetWrapper = styled.div`
   display: flex;
+  justify-content: center;
 
   @media (min-width: 500px) {
     flex-grow: 1;
@@ -45,6 +51,10 @@ export const CreateTuwueetTextInput = styled.textarea`
   border: none;
   resize: none;
   color: var(--color-primary, white);
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const CreateTuwueetPfp = styled.img`
@@ -58,7 +68,7 @@ export const CreateTuwueetOptions = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.5rem;
+  margin-top: 2rem;
 `;
 
 export const TuwueetBtn = styled.button`
@@ -75,6 +85,7 @@ export const TuwueetBtn = styled.button`
 export const CreateTuwueetForm = styled.form`
   display: flex;
   flex-direction: column;
+  margin-left: 1rem;
 
   @media (min-width: 500px) {
     flex-grow: 1;
