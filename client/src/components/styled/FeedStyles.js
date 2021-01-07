@@ -32,6 +32,7 @@ export const FeedHeader = styled.header`
   display: flex;
   align-items: center;
   padding: 0.5rem;
+  z-index: 10;
 `;
 
 export const CreateTuwueetWrapper = styled.div`
