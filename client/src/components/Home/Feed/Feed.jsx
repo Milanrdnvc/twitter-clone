@@ -3,8 +3,25 @@ import Tuwueet from './Tuwueet';
 import FeedWrapper from '../../styled/FeedStyles';
 import axios from 'axios';
 import loadingGif from '../../../pictures/loading.gif';
+import moment from 'moment';
 import { FeedHeader } from '../../styled/FeedStyles';
 import { useEffect, useState, useRef } from 'react';
+
+const CUSTOM_LOCALE_STRINGS = {
+  future: 'in %s',
+  past: '%s ago',
+  s: 'seconds',
+  m: 'a minute',
+  mm: '%d minutes',
+  h: 'an hour',
+  hh: '%d hours',
+  d: 'a day',
+  dd: '%d days',
+  M: 'a month',
+  MM: '%d months',
+  y: 'a year',
+  yy: '%d years',
+};
 
 function Feed() {
   const [tuwueetsData, setTuwueetsData] = useState([]);
@@ -15,7 +32,14 @@ function Feed() {
         <Tuwueet
           text={text}
           img={img}
-          createdAt={createdAt}
+          createdAt={moment(createdAt)
+            .fromNow()
+            .replace(' ', '')
+            .replace('an', '1')
+            .replace('minutes', 'm')
+            .replace('hour', 'h')
+            .replace('hs', 'h')
+            .replace('ago', '')}
           updatedAt={updatedAt}
           key={idx}
         />

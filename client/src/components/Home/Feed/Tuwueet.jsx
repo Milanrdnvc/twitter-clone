@@ -1,5 +1,4 @@
 import pfp from '../../../pictures/pfp.jpg';
-import postPic from '../../../pictures/post.png';
 import {
   TuwueetWrapper,
   TuwueetInfo,
@@ -10,7 +9,6 @@ import { useContext, useEffect, useState } from 'react';
 import UserContext from '../../../context/UserContext';
 
 function Tuwueet({ text, img, createdAt }) {
-  console.log(img);
   const { userData } = useContext(UserContext);
   const [username, setUsername] = useState('');
 
