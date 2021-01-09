@@ -8,6 +8,10 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import UserContext from '../../../context/UserContext';
 
+function likeTuwueet() {
+  console.log('hello');
+}
+
 function Tuwueet({ text, img, createdAt }) {
   const { userData } = useContext(UserContext);
   const [username, setUsername] = useState('');
@@ -45,7 +49,7 @@ function Tuwueet({ text, img, createdAt }) {
             </svg>
             <span>1</span>
           </div>
-          <div onClick={() => setLiked(prev => !prev)}>
+          <div onClick={likeTuwueet}>
             {liked ? (
               <svg
                 style={{ fill: '#fa0095', width: '20px' }}

@@ -39,10 +39,6 @@ export const CreateTuwueetWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 1rem 0.5rem;
-
-  @media (min-width: 500px) {
-    flex-grow: 1;
-  }
 `;
 
 export const CreateTuwueetTextInput = styled.textarea`
@@ -52,6 +48,7 @@ export const CreateTuwueetTextInput = styled.textarea`
   border: none;
   resize: none;
   color: var(--color-primary, white);
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -118,9 +115,9 @@ export const CreateTuwueetForm = styled.form`
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
+  flex-grow: 1;
 
   @media (min-width: 500px) {
-    flex-grow: 1;
   }
 `;
 
