@@ -23,7 +23,8 @@ function Feed() {
             .replace('minutes', 'm')
             .replace('hour', 'h')
             .replace('hs', 'h')
-            .replace('ago', '')}
+            .replace('ago', '')
+            .replace('a', 'a ')}
           updatedAt={updatedAt}
           key={idx}
         />

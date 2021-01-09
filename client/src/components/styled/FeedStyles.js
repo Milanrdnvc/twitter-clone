@@ -77,6 +77,8 @@ export const CreateTuwueetOptions = styled.div`
     opacity: 0;
     position: absolute;
     left: 0;
+    top: -2px;
+    bottom: -2px;
     cursor: pointer;
   }
 `;
@@ -124,14 +126,17 @@ export const CreateTuwueetForm = styled.form`
 
 export const TuwueetWrapper = styled.div`
   display: flex;
-  border-top: 0.5px solid gray;
-  border-bottom: 0.5px solid gray;
+  border-top: 1px solid gray;
   padding: 1rem 0.5rem;
   transition: background-color 0.1s ease-in-out;
   cursor: pointer;
 
   &:hover {
     background-color: var(--color-bg-tertiary);
+  }
+
+  &:last-child {
+    border-bottom: 1px solid gray;
   }
 `;
 
@@ -171,4 +176,10 @@ export const TuwueetOptions = styled.div`
   display: flex;
   align-items: center;
   margin-top: 0.5rem;
+
+  div {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+  }
 `;
