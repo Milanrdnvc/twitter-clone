@@ -11,7 +11,7 @@ export default styled.main`
   -ms-overflow-style: none;
   scrollbar-width: none;
   background-color: var(--color-bg, #15202b);
-  border-right: 1px solid gray;
+  border-right: 1px solid #38444d;
 
   & > img {
     display: block;
@@ -28,7 +28,7 @@ export const FeedHeader = styled.header`
   top: 0;
   height: 50px;
   background-color: var(--color-bg);
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #38444d;
   display: flex;
   align-items: center;
   padding: 0.5rem;
@@ -41,14 +41,18 @@ export const CreateTuwueetWrapper = styled.div`
   padding: 1rem 0.5rem;
 `;
 
-export const CreateTuwueetTextInput = styled.textarea`
+export const CreateTuwueetTextInput = styled.div`
   font-family: sans-serif;
   font-size: var(--font-medium, 1rem);
   background-color: transparent;
   border: none;
   resize: none;
   color: var(--color-primary, white);
-  width: 100%;
+
+  &:empty:not(:focus)::before {
+    color: var(--color-secondary, #192734);
+    content: "What's happening?";
+  }
 
   &:focus {
     outline: none;
@@ -123,7 +127,7 @@ export const CreateTuwueetForm = styled.form`
 
 export const TuwueetWrapper = styled.div`
   display: flex;
-  border-top: 1px solid gray;
+  border-top: 1px solid #38444d;
   padding: 1rem 0.5rem;
   transition: background-color 0.1s ease-in-out;
   cursor: pointer;
@@ -133,7 +137,7 @@ export const TuwueetWrapper = styled.div`
   }
 
   &:last-child {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #38444d;
   }
 `;
 

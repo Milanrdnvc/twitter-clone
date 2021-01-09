@@ -64,8 +64,8 @@ function CreateTuwueet({ getTuwueets }) {
       <CreateTuwueetPfp src={pfp} />
       <CreateTuwueetForm onSubmit={postTuwueet}>
         <CreateTuwueetTextInput
-          placeholder="What's happening?"
-          rows="1"
+          contentEditable="true"
+          dataPlaceholder="What's happening?"
           onChange={e => setText(e.target.value)}
         />
         {img && (

@@ -23,7 +23,6 @@ export const SearchWrapper = styled.input`
 export const TrendsWrapper = styled.div`
   margin-top: 1rem;
   border-radius: 10px;
-  /* width: 200px; */
   background-color: var(--color-bg-secondary, #192734);
 `;
 
@@ -38,7 +37,7 @@ export const TrendsHeader = styled.div`
 export const Trend = styled.div`
   color: var(--color-primary, white);
   font-family: sans-serif;
-  border-top: 1px solid gray;
+  border-top: 1px solid #38444d;
   padding: 1rem;
   em {
     color: var(--color-secondary);

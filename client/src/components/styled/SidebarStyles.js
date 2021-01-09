@@ -10,7 +10,7 @@ export default styled.aside`
   @media (min-width: 500px) {
     position: static;
     height: 100vh;
-    border-right: 1px solid gray;
+    border-right: 1px solid #38444d;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,7 +26,7 @@ export const OptionsWrapper = styled.ul`
   align-items: center;
   padding: 0.5rem;
   margin: 0;
-  border-top: 1px solid gray;
+  border-top: 1px solid #38444d;
 
   @media (min-width: 500px) {
     flex-direction: column;
