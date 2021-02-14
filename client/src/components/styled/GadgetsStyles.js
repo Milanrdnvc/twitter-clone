@@ -18,6 +18,11 @@ export const SearchWrapper = styled.input`
   padding: 0.5rem;
   margin-top: 1rem;
   width: 100%;
+
+  &:focus {
+    box-shadow: 0 0 0.3rem 0.1rem var(--color-fg);
+    outline: none;
+  }
 `;
 
 export const TrendsWrapper = styled.div`
