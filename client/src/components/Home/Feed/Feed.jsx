@@ -60,7 +60,7 @@ function Feed() {
 
   return (
     <FeedWrapper>
-      <FeedHeader>Latest Tuwueets</FeedHeader>
+      <FeedHeader>Home</FeedHeader>
       <CreateTuwueet getTuwueets={getTuwueets} />
       <img ref={loadingGifImg} src={loadingGif} alt="loading" width="200px" />
       {tuwueets}
