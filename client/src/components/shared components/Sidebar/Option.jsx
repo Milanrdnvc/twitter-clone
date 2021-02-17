@@ -4,8 +4,8 @@ function Option({ text, img, href }) {
   return (
     <OptionWrapper>
       <OptionLink to={href}>
-        <img src={img} alt={text} width="40px" height="40px" />
-        {text}
+        <img src={img} alt={text} width="30px" height="30px" />
+        <span>{text}</span>
       </OptionLink>
     </OptionWrapper>
   );

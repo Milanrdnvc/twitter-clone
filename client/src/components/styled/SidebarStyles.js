@@ -7,7 +7,9 @@ export default styled.aside`
   bottom: 0;
   left: 0;
   right: 0;
-  /* display: flex; */
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #38444d;
 
   @media (min-width: 500px) {
     position: static;
@@ -20,6 +22,10 @@ export default styled.aside`
 export const OptionWrapper = styled.div`
   cursor: pointer;
   padding: 1rem;
+
+  &:first-child {
+    display: none;
+  }
 
   @media (min-width: 500px) {
     &:hover a {
@@ -41,19 +47,30 @@ export const OptionWrapper = styled.div`
 `;
 
 export const OptionLink = styled(Link)`
-  display: flex;
-  align-items: center;
-  width: fit-content;
   padding: 0.2rem 1rem;
-  border-radius: 9999px;
-  transition: background-color 0.1s ease-in-out;
   cursor: pointer;
   text-decoration: none;
   color: var(--color-primary);
   font-weight: 700;
   font-size: var(--font-medium);
+  display: flex;
+  align-items: center;
 
-  img {
-    margin-right: 1rem;
+  span {
+    display: none;
+  }
+
+  @media (min-width: 500px) {
+    width: fit-content;
+    border-radius: 9999px;
+    transition: background-color 0.1s ease-in-out;
+
+    img {
+      margin-right: 1rem;
+    }
+
+    span {
+      display: inline;
+    }
   }
 `;
