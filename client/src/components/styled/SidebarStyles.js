@@ -51,6 +51,10 @@ export const OptionWrapper = styled.div`
 
     @media (min-width: 700px) {
       margin: 0;
+
+      &:last-child {
+        display: none;
+      }
     }
   }
 `;

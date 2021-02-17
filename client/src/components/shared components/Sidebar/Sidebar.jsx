@@ -4,6 +4,7 @@ import home from '../../../pictures/home.svg';
 import notification from '../../../pictures/notification.svg';
 import login from '../../../pictures/login.svg';
 import logo from '../../../pictures/logo.png';
+import profile from '../../../pictures/profile.svg';
 
 function Sidebar() {
   return (
@@ -12,6 +13,7 @@ function Sidebar() {
       <Option href="/" text="Home" img={home}></Option>
       <Option text="Notifications" img={notification}></Option>
       <Option href="/login" text="Log In" img={login}></Option>
+      <Option href="/" text="" img={profile}></Option>
     </SidebarWrapper>
   );
 }
