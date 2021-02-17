@@ -12,10 +12,12 @@ export default styled.aside`
   border-top: 1px solid #38444d;
 
   @media (min-width: 500px) {
+    flex-direction: column;
+    justify-content: flex-start;
     position: static;
     height: 100vh;
     border-right: 1px solid #38444d;
-    padding: 1rem;
+    padding: 0 1rem;
   }
 `;
 
@@ -38,6 +40,7 @@ export const OptionWrapper = styled.div`
 
     &:first-child {
       cursor: default;
+      display: block;
 
       img {
         margin: 0;
