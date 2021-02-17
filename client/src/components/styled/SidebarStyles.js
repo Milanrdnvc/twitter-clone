@@ -7,6 +7,7 @@ export default styled.aside`
   bottom: 0;
   left: 0;
   right: 0;
+  /* display: flex; */
 
   @media (min-width: 500px) {
     position: static;
@@ -20,19 +21,21 @@ export const OptionWrapper = styled.div`
   cursor: pointer;
   padding: 1rem;
 
-  &:hover a {
-    background-color: rgba(254, 19, 146, 0.5);
-  }
+  @media (min-width: 500px) {
+    &:hover a {
+      background-color: rgba(254, 19, 146, 0.5);
+    }
 
-  &:first-child:hover a {
-    background-color: transparent;
-  }
+    &:first-child:hover a {
+      background-color: transparent;
+    }
 
-  &:first-child {
-    cursor: default;
+    &:first-child {
+      cursor: default;
 
-    img {
-      margin: 0;
+      img {
+        margin: 0;
+      }
     }
   }
 `;
@@ -52,16 +55,5 @@ export const OptionLink = styled(Link)`
 
   img {
     margin-right: 1rem;
-  }
-`;
-
-export const Logo = styled.img`
-  cursor: pointer;
-  width: 50px;
-  margin-bottom: 2rem;
-  display: none;
-
-  @media (min-width: 500px) {
-    display: block;
   }
 `;
