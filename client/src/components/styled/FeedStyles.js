@@ -39,6 +39,8 @@ export const CreateTuwueetWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 1rem 0.5rem;
+  border-bottom: 1px solid #38444d;
+  margin-bottom: 0.5rem;
 `;
 
 export const CreateTuwueetTextInput = styled.div`
