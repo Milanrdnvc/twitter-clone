@@ -30,6 +30,8 @@ export const OptionWrapper = styled.div`
   }
 
   @media (min-width: 500px) {
+    margin: 0 auto;
+
     &:hover a {
       background-color: rgba(254, 19, 146, 0.5);
     }
@@ -45,6 +47,10 @@ export const OptionWrapper = styled.div`
       img {
         margin: 0;
       }
+    }
+
+    @media (min-width: 700px) {
+      margin: 0;
     }
   }
 `;
@@ -67,13 +73,15 @@ export const OptionLink = styled(Link)`
     width: fit-content;
     border-radius: 9999px;
     transition: background-color 0.1s ease-in-out;
+  }
+
+  @media (min-width: 700px) {
+    span {
+      display: inline;
+    }
 
     img {
       margin-right: 1rem;
-    }
-
-    span {
-      display: inline;
     }
   }
 `;
