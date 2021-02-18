@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+export const EditDetails = styled.section``;
+
 export default styled.div`
   padding: 1rem;
   position: fixed;
@@ -50,8 +52,6 @@ export const Details = styled.section`
   }
 `;
 
-export const EditDetails = styled.section``;
-
 export const EditDetailsForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -78,5 +78,14 @@ export const EditDetailsForm = styled.form`
     color: var(--color-primary);
     font-weight: 700;
     cursor: pointer;
+  }
+
+  @media (min-width: 700px) {
+    max-width: 60%;
+    margin: auto;
+  }
+
+  @media (min-width: 1000px) {
+    max-width: 50%;
   }
 `;
