@@ -12,6 +12,13 @@ function Home() {
       <Tuwueet />
       <Tuwueet />
       <Tuwueet />
+      <Tuwueet />
+      <Tuwueet />
+      <Tuwueet />
+      <Tuwueet />
+      <Tuwueet />
+      <Tuwueet />
+      <Tuwueet />
     </HomeWrapper>
   );
 }

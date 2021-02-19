@@ -14,9 +14,10 @@ export default styled.aside`
   @media (min-width: 500px) {
     flex-direction: column;
     justify-content: flex-start;
-    position: static;
+    position: sticky;
+    left: 0;
+    top: 0;
     height: 100vh;
-    border-right: 1px solid #38444d;
     padding: 0 1rem;
   }
 `;
