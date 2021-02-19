@@ -1,4 +1,4 @@
-import { OptionWrapper, OptionLink } from '../../styled/SidebarStyles';
+import { OptionWrapper, OptionLink } from '../styled/SidebarStyles';
 
 function Option({ text, img, href, onClick }) {
   return (

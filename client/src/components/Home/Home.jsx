@@ -1,14 +1,17 @@
-import Sidebar from '../shared components/Sidebar/Sidebar';
-import Feed from './Feed/Feed';
-import Gadgets from './Gadgets/Gadgets';
-import HomeWrapper from '../styled/HomeStyles';
+import CreateTuwueet from './CreateTuwueet';
+import Tuwueet from './Tuwueet';
+import HomeWrapper, { HomeHeader } from '../styled/HomeStyles';
 
 function Home() {
   return (
     <HomeWrapper>
-      <Sidebar />
-      <Feed />
-      <Gadgets />
+      <HomeHeader>Home</HomeHeader>
+      <CreateTuwueet />
+      <Tuwueet />
+      <Tuwueet />
+      <Tuwueet />
+      <Tuwueet />
+      <Tuwueet />
     </HomeWrapper>
   );
 }

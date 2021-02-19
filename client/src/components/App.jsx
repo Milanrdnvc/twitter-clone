@@ -1,6 +1,7 @@
 import Home from './Home/Home';
 import Register from './Register/Register';
 import Login from './Login/Login';
+import Sidebar from './Sidebar/Sidebar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import UserContext from '../context/UserContext';
@@ -39,6 +40,7 @@ function App() {
   return (
     <Router>
       <UserContext.Provider value={{ userData, setUserData }}>
+        <Sidebar />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/register" component={Register} />

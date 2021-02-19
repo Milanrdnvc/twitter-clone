@@ -1,11 +1,11 @@
-import SidebarWrapper from '../../styled/SidebarStyles';
+import SidebarWrapper from '../styled/SidebarStyles';
 import Option from './Option';
-import home from '../../../pictures/home.svg';
-import notification from '../../../pictures/notification.svg';
-import login from '../../../pictures/login.svg';
-import logo from '../../../pictures/logo.png';
-import profile from '../../../pictures/profile.svg';
-import EditProfile from '../../Profile/EditProfile';
+import home from '../../pictures/home.svg';
+import notification from '../../pictures/notification.svg';
+import login from '../../pictures/login.svg';
+import logo from '../../pictures/logo.png';
+import profile from '../../pictures/profile.svg';
+import EditProfile from '../shared components/EditProfile';
 import { useState } from 'react';
 
 function Sidebar() {

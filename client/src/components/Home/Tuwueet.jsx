@@ -1,12 +1,12 @@
-import pfp from '../../../pictures/pfp.jpg';
+import pfp from '../../pictures/pfp.jpg';
 import {
   TuwueetWrapper,
   TuwueetInfo,
   TuwueetPfp,
   TuwueetOptions,
-} from '../../styled/FeedStyles';
+} from '../styled/FeedStyles';
 import { useContext, useEffect, useState } from 'react';
-import UserContext from '../../../context/UserContext';
+import UserContext from '../../context/UserContext';
 
 function likeTuwueet() {
   console.log('hello');

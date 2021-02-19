@@ -8,3 +8,5 @@ export default styled.div`
     grid-template-columns: 0.8fr 1.4fr 0.8fr;
   }
 `;
+
+export const HomeHeader = styled.header``;

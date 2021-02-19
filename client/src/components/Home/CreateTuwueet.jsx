@@ -1,4 +1,4 @@
-import pfp from '../../../pictures/pfp.jpg';
+import pfp from '../../pictures/pfp.jpg';
 import axios from 'axios';
 import { useState } from 'react';
 import {
@@ -9,7 +9,7 @@ import {
   CreateTuwueetForm,
   CreateTuwueetImgPreview,
   TuwueetBtn,
-} from '../../styled/FeedStyles';
+} from '../styled/FeedStyles';
 
 function CreateTuwueet({ getTuwueets }) {
   const [text, setText] = useState('');
