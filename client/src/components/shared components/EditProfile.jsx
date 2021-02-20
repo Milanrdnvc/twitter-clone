@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import pfp from '../../pictures/pfp.jpg';
-import EditProfileWrapper, {
+import {
+  EditProfileWrapper,
   Details,
   EditDetails,
   EditDetailsForm,

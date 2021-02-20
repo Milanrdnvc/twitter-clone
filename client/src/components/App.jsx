@@ -2,6 +2,7 @@ import Home from './Home/Home';
 import Register from './Register/Register';
 import Login from './Login/Login';
 import Sidebar from './Sidebar/Sidebar';
+import Profile from './Profile/Profile';
 import AppWrapper from './styled/AppStyles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -48,6 +49,7 @@ function App() {
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
           </Switch>
+          <Profile />
         </UserContext.Provider>
       </AppWrapper>
     </Router>
