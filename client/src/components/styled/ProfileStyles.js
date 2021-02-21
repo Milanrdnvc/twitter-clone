@@ -14,6 +14,9 @@ export const ProfileWrapper = styled.div`
     margin: 1rem 0 0 1rem;
     padding: 1rem;
     border-radius: 5px;
+    position: sticky;
+    right: 0;
+    top: 1rem;
 
     p {
       color: white;
