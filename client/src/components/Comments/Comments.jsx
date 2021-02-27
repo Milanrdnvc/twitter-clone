@@ -1,4 +1,3 @@
-import CommentsTuwueet from './CommentsTuwueet';
 import Tuwueet from '../shared components/Tuwueet';
 import SubmitComment from './SubmitComment';
 import Comment from './Comment';

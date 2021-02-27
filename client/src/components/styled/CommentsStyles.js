@@ -16,3 +16,5 @@ export const CommentsHeader = styled.header`
   background-color: var(--color-bg);
   z-index: 100;
 `;
+
+export const SubmitCommentWrapper = styled.div``;
