@@ -1,5 +1,5 @@
 import CreateTuwueet from './CreateTuwueet';
-import Tuwueet from './Tuwueet';
+import Tuwueet from '../shared components/Tuwueet';
 import HomeWrapper, { HomeHeader } from '../styled/HomeStyles';
 
 function Home() {

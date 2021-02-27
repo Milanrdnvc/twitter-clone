@@ -3,6 +3,7 @@ import Register from './Register/Register';
 import Login from './Login/Login';
 import Sidebar from './Sidebar/Sidebar';
 import Profile from './Profile/Profile';
+import Comments from './Comments/Comments';
 import AppWrapper from './styled/AppStyles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -46,6 +47,7 @@ function App() {
           <Sidebar />
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/comments" component={Comments} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
           </Switch>

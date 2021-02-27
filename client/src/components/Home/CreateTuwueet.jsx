@@ -9,7 +9,7 @@ import {
   CreateTuwueetForm,
   CreateTuwueetImgPreview,
   TuwueetBtn,
-} from '../styled/FeedStyles';
+} from '../styled/HomeStyles';
 
 function CreateTuwueet({ getTuwueets }) {
   const [text, setText] = useState('');
