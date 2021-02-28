@@ -185,6 +185,7 @@ export const TuwueetOptions = styled.div`
 
     span {
       margin-left: 0.1rem;
+      font-size: calc(var(--font-small) - 3px);
     }
   }
 `;
