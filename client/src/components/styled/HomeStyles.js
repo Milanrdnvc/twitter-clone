@@ -17,25 +17,6 @@ export const HomeHeader = styled.header`
   z-index: 100;
 `;
 
-// export default styled.main`
-//   &::-webkit-scrollbar {
-//     display: none;
-//   }
-
-//   max-height: 100vh;
-//   overflow-y: scroll;
-//   -moz-scroll: none;
-//   -ms-overflow-style: none;
-//   scrollbar-width: none;
-//   background-color: var(--color-bg, #15202b);
-//   border-right: 1px solid #38444d;
-
-//   & > img {
-//     display: block;
-//     margin: auto;
-//   }
-// `;
-
 export const CreateTuwueetWrapper = styled.div`
   display: flex;
   justify-content: center;
