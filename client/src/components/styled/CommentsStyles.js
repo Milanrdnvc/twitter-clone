@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const CommentsWrapper = styled.main`
   border-left: 1px solid #38444d;
   border-right: 1px solid #38444d;
+  margin-bottom: 200px;
 `;
 
 export const CommentsHeader = styled.header`
@@ -106,5 +107,44 @@ export const SubmitCommentImagePreview = styled.div`
 
   img {
     padding: 1rem;
+  }
+`;
+
+export const CommentWrapper = styled.div`
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid #38444d;
+
+  &:last-child {
+    border-bottom: 1px solid #38444d;
+  }
+
+  & > img {
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+`;
+
+export const CommentContent = styled.div`
+  color: white;
+  font-family: sans-serif;
+  font-size: var(--font-small);
+
+  p {
+    margin: 0 0 1rem 0;
+  }
+
+  strong,
+  em {
+    color: var(--color-secondary, #b4b4b4);
+  }
+
+  strong {
+    cursor: pointer;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 20px;
   }
 `;

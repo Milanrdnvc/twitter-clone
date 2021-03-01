@@ -72,6 +72,7 @@ function CreateTuwueet({ getTuwueets }) {
           onKeyDown={e => setText(e.target.innerText.trim())}
           onKeyUp={e => setText(e.target.innerText.trim())}
           onPaste={e => setText(e.target.innerText.trim())}
+          // We could also use pre-built react-contenteditable component
         />
         {img && (
           <CreateTuwueetImgPreview>

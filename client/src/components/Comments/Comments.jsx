@@ -10,6 +10,10 @@ function Comments() {
       <Tuwueet />
       <SubmitComment />
       <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
     </CommentsWrapper>
   );
 }
