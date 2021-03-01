@@ -66,7 +66,6 @@ function CreateTuwueet({ getTuwueets }) {
       <CreateTuwueetForm onSubmit={postTuwueet}>
         <CreateTuwueetTextInput
           contentEditable="true"
-          dataPlaceholder="What's happening?"
           onChange={e => setText(e.target.value)}
         />
         {img && (

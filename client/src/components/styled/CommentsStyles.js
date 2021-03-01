@@ -26,22 +26,7 @@ export const SubmitCommentForm = styled.form`
   align-items: center;
   justify-content: space-between;
 
-  input:first-child {
-    background-color: transparent;
-    color: var(--color-primary);
-    margin: 1rem 0 1rem 1rem;
-    padding: 1rem;
-    border: 1px solid #38444d;
-    border-radius: 5px;
-    font-size: var(--font-small);
-    flex: 1;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  input:nth-child(2) {
+  input {
     width: 30px;
     height: 30px;
     opacity: 0;
@@ -79,4 +64,47 @@ export const SubmitCommentOptions = styled.div`
   position: relative;
   flex: 1;
   display: flex;
+
+  & > div {
+    color: var(--color-primary);
+    margin: 1rem 0 1rem 1rem;
+    padding: 1rem;
+    border: 1px solid #38444d;
+    border-radius: 5px;
+    font-size: var(--font-small);
+    flex: 1;
+
+    &:empty:not(:focus)::before {
+      color: var(--color-secondary, #192734);
+      content: 'Write your comment';
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+
+export const SubmitCommentImagePreview = styled.div`
+  position: relative;
+
+  span {
+    font-size: var(--font-large, 2rem);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--color-primary, white);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    top: 30px;
+    right: 30px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  img {
+    padding: 1rem;
+  }
 `;

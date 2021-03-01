@@ -30,7 +30,6 @@ export const CreateTuwueetTextInput = styled.div`
   font-size: var(--font-medium, 1rem);
   background-color: transparent;
   border: none;
-  resize: none;
   color: var(--color-primary, white);
 
   &:empty:not(:focus)::before {
