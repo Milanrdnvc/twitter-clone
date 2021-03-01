@@ -66,7 +66,12 @@ function CreateTuwueet({ getTuwueets }) {
       <CreateTuwueetForm onSubmit={postTuwueet}>
         <CreateTuwueetTextInput
           contentEditable="true"
-          onChange={e => setText(e.target.value)}
+          onBlur={e => setText(e.target.innerText.trim())}
+          onFocus={e => setText(e.target.innerText.trim())}
+          onChange={e => setText(e.target.innerText.trim())}
+          onKeyDown={e => setText(e.target.innerText.trim())}
+          onKeyUp={e => setText(e.target.innerText.trim())}
+          onPaste={e => setText(e.target.innerText.trim())}
         />
         {img && (
           <CreateTuwueetImgPreview>

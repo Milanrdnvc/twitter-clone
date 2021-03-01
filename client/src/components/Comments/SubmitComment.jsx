@@ -8,6 +8,7 @@ import {
 } from '../styled/CommentsStyles';
 
 function SubmitComment() {
+  const [text, setText] = useState('');
   const [img, setImg] = useState(null);
 
   function handleFileInputChange(e) {
@@ -26,7 +27,15 @@ function SubmitComment() {
     <SubmitCommentWrapper>
       <SubmitCommentForm>
         <SubmitCommentOptions>
-          <div contentEditable="true" />
+          <div
+            contentEditable="true"
+            onBlur={e => setText(e.target.innerText.trim())}
+            onFocus={e => setText(e.target.innerText.trim())}
+            onChange={e => setText(e.target.innerText.trim())}
+            onKeyDown={e => setText(e.target.innerText.trim())}
+            onKeyUp={e => setText(e.target.innerText.trim())}
+            onPaste={e => setText(e.target.innerText.trim())}
+          />
           <input type="file" onChange={handleFileInputChange} />
           <img src={imageIcon} alt="Image icon" width="30px" />
         </SubmitCommentOptions>
