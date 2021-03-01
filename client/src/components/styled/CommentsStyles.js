@@ -53,7 +53,7 @@ export const SubmitCommentForm = styled.form`
     cursor: pointer;
   }
 
-  svg {
+  img {
     position: absolute;
     right: 0;
     top: 50%;
