@@ -5,6 +5,7 @@ export default styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin: 0 auto;
 `;
 
 export const LoginHeading = styled.h1`

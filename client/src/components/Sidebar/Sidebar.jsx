@@ -15,11 +15,9 @@ function Sidebar() {
   const [openNotifications, setOpenNotifications] = useState(false);
   const { userData } = useContext(UserContext);
 
-  if (!userData.user) return null;
-
   return (
     <>
-      <SidebarWrapper>
+      <SidebarWrapper style={{ visibility: !userData.user && 'hidden' }}>
         <Option href="/" img={logo}></Option>
         <Option href="/" text="Home" img={home}></Option>
         <Option

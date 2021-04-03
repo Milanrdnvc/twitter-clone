@@ -9,11 +9,9 @@ function Profile() {
   const [openEditProfile, setOpenEditProfile] = useState(false);
   const { userData } = useContext(UserContext);
 
-  if (!userData.user) return null;
-
   return (
     <>
-      <ProfileWrapper>
+      <ProfileWrapper style={{ visibility: !userData.user && 'hidden' }}>
         <ProfilePfp>
           <img src={pfp} alt="Profile" width="100px" />
           <img src={edit} alt="Edit" width="25px" />
