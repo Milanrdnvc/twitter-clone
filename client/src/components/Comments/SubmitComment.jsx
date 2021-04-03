@@ -37,7 +37,7 @@ function SubmitComment() {
             onPaste={e => setText(e.target.innerText.trim())}
           />
           <input type="file" onChange={handleFileInputChange} />
-          <img src={imageIcon} alt="Image icon" width="30px" />
+          <img src={imageIcon} alt="Picture icon" width="30px" />
         </SubmitCommentOptions>
         <button type="submit">Submit</button>
       </SubmitCommentForm>
