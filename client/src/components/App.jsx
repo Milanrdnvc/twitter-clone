@@ -5,10 +5,10 @@ import Sidebar from './Sidebar/Sidebar';
 import Profile from './Profile/Profile';
 import Comments from './Comments/Comments';
 import AppWrapper from './styled/AppStyles';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import UserContext from '../context/UserContext';
 import axios from 'axios';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [userData, setUserData] = useState({

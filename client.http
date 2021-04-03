@@ -1,10 +1,12 @@
-POST http://localhost:5000/tuwueets/create
+POST http://localhost:5000/users/register
 X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZjQzZjBiZGNjZjhmMjY2NDZjOTMxZiIsImlhdCI6MTYwOTkzMjkxN30.Bj1WlOfxSIV068_ypofkbiDhgEaVYzCzXDnflGB0JIA
 Content-Type: application/json
 
 {
-    "text": "text of my tuwueet2",
-    "img": "image of my tuwueet2"
+    "email": "mejl@gmail.com",
+    "password": "12345",
+    "passwordCheck": "12345",
+    "username": "Milan"
 }
 
 

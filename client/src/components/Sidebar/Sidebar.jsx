@@ -7,11 +7,15 @@ import notification from '../../pictures/notification.svg';
 import login from '../../pictures/login.svg';
 import logo from '../../pictures/logo.png';
 import profile from '../../pictures/profile.svg';
-import { useState } from 'react';
+import UserContext from '../../context/UserContext';
+import { useState, useContext } from 'react';
 
 function Sidebar() {
   const [openEditProfile, setOpenEditProfile] = useState(false);
   const [openNotifications, setOpenNotifications] = useState(false);
+  const { userData } = useContext(UserContext);
+
+  if (!userData.user) return null;
 
   return (
     <>
