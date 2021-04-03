@@ -1,11 +1,15 @@
 import pfp from '../../pictures/pfp.jpg';
 import edit from '../../pictures/edit.svg';
 import EditProfile from '../shared components/EditProfile';
+import UserContext from '../../context/UserContext';
 import { ProfileWrapper, ProfilePfp } from '../styled/ProfileStyles';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 function Profile() {
   const [openEditProfile, setOpenEditProfile] = useState(false);
+  const { userData } = useContext(UserContext);
+
+  if (!userData.user) return null;
 
   return (
     <>
