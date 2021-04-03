@@ -14,7 +14,7 @@ function Comment() {
             'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt provident quae voluptatem distinctio repellat possimus? Quod dolorum nisi assumenda quis, aliquam nostrum ducimus, quas ratione commodi nulla, aut vero necessitatibus!'
           }
         </p>
-        <img src={post} alt="Comment image" width="100%" />
+        <img src={post} alt="Comment" width="100%" />
       </CommentContent>
     </CommentWrapper>
   );

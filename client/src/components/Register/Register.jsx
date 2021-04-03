@@ -9,7 +9,7 @@ import RegisterWrapper, {
   RegisterPasswordInput,
   RegisterSubmit,
 } from '../styled/RegisterStyles';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function Register() {

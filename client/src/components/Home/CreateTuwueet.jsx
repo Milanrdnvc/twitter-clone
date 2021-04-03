@@ -1,7 +1,7 @@
 import pfp from '../../pictures/pfp.jpg';
 import axios from 'axios';
 import imageIcon from '../../pictures/image.svg';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import {
   CreateTuwueetWrapper,
   CreateTuwueetTextInput,
@@ -15,6 +15,7 @@ import {
 function CreateTuwueet({ getTuwueets }) {
   const [text, setText] = useState('');
   const [img, setImg] = useState(null);
+  const textInput = useRef(null);
 
   function handleFileInputChange(e) {
     const file = e.target.files[0];
@@ -30,7 +31,6 @@ function CreateTuwueet({ getTuwueets }) {
   }
 
   async function postTuwueet(e) {
-    console.log(img);
     e.preventDefault();
     e.target.reset();
     let token = localStorage.getItem('auth-token');
@@ -57,6 +57,7 @@ function CreateTuwueet({ getTuwueets }) {
       setImg(null);
       setText('');
       getTuwueets();
+      textInput.current.innerText = '';
     }
   }
 
@@ -72,6 +73,7 @@ function CreateTuwueet({ getTuwueets }) {
           onKeyDown={e => setText(e.target.innerText.trim())}
           onKeyUp={e => setText(e.target.innerText.trim())}
           onPaste={e => setText(e.target.innerText.trim())}
+          ref={textInput}
           // We could also use pre-built react-contenteditable component
         />
         {img && (
