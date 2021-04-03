@@ -18,7 +18,7 @@ function Register() {
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
   const [error, setError] = useState('');
-  const { setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
 
   async function handleRegisterSubmit(e) {
@@ -40,6 +40,10 @@ function Register() {
       if (err.response.data.msg) setError(err.response.data.msg);
     }
   }
+
+  useEffect(() => {
+    if (userData.user) history.push('/');
+  });
 
   return (
     <RegisterWrapper>
