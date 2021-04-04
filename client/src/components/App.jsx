@@ -7,12 +7,7 @@ import Comments from './Comments/Comments';
 import AppWrapper from './styled/AppStyles';
 import UserContext from '../context/UserContext';
 import axios from 'axios';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-} from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -21,7 +16,6 @@ function App() {
     user: null,
   });
   const history = useHistory();
-  console.log(useHistory());
 
   async function authorizeUser() {
     let token = localStorage.getItem('auth-token');
@@ -58,18 +52,18 @@ function App() {
   }, []);
 
   return (
-      <AppWrapper>
-        <UserContext.Provider value={{ userData, setUserData }}>
-          <Sidebar logout={logout} />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/comments" component={Comments} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-          </Switch>
-          <Profile />
-        </UserContext.Provider>
-      </AppWrapper>
+    <AppWrapper>
+      <UserContext.Provider value={{ userData, setUserData }}>
+        <Sidebar logout={logout} />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/comments" component={Comments} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Switch>
+        <Profile />
+      </UserContext.Provider>
+    </AppWrapper>
   );
 }
 

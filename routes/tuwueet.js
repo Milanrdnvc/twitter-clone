@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const auth = require('../middleware/auth');
 const Tuwueet = require('../models/tuwueet');
-const User = require('../models/user');
 
 router.post('/create', auth, async (req, res) => {
   try {
-    const { text, img } = req.body;
+    const { text, img, username } = req.body;
     if (!text)
       return res
         .status(400)
@@ -14,6 +13,7 @@ router.post('/create', auth, async (req, res) => {
       text,
       img: img || 'no img',
       userId: req.user,
+      username: username,
     });
     await newTuwueet.save();
     res.status(204).send(null);

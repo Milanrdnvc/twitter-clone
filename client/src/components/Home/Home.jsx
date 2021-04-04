@@ -35,6 +35,7 @@ function Home() {
         <Tuwueet
           text={tuwueet.text}
           img={tuwueet.img}
+          username={tuwueet.username}
           createdAt={tuwueet.createdAt}
           key={idx}
         />

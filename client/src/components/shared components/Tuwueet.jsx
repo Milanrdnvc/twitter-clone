@@ -14,16 +14,9 @@ function likeTuwueet() {
   console.log('hello');
 }
 
-function Tuwueet({ text, img, createdAt }) {
+function Tuwueet({ text, img, createdAt, username }) {
   const { userData } = useContext(UserContext);
-  const [username, setUsername] = useState('');
   const [liked, setLiked] = useState(false);
-
-  useEffect(() => {
-    if (userData.user) {
-      setUsername(userData.user.username);
-    }
-  }, [userData]);
 
   return (
     <TuwueetWrapper>

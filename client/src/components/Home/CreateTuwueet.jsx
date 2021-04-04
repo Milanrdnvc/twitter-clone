@@ -1,7 +1,8 @@
 import pfp from '../../pictures/pfp.jpg';
 import axios from 'axios';
 import imageIcon from '../../pictures/image.svg';
-import { useState, useRef } from 'react';
+import UserContext from '../../context/UserContext';
+import { useState, useRef, useContext } from 'react';
 import {
   CreateTuwueetWrapper,
   CreateTuwueetTextInput,
@@ -16,6 +17,7 @@ function CreateTuwueet({ getTuwueets }) {
   const [text, setText] = useState('');
   const [img, setImg] = useState(null);
   const textInput = useRef(null);
+  const { userData } = useContext(UserContext);
 
   function handleFileInputChange(e) {
     const file = e.target.files[0];
@@ -44,16 +46,20 @@ function CreateTuwueet({ getTuwueets }) {
       },
     });
     if (tokenRes.data) {
-      await axios.post(
-        '/tuwueets/create',
-        { text, img },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Auth-Token': token,
-          },
-        }
-      );
+      try {
+        await axios.post(
+          '/tuwueets/create',
+          { text, img, username: userData.user },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Auth-Token': token,
+            },
+          }
+        );
+      } catch (err) {
+        console.log(err.message);
+      }
       setImg(null);
       setText('');
       getTuwueets();
