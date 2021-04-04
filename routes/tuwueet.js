@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const auth = require('../middleware/auth');
 const Tuwueet = require('../models/tuwueet');
+const User = require('../models/user');
 
 router.post('/create', auth, async (req, res) => {
   try {

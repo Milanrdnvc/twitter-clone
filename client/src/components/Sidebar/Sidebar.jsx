@@ -10,7 +10,7 @@ import profile from '../../pictures/profile.svg';
 import UserContext from '../../context/UserContext';
 import { useState, useContext } from 'react';
 
-function Sidebar() {
+function Sidebar({ logout }) {
   const [openEditProfile, setOpenEditProfile] = useState(false);
   const [openNotifications, setOpenNotifications] = useState(false);
   const { userData } = useContext(UserContext);
@@ -26,7 +26,11 @@ function Sidebar() {
           img={notification}
           onClick={() => setOpenNotifications(true)}
         ></Option>
-        <Option href="/login" text="Log In" img={login}></Option>
+        {userData.user ? (
+          <Option href="#" text="Log Out" img={login} onClick={logout} />
+        ) : (
+          <Option href="/login" text="Log In" img={login} />
+        )}
         <Option
           href="#"
           img={profile}

@@ -13,6 +13,10 @@ const tweetSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    username: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

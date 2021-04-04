@@ -7,7 +7,12 @@ import Comments from './Comments/Comments';
 import AppWrapper from './styled/AppStyles';
 import UserContext from '../context/UserContext';
 import axios from 'axios';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -15,36 +20,47 @@ function App() {
     token: null,
     user: null,
   });
+  const history = useHistory();
+  console.log(useHistory());
 
-  useEffect(() => {
-    async function authorizeUser() {
-      let token = localStorage.getItem('auth-token');
-      if (token == null) {
-        localStorage.setItem('auth-token', '');
-        token = '';
-      }
-      const tokenRes = await axios.post('users/tokenIsValid', null, {
+  async function authorizeUser() {
+    let token = localStorage.getItem('auth-token');
+    if (token == null) {
+      localStorage.setItem('auth-token', '');
+      token = '';
+    }
+    const tokenRes = await axios.post('users/tokenIsValid', null, {
+      headers: {
+        'X-Auth-Token': token,
+      },
+    });
+    if (tokenRes.data) {
+      const userRes = await axios.get('/users', {
         headers: {
           'X-Auth-Token': token,
         },
       });
-      if (tokenRes.data) {
-        const userRes = await axios.get('/users', {
-          headers: {
-            'X-Auth-Token': token,
-          },
-        });
-        setUserData({ token, user: userRes.data });
-      }
+      setUserData({ token, user: userRes.data });
     }
+  }
+
+  function logout() {
+    setUserData({
+      token: null,
+      user: null,
+    });
+    localStorage.setItem('auth-token', '');
+    history.push('/login');
+  }
+
+  useEffect(() => {
     authorizeUser();
   }, []);
 
   return (
-    <Router>
       <AppWrapper>
         <UserContext.Provider value={{ userData, setUserData }}>
-          <Sidebar />
+          <Sidebar logout={logout} />
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/comments" component={Comments} />
@@ -54,7 +70,6 @@ function App() {
           <Profile />
         </UserContext.Provider>
       </AppWrapper>
-    </Router>
   );
 }
 

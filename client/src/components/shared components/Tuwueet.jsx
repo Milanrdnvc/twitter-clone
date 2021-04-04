@@ -1,5 +1,4 @@
 import pfp from '../../pictures/pfp.jpg';
-import post from '../../pictures/post.png';
 import like from '../../pictures/like.svg';
 import comment from '../../pictures/comment.svg';
 import {
@@ -31,7 +30,7 @@ function Tuwueet({ text, img, createdAt }) {
       <TuwueetPfp src={pfp} />
       <TuwueetInfo>
         <p>
-          <strong>{'Milanrdnvc'}</strong> <em>{createdAt}</em>
+          <strong>{username}</strong> <em>{createdAt}</em>
           <br />
           {text}
         </p>
