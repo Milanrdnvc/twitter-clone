@@ -49,7 +49,7 @@ function CreateTuwueet({ getTuwueets }) {
       try {
         await axios.post(
           '/tuwueets/create',
-          { text, img, username: userData.user },
+          { text, img, username: userData.user.username },
           {
             headers: {
               'Content-Type': 'application/json',
