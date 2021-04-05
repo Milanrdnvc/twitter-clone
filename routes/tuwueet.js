@@ -41,7 +41,30 @@ router.post('/like', auth, async (req, res) => {
   }
 });
 
-router.get('/all', auth, async (req, res) => {
+router.post('/unlike', auth, async (req, res) => {
+  try {
+    const { tuwueetId, userId } = req.body;
+    if (!userId) return res.status(400).json({ msg: 'User ID not provided' });
+    if (!tuwueetId)
+      return res.status(400).json({ msg: 'Tuwueet ID not provided' });
+    const likes = (await Tuwueet.findOne({ _id: tuwueetId })).likes;
+    const filteredLikes = likes.filter(user => user.id !== userId);
+    const updatedTuwueet = await Tuwueet.findOneAndUpdate(
+      { _id: tuwueetId },
+      { filteredLikes }
+    );
+    res.json({ updatedTuwueet });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post('/', auth, async (req, res) => {
+  const tuwueet = await Tuwueet.findOne({ _id: req.body.id });
+  res.json({ tuwueet });
+});
+
+router.get('/all', auth, async (_, res) => {
   const tuwueets = await Tuwueet.find();
   res.json({ tuwueets });
 });
