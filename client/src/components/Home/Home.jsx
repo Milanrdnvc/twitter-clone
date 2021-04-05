@@ -2,7 +2,7 @@ import CreateTuwueet from './CreateTuwueet';
 import Tuwueet from '../shared components/Tuwueet';
 import axios from 'axios';
 import HomeWrapper, { HomeHeader } from '../styled/HomeStyles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Home() {
   const [Tuwueets, setTuwueets] = useState(null);
@@ -29,6 +29,10 @@ function Home() {
     }
   }
 
+  useEffect(() => {
+    getTuwueets();
+  }, []);
+
   function renderTuwueets(tuwueets) {
     const allTuwueets = tuwueets.data.tuwueets.map((tuwueet, idx) => {
       return (
@@ -38,6 +42,8 @@ function Home() {
           username={tuwueet.username}
           createdAt={tuwueet.createdAt}
           key={idx}
+          id={tuwueet._id}
+          likesNum={tuwueet.likes.length}
         />
       );
     });
