@@ -3,6 +3,7 @@ import Tuwueet from '../shared components/Tuwueet';
 import axios from 'axios';
 import HomeWrapper, { HomeHeader } from '../styled/HomeStyles';
 import { useState, useEffect } from 'react';
+import { getAuthToken, validateToken, GET, POST } from '../../helpers';
 
 function Home() {
   const [Tuwueets, setTuwueets] = useState(null);
