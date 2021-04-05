@@ -1,8 +1,8 @@
 import pfp from '../../pictures/pfp.jpg';
-import axios from 'axios';
 import imageIcon from '../../pictures/image.svg';
 import UserContext from '../../context/UserContext';
 import { useState, useRef, useContext } from 'react';
+import { getAuthToken, validateToken, POST } from '../../helpers';
 import {
   CreateTuwueetWrapper,
   CreateTuwueetTextInput,
@@ -13,7 +13,7 @@ import {
   TuwueetBtn,
 } from '../styled/HomeStyles';
 
-function CreateTuwueet({ getTuwueets }) {
+function CreateTuwueet({ loadTuwueets }) {
   const [text, setText] = useState('');
   const [img, setImg] = useState(null);
   const textInput = useRef(null);
@@ -35,34 +35,22 @@ function CreateTuwueet({ getTuwueets }) {
   async function postTuwueet(e) {
     e.preventDefault();
     e.target.reset();
-    let token = localStorage.getItem('auth-token');
-    if (token == null) {
-      localStorage.setItem('auth-token', '');
-      token = '';
-    }
-    const tokenRes = await axios.post('users/tokenIsValid', null, {
-      headers: {
-        'X-Auth-Token': token,
-      },
-    });
-    if (tokenRes.data) {
-      try {
-        await axios.post(
-          '/tuwueets/create',
-          { text, img, username: userData.user.username },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'X-Auth-Token': token,
-            },
-          }
-        );
-      } catch (err) {
-        console.log(err.message);
-      }
+    const token = getAuthToken();
+    const validToken = (await validateToken(token)).data;
+    if (validToken) {
+      await POST(
+        'tuwueets/create',
+        { text, img, username: userData.user.username },
+        {
+          headers: {
+            'Content-Type': 'applications/json',
+            'X-Auth-Token': token,
+          },
+        }
+      );
       setImg(null);
       setText('');
-      getTuwueets();
+      loadTuwueets();
       textInput.current.innerText = '';
     }
   }

@@ -7,6 +7,7 @@ import Comments from './Comments/Comments';
 import AppWrapper from './styled/AppStyles';
 import UserContext from '../context/UserContext';
 import axios from 'axios';
+import { getAuthToken, validateToken, POST, GET } from '../helpers';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -18,18 +19,10 @@ function App() {
   const history = useHistory();
 
   async function authorizeUser() {
-    let token = localStorage.getItem('auth-token');
-    if (token == null) {
-      localStorage.setItem('auth-token', '');
-      token = '';
-    }
-    const tokenRes = await axios.post('users/tokenIsValid', null, {
-      headers: {
-        'X-Auth-Token': token,
-      },
-    });
-    if (tokenRes.data) {
-      const userRes = await axios.get('/users', {
+    const token = getAuthToken();
+    const validToken = (await validateToken(token)).data;
+    if (validToken) {
+      const userRes = await GET('/users', {
         headers: {
           'X-Auth-Token': token,
         },

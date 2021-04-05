@@ -1,3 +1,7 @@
+import axios from 'axios';
+import UserContext from '../../context/UserContext';
+import Error from '../shared components/Error';
+import { POST } from '../../helpers';
 import LoginWrapper, {
   LoginHeading,
   LoginForm,
@@ -5,9 +9,6 @@ import LoginWrapper, {
   LoginPasswordInput,
   LoginSubmit,
 } from '../styled/LoginStyles';
-import axios from 'axios';
-import UserContext from '../../context/UserContext';
-import Error from '../shared components/Error';
 import { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -22,7 +23,7 @@ function Login() {
     e.preventDefault();
     try {
       const loginUser = { email, password };
-      const loginRes = await axios.post('users/login', loginUser);
+      const loginRes = await POST('users/login', loginUser, null);
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,

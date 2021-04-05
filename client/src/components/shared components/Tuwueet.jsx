@@ -1,8 +1,8 @@
 import pfp from '../../pictures/pfp.jpg';
 import like from '../../pictures/like.svg';
 import comment from '../../pictures/comment.svg';
-import axios from 'axios';
 import UserContext from '../../context/UserContext';
+import { getAuthToken, validateToken, POST } from '../../helpers';
 import { useContext, useState } from 'react';
 import {
   TuwueetWrapper,
@@ -16,36 +16,22 @@ function Tuwueet({ text, img, createdAt, username, id, likesNum }) {
   const { userData } = useContext(UserContext);
 
   async function likeTuwueet() {
-    let token = localStorage.getItem('auth-token');
-    if (token == null) {
-      localStorage.setItem('auth-token', '');
-      token = '';
-    }
-    const tokenRes = await axios.post('users/tokenIsValid', null, {
-      headers: {
-        'X-Auth-Token': token,
-      },
-    });
-    if (tokenRes.data) {
-      try {
-        const likes = (
-          await axios.post(
-            '/tuwueets/like',
-            { userId: userData.user.id, tuwueetId: id },
-            {
-              headers: {
-                'Content-Type': 'application/json',
-                'X-Auth-Token': token,
-              },
-            }
-          )
-        ).data.updatedTuwueet.likes;
-        const liked = likes.find(userId => userId.id === userData.user.id);
-        if (liked) setLikes(prev => prev - 1);
-        else setLikes(prev => prev + 1);
-      } catch (err) {
-        console.log(err.message);
-      }
+    const token = getAuthToken();
+    const validToken = (await validateToken(token)).data;
+    if (validToken) {
+      const likes = (
+        await POST(
+          '/tuwueets/like',
+          { userId: userData.user.id, tuwueetId: id },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Auth-Token': token,
+            },
+          }
+        )
+      ).data.updatedTuwueet.likes.length;
+      setLikes(likes);
     }
   }
 

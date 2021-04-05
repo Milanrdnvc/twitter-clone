@@ -11,6 +11,7 @@ import RegisterWrapper, {
 } from '../styled/RegisterStyles';
 import { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { POST } from '../../helpers';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -25,8 +26,8 @@ function Register() {
     e.preventDefault();
     try {
       const newUser = { username, email, password, passwordCheck };
-      await axios.post('/users/register', newUser);
-      const loginRes = await axios.post('/users/login', {
+      await POST('users/register', newUser, null);
+      const loginRes = await POST('/users/login', {
         email,
         password,
       });

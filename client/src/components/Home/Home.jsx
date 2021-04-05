@@ -1,27 +1,18 @@
 import CreateTuwueet from './CreateTuwueet';
 import Tuwueet from '../shared components/Tuwueet';
-import axios from 'axios';
 import HomeWrapper, { HomeHeader } from '../styled/HomeStyles';
 import { useState, useEffect } from 'react';
-import { getAuthToken, validateToken, GET, POST } from '../../helpers';
+import { getAuthToken, validateToken, GET } from '../../helpers';
 
 function Home() {
   const [Tuwueets, setTuwueets] = useState(null);
 
-  async function getTuwueets() {
+  async function loadTuwueets() {
     let tuwueets;
-    let token = localStorage.getItem('auth-token');
-    if (token == null) {
-      localStorage.setItem('auth-token', '');
-      token = '';
-    }
-    const tokenRes = await axios.post('users/tokenIsValid', null, {
-      headers: {
-        'X-Auth-Token': token,
-      },
-    });
-    if (tokenRes.data) {
-      tuwueets = await axios.get('tuwueets/all', {
+    const token = getAuthToken();
+    const validToken = (await validateToken(token)).data;
+    if (validToken) {
+      tuwueets = await GET('tuwueets/all', {
         headers: {
           'X-Auth-Token': token,
         },
@@ -31,7 +22,7 @@ function Home() {
   }
 
   useEffect(() => {
-    getTuwueets();
+    loadTuwueets();
   }, []);
 
   function renderTuwueets(tuwueets) {
@@ -54,7 +45,7 @@ function Home() {
   return (
     <HomeWrapper>
       <HomeHeader>Home</HomeHeader>
-      <CreateTuwueet getTuwueets={getTuwueets} />
+      <CreateTuwueet loadTuwueets={loadTuwueets} />
       {Tuwueets}
     </HomeWrapper>
   );

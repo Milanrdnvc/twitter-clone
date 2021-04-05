@@ -9,18 +9,36 @@ export function getAuthToken() {
   return token;
 }
 
-export function validateToken() {
-    return await axios.post('users/tokenIsValid', null, {
-        headers: {
-            'X-Auth-Token': getAuthToken(),
-        }
+export async function validateToken(token) {
+  let data;
+  try {
+    data = await axios.post('users/tokenIsValid', null, {
+      headers: {
+        'X-Auth-Token': token,
+      },
     });
+  } catch (err) {
+    throw err;
+  }
+  return data;
 }
 
-export function GET(url, options) {
-    return (await axios.get(url, options));
+export async function GET(url, options) {
+  let data;
+  try {
+    data = await axios.get(url, options);
+  } catch (err) {
+    throw err;
+  }
+  return data;
 }
 
-export function POST(url, body, options) {
-    return (await axios.post(url, body, options));
+export async function POST(url, body, options) {
+  let data;
+  try {
+    data = await axios.post(url, body, options);
+  } catch (err) {
+    throw err;
+  }
+  return data;
 }
