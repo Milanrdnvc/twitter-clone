@@ -43,7 +43,7 @@ function CreateTuwueet({ loadTuwueets }) {
         { text, img, username: userData.user.username },
         {
           headers: {
-            'Content-Type': 'applications/json',
+            'Content-Type': 'application/json',
             'X-Auth-Token': token,
           },
         }

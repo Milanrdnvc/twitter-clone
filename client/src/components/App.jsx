@@ -6,8 +6,7 @@ import Profile from './Profile/Profile';
 import Comments from './Comments/Comments';
 import AppWrapper from './styled/AppStyles';
 import UserContext from '../context/UserContext';
-import axios from 'axios';
-import { getAuthToken, validateToken, POST, GET } from '../helpers';
+import { getAuthToken, validateToken, GET } from '../helpers';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 

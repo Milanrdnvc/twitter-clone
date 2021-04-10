@@ -25,8 +25,21 @@ function Home() {
     loadTuwueets();
   }, []);
 
-  function renderTuwueets(tuwueets) {
+  async function renderTuwueets(tuwueets) {
+    const token = getAuthToken();
+    const validToken = validateToken(token);
+    if (!validToken) return;
+    const user = await GET('users', {
+      headers: {
+        'X-Auth-Token': token,
+      },
+    });
+    const userId = user.data.id;
+
     const allTuwueets = tuwueets.data.tuwueets.map((tuwueet, idx) => {
+      const isLiked = Boolean(
+        tuwueet.likes.find(user => user.userId === userId)
+      );
       return (
         <Tuwueet
           text={tuwueet.text}
@@ -36,6 +49,7 @@ function Home() {
           key={idx}
           id={tuwueet._id}
           likesNum={tuwueet.likes.length}
+          liked={isLiked}
         />
       );
     });

@@ -18,7 +18,7 @@ export async function validateToken(token) {
       },
     });
   } catch (err) {
-    throw err;
+    console.error(err);
   }
   return data;
 }
@@ -28,7 +28,7 @@ export async function GET(url, options) {
   try {
     data = await axios.get(url, options);
   } catch (err) {
-    throw err;
+    console.error(err);
   }
   return data;
 }
@@ -38,7 +38,7 @@ export async function POST(url, body, options) {
   try {
     data = await axios.post(url, body, options);
   } catch (err) {
-    throw err;
+    console.error(err);
   }
   return data;
 }

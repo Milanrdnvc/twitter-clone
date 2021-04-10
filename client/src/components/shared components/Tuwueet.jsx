@@ -1,5 +1,6 @@
 import pfp from '../../pictures/pfp.jpg';
 import like from '../../pictures/like.svg';
+import filledLike from '../../pictures/filledLike.svg';
 import comment from '../../pictures/comment.svg';
 import UserContext from '../../context/UserContext';
 import { getAuthToken, validateToken, POST } from '../../helpers';
@@ -11,15 +12,16 @@ import {
   TuwueetOptions,
 } from '../styled/HomeStyles';
 
-function Tuwueet({ text, img, createdAt, username, id, likesNum }) {
+function Tuwueet({ text, img, createdAt, username, id, likesNum, liked }) {
   const [likes, setLikes] = useState(likesNum);
+  const [isLiked, setIsLiked] = useState(liked);
   const { userData } = useContext(UserContext);
 
   async function toggleLikeTuwueet(action) {
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
-    const likes = (
+    const updatedLikes = (
       await POST(
         `/tuwueets/${action}`,
         { userId: userData.user.id, tuwueetId: id },
@@ -30,8 +32,12 @@ function Tuwueet({ text, img, createdAt, username, id, likesNum }) {
           },
         }
       )
-    ).data.updatedTuwueet.likes.length;
-    setLikes(likes);
+    ).data;
+    const likesNumber =
+      action === 'like' ? updatedLikes.likes : updatedLikes.filteredLikes;
+    if (action === 'unlike') setIsLiked(false);
+    else setIsLiked(true);
+    setLikes(likesNumber.length);
   }
 
   async function handleLikeButton() {
@@ -70,7 +76,11 @@ function Tuwueet({ text, img, createdAt, username, id, likesNum }) {
             <span>122</span>
           </div>
           <div onClick={handleLikeButton}>
-            <img src={like} alt="Like" />
+            {!isLiked ? (
+              <img src={like} alt="Like" />
+            ) : (
+              <img src={filledLike} alt="Filled like" />
+            )}
             <span>{likes}</span>
           </div>
         </TuwueetOptions>
