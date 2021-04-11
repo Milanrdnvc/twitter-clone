@@ -5,6 +5,7 @@ import comment from '../../pictures/comment.svg';
 import UserContext from '../../context/UserContext';
 import { getAuthToken, validateToken, POST } from '../../helpers';
 import { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   TuwueetWrapper,
   TuwueetInfo,
@@ -16,6 +17,7 @@ function Tuwueet({ text, img, createdAt, username, id, likesNum, liked }) {
   const [likes, setLikes] = useState(likesNum);
   const [isLiked, setIsLiked] = useState(liked);
   const { userData } = useContext(UserContext);
+  const history = useHistory();
 
   async function toggleLikeTuwueet(action) {
     const token = getAuthToken();
@@ -60,6 +62,10 @@ function Tuwueet({ text, img, createdAt, username, id, likesNum, liked }) {
     else toggleLikeTuwueet('like');
   }
 
+  function handleCommentButton() {
+    history.push(`/comments/${id}`);
+  }
+
   return (
     <TuwueetWrapper>
       <TuwueetPfp src={pfp} />
@@ -71,9 +77,9 @@ function Tuwueet({ text, img, createdAt, username, id, likesNum, liked }) {
         </p>
         {img !== 'no img' && <img src={img} alt="Tuwueet post" />}
         <TuwueetOptions>
-          <div>
+          <div onClick={handleCommentButton}>
             <img src={comment} alt="Comment" />
-            <span>122</span>
+            <span>0</span>
           </div>
           <div onClick={handleLikeButton}>
             {!isLiked ? (

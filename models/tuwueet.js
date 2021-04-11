@@ -21,6 +21,10 @@ const tuwueetSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    comments: {
+      type: Array,
+      reqired: true,
+    },
   },
   {
     timestamps: true,

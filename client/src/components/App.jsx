@@ -49,7 +49,7 @@ function App() {
         <Sidebar logout={logout} />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/comments" component={Comments} />
+          <Route path="/comments/:id" component={Comments} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </Switch>

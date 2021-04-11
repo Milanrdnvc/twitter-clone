@@ -15,6 +15,7 @@ router.post('/create', auth, async (req, res) => {
       userId: req.user,
       username: username,
       likes: [],
+      comments: [],
     });
     await newTuwueet.save();
     res.status(204).send(null);
@@ -51,6 +52,42 @@ router.post('/unlike', auth, async (req, res) => {
       { likes: filteredLikes }
     );
     res.json({ filteredLikes });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post('/comment', auth, async (req, res) => {
+  try {
+    const {
+      tuwueetId,
+      commentText,
+      commentImg,
+      username,
+      createdAt,
+      userImg,
+    } = req.body;
+    if (!tuwueetId) res.status(400).json({ msg: 'Tuwueet ID not provided' });
+    if (!commentText)
+      res.status(400).json({ msg: 'Your comment must include some text' });
+    const tuwueet = await Tuwueet.findOne({ _id: tuwueetId });
+    const newComment = {
+      tuwueetId,
+      userImg,
+      commentText,
+      createdAt,
+      img: commentImg || 'no img',
+      createdBy: username,
+    };
+    const comments = tuwueet.comments;
+    comments.push(newComment);
+    await Tuwueet.findOneAndUpdate(
+      { _id: tuwueetId },
+      {
+        comments,
+      }
+    );
+    res.json({ comments });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
