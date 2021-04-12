@@ -12,7 +12,7 @@ export function getAuthToken() {
 export async function validateToken(token) {
   let data;
   try {
-    data = await axios.post('users/tokenIsValid', null, {
+    data = await axios.post('/users/tokenIsValid', null, {
       headers: {
         'X-Auth-Token': token,
       },

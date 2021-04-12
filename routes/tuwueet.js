@@ -59,24 +59,17 @@ router.post('/unlike', auth, async (req, res) => {
 
 router.post('/comment', auth, async (req, res) => {
   try {
-    const {
-      tuwueetId,
-      commentText,
-      commentImg,
-      username,
-      createdAt,
-      userImg,
-    } = req.body;
+    const { tuwueetId, text, img, username, createdAt, userImg } = req.body;
     if (!tuwueetId) res.status(400).json({ msg: 'Tuwueet ID not provided' });
-    if (!commentText)
+    if (!text)
       res.status(400).json({ msg: 'Your comment must include some text' });
     const tuwueet = await Tuwueet.findOne({ _id: tuwueetId });
     const newComment = {
       tuwueetId,
       userImg,
-      commentText,
+      text,
       createdAt,
-      img: commentImg || 'no img',
+      img: img || 'no img',
       createdBy: username,
     };
     const comments = tuwueet.comments;

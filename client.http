@@ -1,12 +1,4 @@
-POST http://localhost:5000/users/register
-X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZjQzZjBiZGNjZjhmMjY2NDZjOTMxZiIsImlhdCI6MTYwOTkzMjkxN30.Bj1WlOfxSIV068_ypofkbiDhgEaVYzCzXDnflGB0JIA
-Content-Type: application/json
-
-{
-    "email": "mejl@gmail.com",
-    "password": "12345",
-    "passwordCheck": "12345",
-    "username": "Milan"
-}
+POST http://localhost:5000/tuwueets/comment
+X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZjQ0ZWZkNDMxNGQyMmEyODk3YmU5YSIsImlhdCI6MTYxNzYxMTc4N30.5Bl2roxREr5dAFAt0CuP2050EHP-ZZZFS4azYRQdCZs
 
 

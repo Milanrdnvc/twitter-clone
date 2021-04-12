@@ -1,15 +1,19 @@
 import imageIcon from '../../pictures/image.svg';
-import { useState } from 'react';
+import UserContext from '../../context/UserContext';
+import { useState, useContext, useRef } from 'react';
 import {
   SubmitCommentWrapper,
   SubmitCommentForm,
   SubmitCommentOptions,
   SubmitCommentImagePreview,
 } from '../styled/CommentsStyles';
+import { POST, getAuthToken, validateToken } from '../../helpers';
 
-function SubmitComment() {
+function SubmitComment({ tuwueetId, renderComments }) {
   const [text, setText] = useState('');
   const [img, setImg] = useState(null);
+  const { userData } = useContext(UserContext);
+  const commentInput = useRef(null);
 
   function handleFileInputChange(e) {
     const file = e.target.files[0];
@@ -23,11 +27,45 @@ function SubmitComment() {
       setImg(reader.result);
     };
   }
+
+  async function postComment(e) {
+    e.preventDefault();
+    e.target.reset();
+    const token = getAuthToken();
+    let validToken = await validateToken(token);
+    validToken = validToken ? validToken.data : null;
+    if (!validToken) return;
+    const createdAt = new Date();
+    let comments = await POST(
+      '/tuwueets/comment',
+      {
+        text,
+        img,
+        username: userData.user.username,
+        tuwueetId,
+        createdAt,
+        userImg: 'no img',
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Auth-Token': token,
+        },
+      }
+    );
+    comments = comments ? comments.data : null;
+    setImg(null);
+    setText('');
+    renderComments(comments);
+    commentInput.current.innerText = '';
+  }
+
   return (
     <SubmitCommentWrapper>
-      <SubmitCommentForm>
+      <SubmitCommentForm onSubmit={postComment}>
         <SubmitCommentOptions>
           <div
+            ref={commentInput}
             contentEditable="true"
             onBlur={e => setText(e.target.innerText.trim())}
             onFocus={e => setText(e.target.innerText.trim())}
