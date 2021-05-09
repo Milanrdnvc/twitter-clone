@@ -1,7 +1,7 @@
 import Tuwueet from '../shared components/Tuwueet';
 import SubmitComment from './SubmitComment';
 import Comment from './Comment';
-import { POST, getAuthToken, validateToken } from '../../helpers';
+import { POST, GET, getAuthToken, validateToken } from '../../helpers';
 import { useState, useEffect } from 'react';
 import { CommentsHeader, CommentsWrapper } from '../styled/CommentsStyles';
 
@@ -11,9 +11,44 @@ function Comments({
   },
 }) {
   const [Comments, setComments] = useState(null);
+  const [TuwueetComponent, setTuwueetComponent] = useState(null);
+
+  async function getTuwueet(id) {
+    const token = getAuthToken();
+    const validToken = validateToken(token);
+    if (!validToken) return;
+    const tuwueet = (
+      await POST(
+        '/tuwueets',
+        { id },
+        {
+          headers: {
+            'X-Auth-Token': token,
+          },
+        }
+      )
+    ).data.tuwueet;
+    const user = await GET('/users', {
+      headers: {
+        'X-Auth-Token': token,
+      },
+    });
+    const userId = user.data.id;
+    const isLiked = Boolean(tuwueet.likes.find(user => user.userId === userId));
+    setTuwueetComponent(
+      <Tuwueet
+        text={tuwueet.text}
+        img={tuwueet.img}
+        username={tuwueet.username}
+        createdAt={tuwueet.createdAt}
+        id={tuwueet._id}
+        likesNum={tuwueet.likes.length}
+        liked={isLiked}
+      />
+    );
+  }
 
   function renderComments(comments) {
-    console.log(comments);
     const allComments = comments.comments.map((comment, idx) => {
       return (
         <Comment
@@ -49,12 +84,13 @@ function Comments({
     getAllComments(id)
       .then(res => renderComments(res))
       .catch(err => console.error(err));
+    getTuwueet(id);
   }, []);
 
   return (
     <CommentsWrapper>
       <CommentsHeader>Comments</CommentsHeader>
-      <Tuwueet />
+      {TuwueetComponent}
       <SubmitComment tuwueetId={id} renderComments={renderComments} />
       {Comments}
     </CommentsWrapper>

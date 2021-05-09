@@ -47,7 +47,7 @@ function Tuwueet({ text, img, createdAt, username, id, likesNum, liked }) {
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
     const tuwueet = await POST(
-      'tuwueets/',
+      '/tuwueets/',
       { id },
       {
         headers: {
