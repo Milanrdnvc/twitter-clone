@@ -1,7 +1,8 @@
 import Tuwueet from '../shared components/Tuwueet';
 import SubmitComment from './SubmitComment';
 import Comment from './Comment';
-import { useState } from 'react';
+import { POST, getAuthToken, validateToken } from '../../helpers';
+import { useState, useEffect } from 'react';
 import { CommentsHeader, CommentsWrapper } from '../styled/CommentsStyles';
 
 function Comments({
@@ -12,6 +13,7 @@ function Comments({
   const [Comments, setComments] = useState(null);
 
   function renderComments(comments) {
+    console.log(comments);
     const allComments = comments.comments.map((comment, idx) => {
       return (
         <Comment
@@ -26,6 +28,29 @@ function Comments({
     });
     setComments(allComments.reverse());
   }
+
+  async function getAllComments(tuwueetId) {
+    const token = getAuthToken();
+    const validToken = validateToken(token);
+    if (!validToken) return;
+    const comments = await POST(
+      '/tuwueets/allComments',
+      { tuwueetId },
+      {
+        headers: {
+          'X-Auth-Token': token,
+        },
+      }
+    );
+    return comments.data;
+  }
+
+  useEffect(() => {
+    getAllComments(id)
+      .then(res => renderComments(res))
+      .catch(err => console.error(err));
+  }, []);
+
   return (
     <CommentsWrapper>
       <CommentsHeader>Comments</CommentsHeader>

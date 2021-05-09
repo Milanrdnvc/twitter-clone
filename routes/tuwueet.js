@@ -87,13 +87,34 @@ router.post('/comment', auth, async (req, res) => {
 });
 
 router.post('/', auth, async (req, res) => {
-  const tuwueet = await Tuwueet.findOne({ _id: req.body.id });
-  res.json({ tuwueet });
+  try {
+    const tuwueet = await Tuwueet.findOne({ _id: req.body.id });
+    res.json({ tuwueet });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post('/allComments', auth, async (req, res) => {
+  try {
+    const { tuwueetId } = req.body;
+    if (!tuwueetId)
+      return res.status(400).json({ msg: 'Tuwueet ID not provided' });
+    const tuwueets = await Tuwueet.findOne({ _id: tuwueetId });
+    const comments = tuwueets.comments;
+    res.json({ comments });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 router.get('/all', auth, async (_, res) => {
-  const tuwueets = await Tuwueet.find();
-  res.json({ tuwueets });
+  try {
+    const tuwueets = await Tuwueet.find();
+    res.json({ tuwueets });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;
