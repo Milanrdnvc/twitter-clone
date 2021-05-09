@@ -28,6 +28,13 @@ function Comments({
         }
       )
     ).data.tuwueet;
+    renderTuwueet(tuwueet);
+  }
+
+  async function renderTuwueet(tuwueet) {
+    const token = getAuthToken();
+    const validToken = validateToken(token);
+    if (!validToken) return;
     const user = await GET('/users', {
       headers: {
         'X-Auth-Token': token,
