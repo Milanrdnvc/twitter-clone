@@ -3,6 +3,7 @@ import like from '../../pictures/like.svg';
 import filledLike from '../../pictures/filledLike.svg';
 import comment from '../../pictures/comment.svg';
 import UserContext from '../../context/UserContext';
+import relativeDate from 'tiny-relative-date';
 import { getAuthToken, validateToken, POST } from '../../helpers';
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -18,6 +19,7 @@ function Tuwueet({ text, img, createdAt, username, id, likesNum, liked }) {
   const [isLiked, setIsLiked] = useState(liked);
   const { userData } = useContext(UserContext);
   const history = useHistory();
+  const date = relativeDate(createdAt);
 
   async function toggleLikeTuwueet(action) {
     const token = getAuthToken();
@@ -71,7 +73,7 @@ function Tuwueet({ text, img, createdAt, username, id, likesNum, liked }) {
       <TuwueetPfp src={pfp} />
       <TuwueetInfo>
         <p>
-          <strong>{username}</strong> <em>{createdAt}</em>
+          <strong>{username}</strong> <em>{date}</em>
           <br />
           {text}
         </p>
