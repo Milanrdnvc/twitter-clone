@@ -50,6 +50,7 @@ function Comments({
         createdAt={tuwueet.createdAt}
         id={tuwueet._id}
         likesNum={tuwueet.likes.length}
+        commentsNum={tuwueet.comments.length}
         liked={isLiked}
       />
     );
@@ -68,12 +69,49 @@ function Comments({
         />
       );
     });
+    updateTuwueetComments(allComments.length);
     setComments(allComments.reverse());
+  }
+
+  async function updateTuwueetComments(commentsNum) {
+    const token = getAuthToken();
+    const validToken = (await validateToken(token)).data;
+    if (!validToken) return;
+    const user = await GET('/users', {
+      headers: {
+        'X-Auth-Token': token,
+      },
+    });
+    const tuwueet = (
+      await POST(
+        '/tuwueets',
+        { id },
+        {
+          headers: {
+            'X-Auth-Token': token,
+          },
+        }
+      )
+    ).data.tuwueet;
+    const userId = user.data.id;
+    const isLiked = Boolean(tuwueet.likes.find(user => user.userId === userId));
+    setTuwueetComponent(
+      <Tuwueet
+        text={tuwueet.text}
+        img={tuwueet.img}
+        username={tuwueet.username}
+        createdAt={tuwueet.createdAt}
+        id={tuwueet._id}
+        likesNum={tuwueet.likes.length}
+        commentsNum={commentsNum}
+        liked={isLiked}
+      />
+    );
   }
 
   async function getAllComments(tuwueetId) {
     const token = getAuthToken();
-    const validToken = validateToken(token);
+    const validToken = (await validateToken(token)).data;
     if (!validToken) return;
     const comments = await POST(
       '/tuwueets/allComments',

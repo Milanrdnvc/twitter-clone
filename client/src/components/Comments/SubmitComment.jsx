@@ -32,8 +32,7 @@ function SubmitComment({ tuwueetId, renderComments }) {
     e.preventDefault();
     e.target.reset();
     const token = getAuthToken();
-    let validToken = await validateToken(token);
-    validToken = validToken ? validToken.data : null;
+    const validToken = (await validateToken(token)).data;
     if (!validToken) return;
     const createdAt = new Date();
     let comments = await POST(

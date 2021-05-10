@@ -14,7 +14,16 @@ import {
   TuwueetOptions,
 } from '../styled/HomeStyles';
 
-function Tuwueet({ text, img, createdAt, username, id, likesNum, liked }) {
+function Tuwueet({
+  text,
+  img,
+  createdAt,
+  username,
+  id,
+  likesNum,
+  commentsNum,
+  liked,
+}) {
   const [likes, setLikes] = useState(likesNum);
   const [isLiked, setIsLiked] = useState(liked);
   const { userData } = useContext(UserContext);
@@ -81,7 +90,7 @@ function Tuwueet({ text, img, createdAt, username, id, likesNum, liked }) {
         <TuwueetOptions>
           <div onClick={handleCommentButton}>
             <img src={comment} alt="Comment" />
-            <span>0</span>
+            <span>{commentsNum}</span>
           </div>
           <div onClick={handleLikeButton}>
             {!isLiked ? (
