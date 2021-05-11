@@ -39,7 +39,7 @@ function CreateTuwueet({ loadTuwueets }) {
     if (validToken) {
       await POST(
         'tuwueets/create',
-        { text, img, username: userData.user.username },
+        { text, img, username: userData.user.username, pfp: profilePicture },
         {
           headers: {
             'Content-Type': 'application/json',

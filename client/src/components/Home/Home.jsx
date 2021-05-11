@@ -51,6 +51,7 @@ function Home() {
           likesNum={tuwueet.likes.length}
           commentsNum={tuwueet.comments.length}
           liked={isLiked}
+          pfp={tuwueet.pfp}
         />
       );
     });

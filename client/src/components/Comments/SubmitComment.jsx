@@ -12,7 +12,7 @@ import { POST, getAuthToken, validateToken } from '../../helpers';
 function SubmitComment({ tuwueetId, renderComments }) {
   const [text, setText] = useState('');
   const [img, setImg] = useState(null);
-  const { userData } = useContext(UserContext);
+  const { userData, profilePicture } = useContext(UserContext);
   const commentInput = useRef(null);
 
   function handleFileInputChange(e) {
@@ -43,7 +43,7 @@ function SubmitComment({ tuwueetId, renderComments }) {
         username: userData.user.username,
         tuwueetId,
         createdAt,
-        userImg: 'no img',
+        userImg: profilePicture,
       },
       {
         headers: {

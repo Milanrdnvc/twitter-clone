@@ -4,7 +4,7 @@ const Tuwueet = require('../models/tuwueet');
 
 router.post('/create', auth, async (req, res) => {
   try {
-    const { text, img, username } = req.body;
+    const { text, img, username, pfp } = req.body;
     if (!text)
       return res
         .status(400)
@@ -16,6 +16,7 @@ router.post('/create', auth, async (req, res) => {
       username: username,
       likes: [],
       comments: [],
+      pfp,
     });
     await newTuwueet.save();
     res.status(204).send(null);

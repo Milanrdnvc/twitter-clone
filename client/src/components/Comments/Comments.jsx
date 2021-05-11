@@ -105,6 +105,7 @@ function Comments({
         likesNum={tuwueet.likes.length}
         commentsNum={commentsNum}
         liked={isLiked}
+        pfp={tuwueet.pfp}
       />
     );
   }

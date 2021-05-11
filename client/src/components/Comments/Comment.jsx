@@ -3,13 +3,13 @@ import UserContext from '../../context/UserContext';
 import { useContext } from 'react';
 import { CommentWrapper, CommentContent } from '../styled/CommentsStyles';
 
-function Comment({ username, img, createdAt, text }) {
+function Comment({ username, img, createdAt, text, userPfp }) {
   const date = relativeDate(createdAt);
   const { profilePicture } = useContext(UserContext);
 
   return (
     <CommentWrapper>
-      <img src={profilePicture} alt="Avatar" width="50px" height="50px" />
+      <img src={userPfp} alt="Avatar" width="50px" height="50px" />
       <CommentContent>
         <p>
           <strong>{username}</strong> <em>{date}</em>

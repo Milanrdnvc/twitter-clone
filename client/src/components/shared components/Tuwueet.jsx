@@ -22,10 +22,11 @@ function Tuwueet({
   likesNum,
   commentsNum,
   liked,
+  pfp,
 }) {
   const [likes, setLikes] = useState(likesNum);
   const [isLiked, setIsLiked] = useState(liked);
-  const { userData, profilePicture } = useContext(UserContext);
+  const { userData } = useContext(UserContext);
   const history = useHistory();
   const date = relativeDate(createdAt);
 
@@ -78,7 +79,7 @@ function Tuwueet({
 
   return (
     <TuwueetWrapper>
-      <TuwueetPfp src={profilePicture} />
+      <TuwueetPfp src={pfp} />
       <TuwueetInfo>
         <p>
           <strong>{username}</strong> <em>{date}</em>
