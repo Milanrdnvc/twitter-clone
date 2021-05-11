@@ -6,6 +6,7 @@ import Profile from './Profile/Profile';
 import Comments from './Comments/Comments';
 import AppWrapper from './styled/AppStyles';
 import UserContext from '../context/UserContext';
+import pfp from '../pictures/pfp.jpg';
 import { getAuthToken, validateToken, GET } from '../helpers';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -15,6 +16,7 @@ function App() {
     token: null,
     user: null,
   });
+  const [profilePicture, setProfilePicture] = useState(pfp);
   const history = useHistory();
 
   async function authorizeUser() {
@@ -45,7 +47,9 @@ function App() {
 
   return (
     <AppWrapper>
-      <UserContext.Provider value={{ userData, setUserData }}>
+      <UserContext.Provider
+        value={{ userData, setUserData, profilePicture, setProfilePicture }}
+      >
         <Sidebar logout={logout} />
         <Switch>
           <Route path="/" exact component={Home} />

@@ -141,3 +141,18 @@ export const EditDetailsForm = styled.form`
     max-width: 50%;
   }
 `;
+
+export const EditButton = styled.div`
+  position: relative;
+
+  input {
+    width: 25px;
+    height: 25px;
+    opacity: 0;
+    position: absolute;
+    bottom: -5px;
+    right: -10px;
+    cursor: pointer;
+    z-index: 10;
+  }
+`;

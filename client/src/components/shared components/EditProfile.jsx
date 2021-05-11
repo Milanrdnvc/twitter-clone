@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom';
-import pfp from '../../pictures/pfp.jpg';
 import {
   EditProfileWrapper,
   Details,
@@ -7,13 +6,38 @@ import {
   EditDetailsForm,
 } from '../styled/ProfileStyles';
 
-function EditProfile({ open, setOpen }) {
+function EditProfile({
+  open,
+  setOpen,
+  updateProfile,
+  profilePicture,
+  bio,
+  location,
+  website,
+}) {
   if (!open) return null;
+
+  async function handleEditProfileSubmit(e) {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    e.target.reset();
+    const formBio = data.get('bio');
+    const formLocation = data.get('location');
+    const formWebsite = data.get('website');
+    updateProfile({
+      img: profilePicture,
+      bio: formBio || bio,
+      location: formLocation || location,
+      website: formWebsite || website,
+    });
+    setOpen(false);
+  }
+
   return ReactDOM.createPortal(
     <EditProfileWrapper>
       <span onClick={() => setOpen(false)}>&times;</span>
       <Details>
-        <img src={pfp} alt="Profile picture" width="70px" />
+        <img src={profilePicture} alt="Profile picture" width="70px" />
         <span>Username</span>
         <small>Joined 1. Jan 2021</small>
         <small>1.1.2001</small>
@@ -23,12 +47,17 @@ function EditProfile({ open, setOpen }) {
         </small>
       </Details>
       <EditDetails>
-        <EditDetailsForm>
-          <input type="text" placeholder="Bio" />
-          <input type="text" placeholder="Location" />
-          <input type="text" placeholder="Website" />
+        <EditDetailsForm onSubmit={handleEditProfileSubmit}>
+          <input type="text" name="bio" placeholder="Bio" />
+          <input type="text" name="location" placeholder="Location" />
+          <input
+            type="text"
+            name="website"
+            placeholder="Website"
+            autoComplete="off"
+          />
           <button onClick={() => setOpen(false)}>Cancel</button>
-          <button>Save</button>
+          <button type="submit">Save</button>
         </EditDetailsForm>
       </EditDetails>
     </EditProfileWrapper>,

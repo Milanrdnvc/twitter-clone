@@ -1,4 +1,3 @@
-import pfp from '../../pictures/pfp.jpg';
 import imageIcon from '../../pictures/image.svg';
 import UserContext from '../../context/UserContext';
 import { useState, useRef, useContext } from 'react';
@@ -17,7 +16,7 @@ function CreateTuwueet({ loadTuwueets }) {
   const [text, setText] = useState('');
   const [img, setImg] = useState(null);
   const textInput = useRef(null);
-  const { userData } = useContext(UserContext);
+  const { userData, profilePicture } = useContext(UserContext);
 
   function handleFileInputChange(e) {
     const file = e.target.files[0];
@@ -57,7 +56,7 @@ function CreateTuwueet({ loadTuwueets }) {
 
   return (
     <CreateTuwueetWrapper>
-      <CreateTuwueetPfp src={pfp} />
+      <CreateTuwueetPfp src={profilePicture} />
       <CreateTuwueetForm onSubmit={postTuwueet}>
         <CreateTuwueetTextInput
           contentEditable="true"

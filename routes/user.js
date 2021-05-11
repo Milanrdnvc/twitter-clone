@@ -74,12 +74,48 @@ router.post('/tokenIsValid', async (req, res) => {
   }
 });
 
+router.post('/editProfile', auth, async (req, res) => {
+  try {
+    const { pfp, bio, location, website } = req.body;
+    const user = await User.findOneAndUpdate(
+      { _id: req.user },
+      {
+        pfp,
+        bio,
+        location,
+        website,
+      }
+    );
+    res.json({ user });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get('/profileInfo', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user);
+    res.json({
+      pfp: user.pfp,
+      bio: user.bio,
+      location: user.location,
+      website: user.website,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 router.get('/', auth, async (req, res) => {
-  const user = await User.findById(req.user);
-  res.json({
-    username: user.username,
-    id: user._id,
-  });
+  try {
+    const user = await User.findById(req.user);
+    res.json({
+      username: user.username,
+      id: user._id,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;

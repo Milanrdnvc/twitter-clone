@@ -1,4 +1,3 @@
-import pfp from '../../pictures/pfp.jpg';
 import like from '../../pictures/like.svg';
 import filledLike from '../../pictures/filledLike.svg';
 import comment from '../../pictures/comment.svg';
@@ -26,7 +25,7 @@ function Tuwueet({
 }) {
   const [likes, setLikes] = useState(likesNum);
   const [isLiked, setIsLiked] = useState(liked);
-  const { userData } = useContext(UserContext);
+  const { userData, profilePicture } = useContext(UserContext);
   const history = useHistory();
   const date = relativeDate(createdAt);
 
@@ -79,7 +78,7 @@ function Tuwueet({
 
   return (
     <TuwueetWrapper>
-      <TuwueetPfp src={pfp} />
+      <TuwueetPfp src={profilePicture} />
       <TuwueetInfo>
         <p>
           <strong>{username}</strong> <em>{date}</em>
