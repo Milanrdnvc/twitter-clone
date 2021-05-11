@@ -52,12 +52,12 @@ function App() {
       >
         <Sidebar logout={logout} />
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/comments/:id" component={Comments} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/" exact component={Home} />
+          <Route path="/comments/:id" component={Comments} />
         </Switch>
-        <Profile />
+        {userData.user && <Profile />}
       </UserContext.Provider>
     </AppWrapper>
   );

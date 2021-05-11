@@ -11,11 +11,18 @@ import { useState, useContext, useEffect } from 'react';
 
 function Profile() {
   const [openEditProfile, setOpenEditProfile] = useState(false);
-  const { userData } = useContext(UserContext);
-  const { profilePicture, setProfilePicture } = useContext(UserContext);
   const [bio, setBio] = useState(null);
   const [location, setLocation] = useState(null);
   const [website, setWebsite] = useState(null);
+  const [joined, setJoined] = useState(null);
+  const { userData } = useContext(UserContext);
+  const {
+    profilePicture,
+    setProfilePicture,
+    userData: {
+      user: { username },
+    },
+  } = useContext(UserContext);
 
   function handleFileInputChange(e) {
     const file = e.target.files[0];
@@ -71,6 +78,7 @@ function Profile() {
     setBio(profileData.bio);
     setLocation(profileData.location);
     setWebsite(profileData.website);
+    setJoined(profileData.joined);
   }
 
   useEffect(() => {
@@ -97,7 +105,7 @@ function Profile() {
         <a href={website || '#'} target="_blank">
           Website
         </a>
-        <p>Joined Feb 2021</p>
+        <p>Joined: {new Date(joined).toDateString()}</p>
         <button onClick={() => setOpenEditProfile(true)}>Edit Profile</button>
       </ProfileWrapper>
       <EditProfile
@@ -111,6 +119,8 @@ function Profile() {
         bio={bio}
         location={location}
         website={website}
+        username={username}
+        joined={joined}
       />
     </>
   );

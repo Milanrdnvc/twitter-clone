@@ -14,6 +14,8 @@ function EditProfile({
   bio,
   location,
   website,
+  username,
+  joined,
 }) {
   if (!open) return null;
 
@@ -38,12 +40,12 @@ function EditProfile({
       <span onClick={() => setOpen(false)}>&times;</span>
       <Details>
         <img src={profilePicture} alt="Profile picture" width="70px" />
-        <span>Username</span>
-        <small>Joined 1. Jan 2021</small>
-        <small>1.1.2001</small>
-        <small>Serbia</small>
+        <span>{username}</span>
+        <small>Joined {new Date(joined).toDateString()}</small>
+        <small>{bio}</small>
+        <small>{location}</small>
         <small>
-          <a href="http://www.google.com">My Website</a>
+          <a href={website || '#'}>My Website</a>
         </small>
       </Details>
       <EditDetails>

@@ -100,6 +100,7 @@ router.get('/profileInfo', auth, async (req, res) => {
       bio: user.bio,
       location: user.location,
       website: user.website,
+      joined: user.createdAt,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
