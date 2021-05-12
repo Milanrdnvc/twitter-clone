@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/user');
+const Tuwueet = require('../models/tuwueet');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
@@ -27,6 +28,7 @@ router.post('/register', async (req, res) => {
       email: email,
       password: passwordHash,
       username: username,
+      notifications: [],
     });
     const savedUser = await newUser.save();
     res.json(savedUser);
@@ -102,6 +104,31 @@ router.get('/profileInfo', auth, async (req, res) => {
       website: user.website,
       joined: user.createdAt,
     });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post('/sendNotification', auth, async (req, res) => {
+  try {
+    const newNotification = req.body;
+    const tuwueet = await Tuwueet.findById(newNotification.tuwueetId);
+    const user = await User.findById(tuwueet.userId);
+    const notifications = user.notifications;
+    notifications.push(newNotification);
+    await User.findByIdAndUpdate(tuwueet.userId, {
+      notifications,
+    });
+    res.json({ notifications });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get('/allNotifications', auth, async (req, res) => {
+  try {
+    const notifications = (await User.findById(req.user)).notifications;
+    res.json({ notifications });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

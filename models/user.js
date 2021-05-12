@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    notifications: {
+      type: Array,
+      required: true,
+    },
     pfp: {
       type: String,
     },

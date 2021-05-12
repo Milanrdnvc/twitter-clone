@@ -1,4 +1,3 @@
-import axios from 'axios';
 import UserContext from '../../context/UserContext';
 import Error from '../shared components/Error';
 import { POST } from '../../helpers';
@@ -60,6 +59,7 @@ function Login() {
         <LoginPasswordInput
           placeholder="Enter your password"
           onChange={e => setPassword(e.target.value)}
+          type="password"
         />
         <LoginSubmit type="submit">Login</LoginSubmit>
       </LoginForm>

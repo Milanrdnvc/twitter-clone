@@ -23,6 +23,7 @@ function Tuwueet({
   commentsNum,
   liked,
   pfp,
+  userId,
 }) {
   const [likes, setLikes] = useState(likesNum);
   const [isLiked, setIsLiked] = useState(liked);
@@ -70,7 +71,34 @@ function Tuwueet({
       user => user.userId === userData.user.id
     );
     if (isLiked) toggleLikeTuwueet('unlike');
-    else toggleLikeTuwueet('like');
+    else {
+      toggleLikeTuwueet('like');
+      if (tuwueet.data.tuwueet.userId !== userData.user.id)
+        sendLikeNotification();
+    }
+  }
+
+  async function sendLikeNotification() {
+    const token = getAuthToken();
+    const validToken = (await validateToken(token)).data;
+    if (!validToken) return;
+    const notifications = (
+      await POST(
+        '/users/sendNotification',
+        {
+          type: 'like',
+          tuwueetId: id,
+          username: userData.user.username,
+          userId,
+        },
+        {
+          headers: {
+            'X-Auth-Token': token,
+          },
+        }
+      )
+    ).data;
+    console.log(notifications);
   }
 
   function handleCommentButton() {
