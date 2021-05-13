@@ -23,12 +23,12 @@ function App() {
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
-    const userRes = await GET('/users', {
+    const user = await GET('/users', {
       headers: {
         'X-Auth-Token': token,
       },
     });
-    setUserData({ token, user: userRes.data });
+    setUserData({ token, user: user.data });
   }
 
   function logout() {

@@ -1,5 +1,6 @@
 import CreateTuwueet from './CreateTuwueet';
 import Tuwueet from '../shared components/Tuwueet';
+import loading from '../../pictures/loading.gif';
 import HomeWrapper, { HomeHeader } from '../styled/HomeStyles';
 import { useState, useEffect } from 'react';
 import { getAuthToken, validateToken, GET } from '../../helpers';
@@ -8,34 +9,29 @@ function Home() {
   const [Tuwueets, setTuwueets] = useState(null);
 
   async function loadTuwueets() {
-    let tuwueets;
+    const tuwueets = (
+      await GET('tuwueets/all', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    ).data.tuwueets;
+    renderTuwueets(tuwueets);
+  }
+
+  async function renderTuwueets(tuwueets) {
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
+    let userId = null;
     if (validToken) {
-      tuwueets = await GET('tuwueets/all', {
+      const user = await GET('/users', {
         headers: {
           'X-Auth-Token': token,
         },
       });
-      renderTuwueets(tuwueets);
+      userId = user.data.id;
     }
-  }
-
-  useEffect(() => {
-    loadTuwueets();
-  }, []);
-
-  async function renderTuwueets(tuwueets) {
-    const token = getAuthToken();
-    const validToken = validateToken(token);
-    if (!validToken) return;
-    const user = await GET('users', {
-      headers: {
-        'X-Auth-Token': token,
-      },
-    });
-    const userId = user.data.id;
-    const allTuwueets = tuwueets.data.tuwueets.map((tuwueet, idx) => {
+    const allTuwueets = tuwueets.map((tuwueet, idx) => {
       const isLiked = Boolean(
         tuwueet.likes.find(user => user.userId === userId)
       );
@@ -46,24 +42,28 @@ function Home() {
           img={tuwueet.img}
           username={tuwueet.username}
           createdAt={tuwueet.createdAt}
-          key={idx}
           id={tuwueet._id}
           likesNum={tuwueet.likes.length}
           commentsNum={tuwueet.comments.length}
           liked={isLiked}
           pfp={tuwueet.pfp}
           userId={tuwueet.userId}
+          key={idx}
         />
       );
     });
     setTuwueets(allTuwueets.reverse());
   }
 
+  useEffect(() => {
+    loadTuwueets();
+  }, []);
+
   return (
     <HomeWrapper>
       <HomeHeader>Home</HomeHeader>
       <CreateTuwueet loadTuwueets={loadTuwueets} />
-      {Tuwueets}
+      {Tuwueets || <img src={loading} alt="Loading" />}
     </HomeWrapper>
   );
 }

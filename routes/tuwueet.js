@@ -109,7 +109,7 @@ router.post('/allComments', auth, async (req, res) => {
   }
 });
 
-router.get('/all', auth, async (_, res) => {
+router.get('/all', async (_, res) => {
   try {
     const tuwueets = await Tuwueet.find();
     res.json({ tuwueets });
