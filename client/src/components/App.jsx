@@ -22,14 +22,13 @@ function App() {
   async function authorizeUser() {
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
-    if (validToken) {
-      const userRes = await GET('/users', {
-        headers: {
-          'X-Auth-Token': token,
-        },
-      });
-      setUserData({ token, user: userRes.data });
-    }
+    if (!validToken) return;
+    const userRes = await GET('/users', {
+      headers: {
+        'X-Auth-Token': token,
+      },
+    });
+    setUserData({ token, user: userRes.data });
   }
 
   function logout() {

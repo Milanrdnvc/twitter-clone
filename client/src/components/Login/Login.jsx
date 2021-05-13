@@ -20,18 +20,23 @@ function Login() {
 
   async function handleLoginSubmit(e) {
     e.preventDefault();
-    try {
-      const loginUser = { email, password };
-      const loginRes = await POST('users/login', loginUser, null);
-      setUserData({
-        token: loginRes.data.token,
-        user: loginRes.data.user,
-      });
-      localStorage.setItem('auth-token', loginRes.data.token);
-      history.push('/');
-    } catch (err) {
-      if (err.response.data.msg) setError(err.response.data.msg);
+
+    const loginUser = { email, password };
+    const loginRes = await POST('/users/login', loginUser, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (loginRes.status === 400) {
+      setError(loginRes.data.msg);
+      return;
     }
+    setUserData({
+      token: loginRes.data.token,
+      user: loginRes.data.user,
+    });
+    localStorage.setItem('auth-token', loginRes.data.token);
+    history.push('/');
   }
 
   useEffect(() => {
