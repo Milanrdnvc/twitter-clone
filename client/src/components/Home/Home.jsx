@@ -63,7 +63,7 @@ function Home() {
     <HomeWrapper>
       <HomeHeader>Home</HomeHeader>
       <CreateTuwueet loadTuwueets={loadTuwueets} />
-      {Tuwueets || <img src={loading} alt="Loading" />}
+      {Tuwueets || <img src={loading} alt="Loading" width="200px" />}
     </HomeWrapper>
   );
 }

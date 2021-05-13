@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export default styled.main`
   border-left: 1px solid #38444d;
   border-right: 1px solid #38444d;
+
+  img:last-child {
+    display: block;
+    margin: 0 auto;
+  }
 `;
 
 export const HomeHeader = styled.header`
