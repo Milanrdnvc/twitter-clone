@@ -24,6 +24,7 @@ function Tuwueet({
   liked,
   pfp,
   userId,
+  loggedIn,
 }) {
   const [likes, setLikes] = useState(likesNum);
   const [isLiked, setIsLiked] = useState(liked);
@@ -113,18 +114,22 @@ function Tuwueet({
         </p>
         {img !== 'no img' && <img src={img} alt="Tuwueet post" />}
         <TuwueetOptions>
-          <div onClick={handleCommentButton}>
-            <img src={comment} alt="Comment" />
-            <span>{commentsNum}</span>
-          </div>
-          <div onClick={handleLikeButton}>
-            {!isLiked ? (
-              <img src={like} alt="Like" />
-            ) : (
-              <img src={filledLike} alt="Filled like" />
-            )}
-            <span>{likes}</span>
-          </div>
+          {loggedIn && (
+            <>
+              <div onClick={handleCommentButton}>
+                <img src={comment} alt="Comment" />
+                <span>{commentsNum}</span>
+              </div>
+              <div onClick={handleLikeButton}>
+                {!isLiked ? (
+                  <img src={like} alt="Like" />
+                ) : (
+                  <img src={filledLike} alt="Filled like" />
+                )}
+                <span>{likes}</span>
+              </div>
+            </>
+          )}
         </TuwueetOptions>
       </TuwueetInfo>
     </TuwueetWrapper>

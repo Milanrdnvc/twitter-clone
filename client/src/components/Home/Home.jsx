@@ -49,6 +49,7 @@ function Home() {
           pfp={tuwueet.pfp}
           userId={tuwueet.userId}
           key={idx}
+          loggedIn={userId}
         />
       );
     });
