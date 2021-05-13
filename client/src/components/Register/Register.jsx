@@ -24,22 +24,30 @@ function Register() {
 
   async function handleRegisterSubmit(e) {
     e.preventDefault();
-    try {
-      const newUser = { username, email, password, passwordCheck };
-      await POST('users/register', newUser, null);
-      const loginRes = await POST('/users/login', {
+    const newUser = { username, email, password, passwordCheck };
+    const registerRes = await POST('users/register', newUser, null);
+    if (registerRes.status === 400) {
+      setError(registerRes.data.msg);
+      return;
+    }
+    const loginRes = await POST(
+      '/users/login',
+      {
         email,
         password,
-      });
-      setUserData({
-        token: loginRes.data.token,
-        user: loginRes.data.user,
-      });
-      localStorage.setItem('auth-token', loginRes.data.token);
-      history.push('/');
-    } catch (err) {
-      if (err.response.data.msg) setError(err.response.data.msg);
-    }
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    setUserData({
+      token: loginRes.data.token,
+      user: loginRes.data.user,
+    });
+    localStorage.setItem('auth-token', loginRes.data.token);
+    history.push('/');
   }
 
   useEffect(() => {
@@ -70,10 +78,12 @@ function Register() {
         />
         <RegisterPasswordInput
           placeholder="Enter your password"
+          type="password"
           onChange={e => setPassword(e.target.value)}
         />
         <RegisterPasswordInput
           placeholder="Confirm your password"
+          type="password"
           onChange={e => setPasswordCheck(e.target.value)}
         />
         <RegisterSubmit type="submit">Register</RegisterSubmit>
@@ -81,7 +91,7 @@ function Register() {
       <span>
         Already have an account? <a href="/login">Login</a>
       </span>
-      {error && <Error errorMsg={error} />}
+      {error && <Error errorMsg={error} closeError={() => setError('')} />}
     </RegisterWrapper>
   );
 }

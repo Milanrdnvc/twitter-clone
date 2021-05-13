@@ -6,6 +6,16 @@ export default styled.div`
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
+
+  span {
+    color: var(--color-primary, white);
+    font-family: sans-serif;
+    font-size: var(--font-small, 1rem);
+  }
+
+  a {
+    color: var(--color-fg, #fa0095);
+  }
 `;
 
 export const LoginHeading = styled.h1`

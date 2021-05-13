@@ -36,7 +36,6 @@ export async function GET(url, options) {
 export async function POST(url, body, options) {
   let data;
   try {
-    // console.log(await axios.post(url, body, options));
     data = await axios.post(url, body, options);
   } catch (err) {
     data = err.response;

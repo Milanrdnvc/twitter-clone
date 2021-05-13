@@ -68,6 +68,9 @@ function Login() {
         />
         <LoginSubmit type="submit">Login</LoginSubmit>
       </LoginForm>
+      <span>
+        Don't have an account? <a href="/register">Register</a>
+      </span>
       {error && <Error errorMsg={error} closeError={() => setError('')} />}
     </LoginWrapper>
   );
