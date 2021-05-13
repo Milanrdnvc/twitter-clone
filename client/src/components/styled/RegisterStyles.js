@@ -25,8 +25,8 @@ export const RegisterHeading = styled.h1`
   flex-direction: column;
   align-items: center;
 
-  svg {
-    width: 50px;
+  img {
+    margin-bottom: 10px;
   }
 `;
 
