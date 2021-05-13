@@ -12,11 +12,12 @@ import {
   TuwueetBtn,
 } from '../styled/HomeStyles';
 
-function CreateTuwueet({ loadTuwueets }) {
+function CreateTuwueet({ loadTuwueets, loggedIn }) {
   const [text, setText] = useState('');
   const [img, setImg] = useState(null);
   const textInput = useRef(null);
   const { userData, profilePicture } = useContext(UserContext);
+  if (!loggedIn) return null;
 
   function handleFileInputChange(e) {
     const file = e.target.files[0];

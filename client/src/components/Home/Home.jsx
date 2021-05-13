@@ -7,6 +7,7 @@ import { getAuthToken, validateToken, GET } from '../../helpers';
 
 function Home() {
   const [Tuwueets, setTuwueets] = useState(null);
+  let userId;
 
   async function loadTuwueets() {
     const tuwueets = (
@@ -22,7 +23,7 @@ function Home() {
   async function renderTuwueets(tuwueets) {
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
-    let userId = null;
+    userId = null;
     if (validToken) {
       const user = await GET('/users', {
         headers: {
@@ -63,7 +64,7 @@ function Home() {
   return (
     <HomeWrapper>
       <HomeHeader>Home</HomeHeader>
-      <CreateTuwueet loadTuwueets={loadTuwueets} />
+      <CreateTuwueet loadTuwueets={loadTuwueets} loggedIn={userId} />
       {Tuwueets || <img src={loading} alt="Loading" width="200px" />}
     </HomeWrapper>
   );
