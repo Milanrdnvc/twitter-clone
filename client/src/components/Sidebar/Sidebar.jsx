@@ -9,15 +9,24 @@ import logo from '../../pictures/logo.png';
 import profile from '../../pictures/profile.svg';
 import UserContext from '../../context/UserContext';
 import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Sidebar({ logout }) {
   const [openEditProfile, setOpenEditProfile] = useState(false);
   const [openNotifications, setOpenNotifications] = useState(false);
   const { userData } = useContext(UserContext);
+  const history = useHistory();
+  let styles = { visibility: 'visible' };
+
+  if (
+    history.location.pathname === '/login' ||
+    history.location.pathname === '/register'
+  )
+    styles = { visibility: 'hidden' };
 
   return (
     <>
-      <SidebarWrapper style={{ visibility: !userData.user && 'hidden' }}>
+      <SidebarWrapper style={styles}>
         <Option href="/" img={logo}></Option>
         <Option href="/" text="Home" img={home}></Option>
         <Option
