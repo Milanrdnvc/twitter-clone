@@ -82,23 +82,20 @@ function Tuwueet({
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
-    const notifications = (
-      await POST(
-        '/users/sendNotification',
-        {
-          type: 'like',
-          tuwueetId: id,
-          username: userData.user.username,
-          userId,
+    await POST(
+      '/users/sendNotification',
+      {
+        type: 'like',
+        tuwueetId: id,
+        username: userData.user.username,
+        userId,
+      },
+      {
+        headers: {
+          'X-Auth-Token': token,
         },
-        {
-          headers: {
-            'X-Auth-Token': token,
-          },
-        }
-      )
-    ).data;
-    console.log(notifications);
+      }
+    );
   }
 
   function handleCommentButton() {

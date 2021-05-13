@@ -1,6 +1,6 @@
 import imageIcon from '../../pictures/image.svg';
 import UserContext from '../../context/UserContext';
-import { useState, useContext, useRef } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 import {
   SubmitCommentWrapper,
   SubmitCommentForm,
@@ -53,10 +53,44 @@ function SubmitComment({ tuwueetId, renderComments }) {
       }
     );
     comments = comments ? comments.data : null;
+    const tuwueet = (
+      await POST(
+        '/tuwueets/',
+        {
+          id: tuwueetId,
+        },
+        {
+          headers: {
+            'X-Auth-Token': token,
+          },
+        }
+      )
+    ).data.tuwueet;
     setImg(null);
     setText('');
     renderComments(comments);
     commentInput.current.innerText = '';
+    if (tuwueet.userId !== userData.user.id) sendCommentNotification(tuwueet);
+  }
+
+  async function sendCommentNotification(tuwueet) {
+    const token = getAuthToken();
+    const validToken = (await validateToken(token)).data;
+    if (!validToken) return;
+    await POST(
+      '/users/sendNotification',
+      {
+        type: 'comment',
+        tuwueetId,
+        username: userData.user.username,
+        userId: tuwueet.userId,
+      },
+      {
+        headers: {
+          'X-Auth-Token': token,
+        },
+      }
+    );
   }
 
   return (

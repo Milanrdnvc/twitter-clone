@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 
 function Notifications({ open, setOpen }) {
   const [NotificationComponent, setNotificationComponent] = useState(null);
+
   async function getAllNotifications() {
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
@@ -31,7 +32,7 @@ function Notifications({ open, setOpen }) {
             text={
               notification.type === 'like'
                 ? `${notification.username} liked your tuwueet!`
-                : `${notification.username} commented on you tuwueet!`
+                : `${notification.username} commented on your tuwueet!`
             }
             iconAlt={notification.type}
             tuwueetId={notification.tuwueetId}
