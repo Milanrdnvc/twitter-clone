@@ -22,7 +22,8 @@ function Sidebar({ logout }) {
     history.listen(location => {
       if (location.pathname === '/login' || location.pathname === '/register') {
         setStyles({ visibility: 'hidden' });
-      }
+      } else if (location.pathname === '/')
+        setStyles({ visibility: 'visible' });
     });
     if (
       history.location.pathname === '/login' ||
