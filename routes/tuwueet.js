@@ -19,7 +19,7 @@ router.post('/create', auth, async (req, res) => {
       pfp,
     });
     await newTuwueet.save();
-    res.status(204).send(null);
+    res.json({ newTuwueet });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -31,9 +31,11 @@ router.post('/like', auth, async (req, res) => {
     if (!userId) return res.status(400).json({ msg: 'User ID not provided' });
     if (!tuwueetId)
       return res.status(400).json({ msg: 'Tuwueet ID not provided' });
-    const likes = (await Tuwueet.findOne({ _id: tuwueetId })).likes;
+    const tuwueet = await Tuwueet.findOne({ _id: tuwueetId });
+    const likes = tuwueet.likes;
     likes.push({ userId });
-    await Tuwueet.findOneAndUpdate({ _id: tuwueetId }, { likes });
+    tuwueet.likes = likes;
+    await tuwueet.save();
     res.json({ likes });
   } catch (err) {
     res.status(500).json({ error: err.message });

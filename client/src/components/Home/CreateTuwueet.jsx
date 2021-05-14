@@ -37,22 +37,21 @@ function CreateTuwueet({ loadTuwueets, loggedIn }) {
     e.target.reset();
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
-    if (validToken) {
-      await POST(
-        'tuwueets/create',
-        { text, img, username: userData.user.username, pfp: profilePicture },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Auth-Token': token,
-          },
-        }
-      );
-      setImg(null);
-      setText('');
-      loadTuwueets();
-      textInput.current.innerText = '';
-    }
+    if (!validToken) return;
+    await POST(
+      'tuwueets/create',
+      { text, img, username: userData.user.username, pfp: profilePicture },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Auth-Token': token,
+        },
+      }
+    );
+    setImg(null);
+    setText('');
+    loadTuwueets();
+    textInput.current.innerText = '';
   }
 
   return (

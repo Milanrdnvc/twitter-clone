@@ -8,7 +8,7 @@ import { getAuthToken, validateToken, GET } from '../../helpers';
 function Home() {
   const [Tuwueets, setTuwueets] = useState(null);
   const [CreateTuwueetComponent, setCreateTuwueetComponent] = useState(null);
-  let userId;
+  let userId = null;
 
   async function loadTuwueets() {
     const tuwueets = (
@@ -24,7 +24,6 @@ function Home() {
   async function renderTuwueets(tuwueets) {
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
-    userId = null;
     if (validToken) {
       const user = await GET('/users', {
         headers: {
@@ -49,8 +48,8 @@ function Home() {
           liked={isLiked}
           pfp={tuwueet.pfp}
           userId={tuwueet.userId}
-          key={idx}
           loggedIn={userId}
+          key={idx}
         />
       );
     });

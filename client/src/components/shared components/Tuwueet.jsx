@@ -32,10 +32,7 @@ function Tuwueet({
   const history = useHistory();
   const date = relativeDate(createdAt);
 
-  async function toggleLikeTuwueet(action) {
-    const token = getAuthToken();
-    const validToken = (await validateToken(token)).data;
-    if (!validToken) return;
+  async function toggleLikeTuwueet(action, token) {
     const updatedLikes = (
       await POST(
         `/tuwueets/${action}`,
@@ -68,21 +65,18 @@ function Tuwueet({
         },
       }
     );
-    const isLiked = tuwueet.data.tuwueet.likes.find(
-      user => user.userId === userData.user.id
+    const isLiked = Boolean(
+      tuwueet.data.tuwueet.likes.find(user => user.userId === userData.user.id)
     );
-    if (isLiked) toggleLikeTuwueet('unlike');
+    if (isLiked) toggleLikeTuwueet('unlike', token);
     else {
-      toggleLikeTuwueet('like');
+      toggleLikeTuwueet('like', token);
       if (tuwueet.data.tuwueet.userId !== userData.user.id)
-        sendLikeNotification();
+        sendLikeNotification(token);
     }
   }
 
-  async function sendLikeNotification() {
-    const token = getAuthToken();
-    const validToken = (await validateToken(token)).data;
-    if (!validToken) return;
+  async function sendLikeNotification(token) {
     await POST(
       '/users/sendNotification',
       {
