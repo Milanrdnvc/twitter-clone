@@ -7,6 +7,7 @@ import { getAuthToken, validateToken, GET } from '../../helpers';
 
 function Home() {
   const [Tuwueets, setTuwueets] = useState(null);
+  const [CreateTuwueetComponent, setCreateTuwueetComponent] = useState(null);
   let userId;
 
   async function loadTuwueets() {
@@ -36,7 +37,6 @@ function Home() {
       const isLiked = Boolean(
         tuwueet.likes.find(user => user.userId === userId)
       );
-
       return (
         <Tuwueet
           text={tuwueet.text}
@@ -55,6 +55,9 @@ function Home() {
       );
     });
     setTuwueets(allTuwueets.reverse());
+    setCreateTuwueetComponent(
+      <CreateTuwueet loadTuwueets={loadTuwueets} loggedIn={userId} />
+    );
   }
 
   useEffect(() => {
@@ -64,7 +67,7 @@ function Home() {
   return (
     <HomeWrapper>
       <HomeHeader>Home</HomeHeader>
-      <CreateTuwueet loadTuwueets={loadTuwueets} loggedIn={userId} />
+      {CreateTuwueetComponent}
       {Tuwueets || <img src={loading} alt="Loading" width="200px" />}
     </HomeWrapper>
   );
