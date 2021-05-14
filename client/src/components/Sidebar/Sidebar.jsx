@@ -8,21 +8,29 @@ import login from '../../pictures/login.svg';
 import logo from '../../pictures/logo.png';
 import profile from '../../pictures/profile.svg';
 import UserContext from '../../context/UserContext';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function Sidebar({ logout }) {
   const [openEditProfile, setOpenEditProfile] = useState(false);
   const [openNotifications, setOpenNotifications] = useState(false);
+  const [styles, setStyles] = useState({ visibility: 'visible' });
   const { userData } = useContext(UserContext);
   const history = useHistory();
-  let styles = { visibility: 'visible' };
 
-  if (
-    history.location.pathname === '/login' ||
-    history.location.pathname === '/register'
-  )
-    styles = { visibility: 'hidden' };
+  useEffect(() => {
+    history.listen(location => {
+      if (location.pathname === '/login' || location.pathname === '/register') {
+        setStyles({ visibility: 'hidden' });
+      }
+    });
+    if (
+      history.location.pathname === '/login' ||
+      history.location.pathname === '/register'
+    ) {
+      setStyles({ visibility: 'hidden' });
+    }
+  }, []);
 
   return (
     <>
