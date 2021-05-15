@@ -76,12 +76,8 @@ router.post('/comment', auth, async (req, res) => {
     };
     const comments = tuwueet.comments;
     comments.push(newComment);
-    await Tuwueet.findOneAndUpdate(
-      { _id: tuwueetId },
-      {
-        comments,
-      }
-    );
+    tuwueet.comments = comments;
+    await tuwueet.save();
     res.json({ comments });
   } catch (err) {
     res.status(500).json({ error: err.message });

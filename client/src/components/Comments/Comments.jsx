@@ -28,13 +28,10 @@ function Comments({
         }
       )
     ).data.tuwueet;
-    renderTuwueet(tuwueet);
+    renderTuwueet(tuwueet, token);
   }
 
-  async function renderTuwueet(tuwueet) {
-    const token = getAuthToken();
-    const validToken = validateToken(token);
-    if (!validToken) return;
+  async function renderTuwueet(tuwueet, token) {
     const user = await GET('/users', {
       headers: {
         'X-Auth-Token': token,
@@ -52,11 +49,12 @@ function Comments({
         likesNum={tuwueet.likes.length}
         commentsNum={tuwueet.comments.length}
         liked={isLiked}
+        loggedIn={true}
       />
     );
   }
 
-  function renderComments(comments) {
+  function renderComments(comments, token) {
     const allComments = comments.comments.map((comment, idx) => {
       return (
         <Comment
@@ -69,14 +67,11 @@ function Comments({
         />
       );
     });
-    updateTuwueetComments(allComments.length);
     setComments(allComments.reverse());
+    updateTuwueetCommentsNumber(allComments.length, token);
   }
 
-  async function updateTuwueetComments(commentsNum) {
-    const token = getAuthToken();
-    const validToken = (await validateToken(token)).data;
-    if (!validToken) return;
+  async function updateTuwueetCommentsNumber(commentsNum, token) {
     const user = await GET('/users', {
       headers: {
         'X-Auth-Token': token,
@@ -106,6 +101,7 @@ function Comments({
         commentsNum={commentsNum}
         liked={isLiked}
         pfp={tuwueet.pfp}
+        loggedIn={true}
       />
     );
   }
@@ -123,12 +119,12 @@ function Comments({
         },
       }
     );
-    return comments.data;
+    return [comments.data, token];
   }
 
   useEffect(() => {
     getAllComments(id)
-      .then(res => renderComments(res))
+      .then(res => renderComments(res[0], res[1]))
       .catch(err => console.error(err));
     getTuwueet(id);
   }, []);

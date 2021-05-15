@@ -1,6 +1,6 @@
 import imageIcon from '../../pictures/image.svg';
 import UserContext from '../../context/UserContext';
-import { useState, useContext, useRef, useEffect } from 'react';
+import { useState, useContext, useRef } from 'react';
 import {
   SubmitCommentWrapper,
   SubmitCommentForm,
@@ -35,7 +35,7 @@ function SubmitComment({ tuwueetId, renderComments }) {
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
     const createdAt = new Date();
-    let comments = await POST(
+    const comments = await POST(
       '/tuwueets/comment',
       {
         text,
@@ -52,7 +52,6 @@ function SubmitComment({ tuwueetId, renderComments }) {
         },
       }
     );
-    comments = comments ? comments.data : null;
     const tuwueet = (
       await POST(
         '/tuwueets/',
@@ -68,15 +67,13 @@ function SubmitComment({ tuwueetId, renderComments }) {
     ).data.tuwueet;
     setImg(null);
     setText('');
-    renderComments(comments);
+    renderComments(comments.data, token);
     commentInput.current.innerText = '';
-    if (tuwueet.userId !== userData.user.id) sendCommentNotification(tuwueet);
+    if (tuwueet.userId !== userData.user.id)
+      sendCommentNotification(tuwueet, token);
   }
 
-  async function sendCommentNotification(tuwueet) {
-    const token = getAuthToken();
-    const validToken = (await validateToken(token)).data;
-    if (!validToken) return;
+  async function sendCommentNotification(tuwueet, token) {
     await POST(
       '/users/sendNotification',
       {

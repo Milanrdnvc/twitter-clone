@@ -116,9 +116,8 @@ router.post('/sendNotification', auth, async (req, res) => {
     const user = await User.findById(tuwueet.userId);
     const notifications = user.notifications;
     notifications.push(newNotification);
-    await User.findByIdAndUpdate(tuwueet.userId, {
-      notifications,
-    });
+    user.notifications = notifications;
+    await user.save();
     res.json({ notifications });
   } catch (err) {
     res.status(500).json({ error: err.message });
