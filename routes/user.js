@@ -86,24 +86,10 @@ router.post('/editProfile', auth, async (req, res) => {
         bio,
         location,
         website,
-      }
+      },
+      { new: true }
     );
     res.json({ user });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-router.get('/profileInfo', auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.user);
-    res.json({
-      pfp: user.pfp,
-      bio: user.bio,
-      location: user.location,
-      website: user.website,
-      joined: user.createdAt,
-    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -119,6 +105,21 @@ router.post('/sendNotification', auth, async (req, res) => {
     user.notifications = notifications;
     await user.save();
     res.json({ notifications });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get('/profileInfo', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user);
+    res.json({
+      pfp: user.pfp,
+      bio: user.bio,
+      location: user.location,
+      website: user.website,
+      joined: user.createdAt,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

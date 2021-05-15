@@ -15,7 +15,6 @@ function Profile() {
   const [location, setLocation] = useState(null);
   const [website, setWebsite] = useState(null);
   const [joined, setJoined] = useState(null);
-  const { userData } = useContext(UserContext);
   const {
     profilePicture,
     setProfilePicture,
@@ -87,7 +86,7 @@ function Profile() {
 
   return (
     <>
-      <ProfileWrapper style={{ visibility: !userData.user && 'hidden' }}>
+      <ProfileWrapper>
         <ProfilePfp>
           <img
             src={profilePicture}
