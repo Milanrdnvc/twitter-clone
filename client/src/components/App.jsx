@@ -6,7 +6,6 @@ import Profile from './Profile/Profile';
 import Comments from './Comments/Comments';
 import AppWrapper from './styled/AppStyles';
 import UserContext from '../context/UserContext';
-import pfp from '../pictures/pfp.jpg';
 import { getAuthToken, validateToken, GET } from '../helpers';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -16,7 +15,9 @@ function App() {
     token: null,
     user: null,
   });
-  const [profilePicture, setProfilePicture] = useState(pfp);
+  const [profilePicture, setProfilePicture] = useState(
+    'https://res.cloudinary.com/tuwuitter/image/upload/v1621165721/original_m8lw8t.jpg'
+  );
   const history = useHistory();
 
   async function authorizeUser() {
@@ -52,7 +53,10 @@ function App() {
         <Sidebar logout={logout} />
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <Route
+            path="/register"
+            component={() => <Register pfp={profilePicture} />}
+          />
           <Route path="/" exact component={Home} />
           <Route path="/comments/:id" component={Comments} />
         </Switch>

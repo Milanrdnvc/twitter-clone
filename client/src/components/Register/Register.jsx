@@ -13,7 +13,7 @@ import { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { POST } from '../../helpers';
 
-function Register() {
+function Register({ pfp }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +24,7 @@ function Register() {
 
   async function handleRegisterSubmit(e) {
     e.preventDefault();
-    const newUser = { username, email, password, passwordCheck };
+    const newUser = { username, email, password, passwordCheck, pfp };
     const registerRes = await POST('users/register', newUser, null);
     if (registerRes.status === 400) {
       setError(registerRes.data.msg);

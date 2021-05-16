@@ -7,7 +7,7 @@ const auth = require('../middleware/auth');
 
 router.post('/register', async (req, res) => {
   try {
-    const { email, password, passwordCheck, username } = req.body;
+    const { email, password, passwordCheck, username, pfp } = req.body;
     if (!email || !password || !passwordCheck || !username)
       return res.status(400).json({ msg: 'Please fill in all the fields' });
     if (password.length < 5)
@@ -28,6 +28,7 @@ router.post('/register', async (req, res) => {
       email: email,
       password: passwordHash,
       username: username,
+      pfp: pfp,
       notifications: [],
     });
     const savedUser = await newUser.save();

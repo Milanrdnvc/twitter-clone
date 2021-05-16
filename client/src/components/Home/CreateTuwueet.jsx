@@ -1,7 +1,7 @@
 import imageIcon from '../../pictures/image.svg';
 import UserContext from '../../context/UserContext';
 import { useState, useRef, useContext } from 'react';
-import { getAuthToken, validateToken, POST } from '../../helpers';
+import { getAuthToken, validateToken, POST, uploadImage } from '../../helpers';
 import {
   CreateTuwueetWrapper,
   CreateTuwueetTextInput,
@@ -14,7 +14,7 @@ import {
 
 function CreateTuwueet({ loadTuwueets, loggedIn }) {
   const [text, setText] = useState('');
-  const [img, setImg] = useState(null);
+  const [encodedImg, setEncodedImg] = useState(null);
   const textInput = useRef(null);
   const { userData, profilePicture } = useContext(UserContext);
   if (!loggedIn) return null;
@@ -28,7 +28,7 @@ function CreateTuwueet({ loadTuwueets, loggedIn }) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImg(reader.result);
+      setEncodedImg(reader.result);
     };
   }
 
@@ -38,9 +38,17 @@ function CreateTuwueet({ loadTuwueets, loggedIn }) {
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
+    let uploadedImg;
+    if (encodedImg)
+      uploadedImg = (await uploadImage(encodedImg, token)).data.url;
     await POST(
       'tuwueets/create',
-      { text, img, username: userData.user.username, pfp: profilePicture },
+      {
+        text,
+        img: uploadedImg,
+        username: userData.user.username,
+        pfp: profilePicture,
+      },
       {
         headers: {
           'Content-Type': 'application/json',
@@ -48,7 +56,7 @@ function CreateTuwueet({ loadTuwueets, loggedIn }) {
         },
       }
     );
-    setImg(null);
+    setEncodedImg(null);
     setText('');
     loadTuwueets();
     textInput.current.innerText = '';
@@ -69,10 +77,10 @@ function CreateTuwueet({ loadTuwueets, loggedIn }) {
           ref={textInput}
           // We could also use pre-built react-contenteditable component
         />
-        {img && (
+        {encodedImg && (
           <CreateTuwueetImgPreview>
-            <img src={img} alt="test" width="100%" />
-            <span onClick={() => setImg(null)}>&times;</span>
+            <img src={encodedImg} alt="test" width="100%" />
+            <span onClick={() => setEncodedImg(null)}>&times;</span>
           </CreateTuwueetImgPreview>
         )}
         <CreateTuwueetOptions>

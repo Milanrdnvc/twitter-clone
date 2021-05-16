@@ -7,11 +7,11 @@ import {
   SubmitCommentOptions,
   SubmitCommentImagePreview,
 } from '../styled/CommentsStyles';
-import { POST, getAuthToken, validateToken } from '../../helpers';
+import { POST, getAuthToken, validateToken, uploadImage } from '../../helpers';
 
 function SubmitComment({ tuwueetId, renderComments }) {
   const [text, setText] = useState('');
-  const [img, setImg] = useState(null);
+  const [encodedImg, setEncodedImg] = useState(null);
   const { userData, profilePicture } = useContext(UserContext);
   const commentInput = useRef(null);
 
@@ -24,7 +24,7 @@ function SubmitComment({ tuwueetId, renderComments }) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImg(reader.result);
+      setEncodedImg(reader.result);
     };
   }
 
@@ -35,11 +35,14 @@ function SubmitComment({ tuwueetId, renderComments }) {
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
     const createdAt = new Date();
+    let uploadedImg;
+    if (encodedImg)
+      uploadedImg = (await uploadImage(encodedImg, token)).data.url;
     const comments = await POST(
       '/tuwueets/comment',
       {
         text,
-        img,
+        img: uploadedImg,
         username: userData.user.username,
         tuwueetId,
         createdAt,
@@ -65,7 +68,7 @@ function SubmitComment({ tuwueetId, renderComments }) {
         }
       )
     ).data.tuwueet;
-    setImg(null);
+    setEncodedImg(null);
     setText('');
     renderComments(comments.data, token);
     commentInput.current.innerText = '';
@@ -109,10 +112,10 @@ function SubmitComment({ tuwueetId, renderComments }) {
         </SubmitCommentOptions>
         <button type="submit">Submit</button>
       </SubmitCommentForm>
-      {img && (
+      {encodedImg && (
         <SubmitCommentImagePreview>
-          <img src={img} alt="" width="100%" />
-          <span onClick={() => setImg(null)}>&times;</span>
+          <img src={encodedImg} alt="" width="100%" />
+          <span onClick={() => setEncodedImg(null)}>&times;</span>
         </SubmitCommentImagePreview>
       )}
     </SubmitCommentWrapper>

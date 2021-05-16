@@ -6,7 +6,13 @@ import {
   ProfilePfp,
   EditButton,
 } from '../styled/ProfileStyles';
-import { getAuthToken, POST, GET, validateToken } from '../../helpers';
+import {
+  getAuthToken,
+  POST,
+  GET,
+  validateToken,
+  uploadImage,
+} from '../../helpers';
 import { useState, useContext, useEffect } from 'react';
 
 function Profile() {
@@ -28,23 +34,24 @@ function Profile() {
     previewFile(file);
   }
 
-  function previewFile(file) {
+  async function previewFile(file) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      updateProfile({ img: reader.result, bio, location, website });
+      updateProfile({ encodedImg: reader.result, bio, location, website });
     };
   }
 
-  async function updateProfile({ img, bio, location, website }) {
+  async function updateProfile({ encodedImg, bio, location, website }) {
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
+    const uploadedImg = (await uploadImage(encodedImg, token)).data.url;
     const updatedUser = (
       await POST(
         '/users/editProfile',
         {
-          pfp: img,
+          pfp: uploadedImg,
           bio,
           location,
           website,

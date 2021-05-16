@@ -43,3 +43,17 @@ export async function POST(url, body, options) {
   }
   return data;
 }
+
+export async function uploadImage(base64EncodedImage, token) {
+  const data = await POST(
+    '/uploadImage',
+    JSON.stringify({ data: base64EncodedImage }),
+    {
+      headers: {
+        'X-Auth-Token': token,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+  return data;
+}
