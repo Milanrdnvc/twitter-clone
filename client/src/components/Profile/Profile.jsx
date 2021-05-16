@@ -14,6 +14,7 @@ import {
   uploadImage,
 } from '../../helpers';
 import { useState, useContext, useEffect } from 'react';
+import e from 'cors';
 
 function Profile() {
   const [openEditProfile, setOpenEditProfile] = useState(false);
@@ -46,7 +47,10 @@ function Profile() {
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
-    const uploadedImg = (await uploadImage(encodedImg, token)).data.url;
+    let uploadedImg;
+    if (typeof encodedImg === 'string')
+      uploadedImg = (await uploadImage(encodedImg, token)).data.url;
+    else uploadedImg = encodedImg;
     const updatedUser = (
       await POST(
         '/users/editProfile',

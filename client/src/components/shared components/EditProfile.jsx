@@ -27,7 +27,7 @@ function EditProfile({
     const formLocation = data.get('location');
     const formWebsite = data.get('website');
     updateProfile({
-      img: profilePicture,
+      encodedImg: [profilePicture, 'old'],
       bio: formBio || bio,
       location: formLocation || location,
       website: formWebsite || website,
