@@ -1,6 +1,7 @@
 import imageIcon from '../../pictures/image.svg';
 import UserContext from '../../context/UserContext';
-import { useState, useRef, useContext } from 'react';
+import io from 'socket.io-client';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { getAuthToken, validateToken, POST, uploadImage } from '../../helpers';
 import {
   CreateTuwueetWrapper,
@@ -12,12 +13,19 @@ import {
   TuwueetBtn,
 } from '../styled/HomeStyles';
 
+const socket = io('http://localhost:5000', { transports: ['websocket'] });
+
 function CreateTuwueet({ loadTuwueets, loggedIn }) {
   const [text, setText] = useState('');
   const [encodedImg, setEncodedImg] = useState(null);
   const textInput = useRef(null);
   const { userData, profilePicture } = useContext(UserContext);
-  if (!loggedIn) return null;
+
+  function emitTuwueet(tuwueet) {
+    socket.emit('tuwueet', {
+      tuwueet,
+    });
+  }
 
   function handleFileInputChange(e) {
     const file = e.target.files[0];
@@ -41,26 +49,32 @@ function CreateTuwueet({ loadTuwueets, loggedIn }) {
     let uploadedImg;
     if (encodedImg)
       uploadedImg = (await uploadImage(encodedImg, token)).data.url;
-    await POST(
-      'tuwueets/create',
-      {
-        text,
-        img: uploadedImg,
-        username: userData.user.username,
-        pfp: profilePicture,
+    const tuwueet = {
+      text,
+      img: uploadedImg,
+      username: userData.user.username,
+      pfp: profilePicture,
+    };
+    emitTuwueet(tuwueet);
+    await POST('tuwueets/create', tuwueet, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Auth-Token': token,
       },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Auth-Token': token,
-        },
-      }
-    );
+    });
     setEncodedImg(null);
     setText('');
     loadTuwueets();
     textInput.current.innerText = '';
   }
+
+  useEffect(() => {
+    socket.on('tuwueet', tuwueet => {
+      console.log(tuwueet);
+    });
+  }, []);
+
+  if (!loggedIn) return null;
 
   return (
     <CreateTuwueetWrapper>

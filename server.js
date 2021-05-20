@@ -43,7 +43,9 @@ mongoose.connect(
     });
     const io = socket(server);
     io.on('connection', socket => {
-      console.log('Made socket connection', socket.id);
+      socket.on('tuwueet', ({ tuwueet }) => {
+        io.emit('tuwueet', tuwueet);
+      });
     });
   }
 );
