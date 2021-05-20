@@ -50,7 +50,7 @@ function Profile() {
     let uploadedImg;
     if (typeof encodedImg === 'string')
       uploadedImg = (await uploadImage(encodedImg, token)).data.url;
-    else uploadedImg = encodedImg;
+    else uploadedImg = encodedImg[0];
     const updatedUser = (
       await POST(
         '/users/editProfile',
