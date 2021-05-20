@@ -2,8 +2,11 @@ import CreateTuwueet from './CreateTuwueet';
 import Tuwueet from '../shared components/Tuwueet';
 import loading from '../../pictures/loading.gif';
 import HomeWrapper, { HomeHeader } from '../styled/HomeStyles';
+import io from 'socket.io-client';
 import { useState, useEffect } from 'react';
 import { getAuthToken, validateToken, GET } from '../../helpers';
+
+const socket = io('http://localhost:5000', { transports: ['websocket'] });
 
 function Home() {
   const [Tuwueets, setTuwueets] = useState(null);

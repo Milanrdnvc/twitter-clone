@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const socket = reuqire('socket.io');
+const socket = require('socket.io');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const auth = require('./middleware/auth');
