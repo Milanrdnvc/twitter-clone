@@ -1,11 +1,8 @@
 import relativeDate from 'tiny-relative-date';
-import UserContext from '../../context/UserContext';
-import { useContext } from 'react';
 import { CommentWrapper, CommentContent } from '../styled/CommentsStyles';
 
 function Comment({ username, img, createdAt, text, userPfp }) {
   const date = relativeDate(createdAt);
-  const { profilePicture } = useContext(UserContext);
 
   return (
     <CommentWrapper>

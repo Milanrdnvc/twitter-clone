@@ -44,10 +44,13 @@ mongoose.connect(
     const io = socket(server);
     io.on('connection', socket => {
       socket.on('tuwueet', ({ tuwueet }) => {
-        io.emit('tuwueet', tuwueet);
+        socket.broadcast.emit('tuwueet', tuwueet);
       });
       socket.on('like', ({ likeNum, tuwueetId }) => {
-        io.emit('like', { likeNum, tuwueetId });
+        socket.broadcast.emit('like', { likeNum, tuwueetId });
+      });
+      socket.on('comment', ({ comment }) => {
+        socket.broadcast.emit('comment', comment);
       });
     });
   }

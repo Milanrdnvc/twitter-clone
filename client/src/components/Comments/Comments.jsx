@@ -1,9 +1,12 @@
 import Tuwueet from '../shared components/Tuwueet';
 import SubmitComment from './SubmitComment';
 import Comment from './Comment';
+import io from 'socket.io-client';
 import { POST, GET, getAuthToken, validateToken } from '../../helpers';
 import { useState, useEffect } from 'react';
 import { CommentsHeader, CommentsWrapper } from '../styled/CommentsStyles';
+
+const socket = io('http://localhost:5000', { transports: ['websocket'] });
 
 function Comments({
   match: {
@@ -133,7 +136,11 @@ function Comments({
     <CommentsWrapper>
       <CommentsHeader>Comments</CommentsHeader>
       {TuwueetComponent}
-      <SubmitComment tuwueetId={id} renderComments={renderComments} />
+      <SubmitComment
+        tuwueetId={id}
+        renderComments={renderComments}
+        setComments={setComments}
+      />
       {Comments}
     </CommentsWrapper>
   );

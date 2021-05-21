@@ -1,6 +1,8 @@
 import imageIcon from '../../pictures/image.svg';
 import UserContext from '../../context/UserContext';
-import { useState, useContext, useRef } from 'react';
+import Comment from '../Comments/Comment';
+import io from 'socket.io-client';
+import { useState, useContext, useRef, useEffect } from 'react';
 import {
   SubmitCommentWrapper,
   SubmitCommentForm,
@@ -9,11 +11,19 @@ import {
 } from '../styled/CommentsStyles';
 import { POST, getAuthToken, validateToken, uploadImage } from '../../helpers';
 
-function SubmitComment({ tuwueetId, renderComments }) {
+const socket = io('http://localhost:5000', { transports: ['websocket'] });
+
+function SubmitComment({ tuwueetId, renderComments, setComments }) {
   const [text, setText] = useState('');
   const [encodedImg, setEncodedImg] = useState(null);
   const { userData, profilePicture } = useContext(UserContext);
   const commentInput = useRef(null);
+
+  function emitComment(comment) {
+    socket.emit('comment', {
+      comment,
+    });
+  }
 
   function handleFileInputChange(e) {
     const file = e.target.files[0];
@@ -38,23 +48,20 @@ function SubmitComment({ tuwueetId, renderComments }) {
     let uploadedImg;
     if (encodedImg)
       uploadedImg = (await uploadImage(encodedImg, token)).data.url;
-    const comments = await POST(
-      '/tuwueets/comment',
-      {
-        text,
-        img: uploadedImg,
-        username: userData.user.username,
-        tuwueetId,
-        createdAt,
-        userImg: profilePicture,
+    const comment = {
+      text,
+      img: uploadedImg || 'no img',
+      username: userData.user.username,
+      tuwueetId,
+      createdAt,
+      userImg: profilePicture,
+    };
+    const comments = await POST('/tuwueets/comment', comment, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Auth-Token': token,
       },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Auth-Token': token,
-        },
-      }
-    );
+    });
     const tuwueet = (
       await POST(
         '/tuwueets/',
@@ -68,6 +75,7 @@ function SubmitComment({ tuwueetId, renderComments }) {
         }
       )
     ).data.tuwueet;
+    emitComment(comment);
     setEncodedImg(null);
     setText('');
     renderComments(comments.data, token);
@@ -92,6 +100,25 @@ function SubmitComment({ tuwueetId, renderComments }) {
       }
     );
   }
+
+  useEffect(() => {
+    socket.on('comment', comment => {
+      console.log(comment);
+      setComments(prev => {
+        const Comments = prev;
+        return [
+          <Comment
+            username={comment.createdBy}
+            img={comment.img}
+            createdAt={comment.createdAt}
+            text={comment.text}
+            userPfp={comment.userImg}
+          />,
+          ...Comments,
+        ];
+      });
+    });
+  }, []);
 
   return (
     <SubmitCommentWrapper>
