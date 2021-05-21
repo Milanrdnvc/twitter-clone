@@ -1,5 +1,6 @@
 import imageIcon from '../../pictures/image.svg';
 import UserContext from '../../context/UserContext';
+import Tuwueet from '../shared components/Tuwueet';
 import io from 'socket.io-client';
 import { useState, useRef, useContext, useEffect } from 'react';
 import { getAuthToken, validateToken, POST, uploadImage } from '../../helpers';
@@ -15,7 +16,7 @@ import {
 
 const socket = io('http://localhost:5000', { transports: ['websocket'] });
 
-function CreateTuwueet({ loadTuwueets, loggedIn }) {
+function CreateTuwueet({ loadTuwueets, loggedIn, setTuwueets }) {
   const [text, setText] = useState('');
   const [encodedImg, setEncodedImg] = useState(null);
   const textInput = useRef(null);
@@ -55,13 +56,13 @@ function CreateTuwueet({ loadTuwueets, loggedIn }) {
       username: userData.user.username,
       pfp: profilePicture,
     };
-    emitTuwueet(tuwueet);
-    await POST('tuwueets/create', tuwueet, {
+    const tuwueetRes = await POST('tuwueets/create', tuwueet, {
       headers: {
         'Content-Type': 'application/json',
         'X-Auth-Token': token,
       },
     });
+    emitTuwueet(tuwueetRes.data.newTuwueet);
     setEncodedImg(null);
     setText('');
     loadTuwueets();
@@ -71,6 +72,25 @@ function CreateTuwueet({ loadTuwueets, loggedIn }) {
   useEffect(() => {
     socket.on('tuwueet', tuwueet => {
       console.log(tuwueet);
+      setTuwueets(prev => {
+        const Tuwueets = prev;
+        return [
+          <Tuwueet
+            text={tuwueet.text}
+            img={tuwueet.img}
+            username={tuwueet.username}
+            createdAt={tuwueet.createdAt}
+            id={tuwueet._id}
+            likesNum={tuwueet.likes.length}
+            commentsNum={tuwueet.comments.length}
+            liked={false}
+            pfp={tuwueet.pfp}
+            userId={tuwueet.userId}
+            loggedIn={true}
+          />,
+          ...Tuwueets,
+        ];
+      });
     });
   }, []);
 

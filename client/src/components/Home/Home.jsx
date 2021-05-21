@@ -55,7 +55,11 @@ function Home() {
     });
     setTuwueets(allTuwueets.reverse());
     setCreateTuwueetComponent(
-      <CreateTuwueet loadTuwueets={loadTuwueets} loggedIn={userId} />
+      <CreateTuwueet
+        loadTuwueets={loadTuwueets}
+        loggedIn={userId}
+        setTuwueets={setTuwueets}
+      />
     );
   }
 
