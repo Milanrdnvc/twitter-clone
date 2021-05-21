@@ -46,6 +46,9 @@ mongoose.connect(
       socket.on('tuwueet', ({ tuwueet }) => {
         io.emit('tuwueet', tuwueet);
       });
+      socket.on('like', ({ likeNum, tuwueetId }) => {
+        io.emit('like', { likeNum, tuwueetId });
+      });
     });
   }
 );

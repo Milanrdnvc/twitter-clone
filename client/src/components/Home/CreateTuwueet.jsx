@@ -71,7 +71,6 @@ function CreateTuwueet({ loadTuwueets, loggedIn, setTuwueets }) {
 
   useEffect(() => {
     socket.on('tuwueet', tuwueet => {
-      console.log(tuwueet);
       setTuwueets(prev => {
         const Tuwueets = prev;
         return [
