@@ -26,12 +26,14 @@ function Tuwueet({
   id,
   likesNum,
   commentsNum,
+  commentsNumUpdated,
   liked,
   pfp,
   userId,
   loggedIn,
 }) {
   const [likes, setLikes] = useState(likesNum);
+  const [comments, setComments] = useState(commentsNum);
   const [isLiked, setIsLiked] = useState(liked);
   const { userData, socket } = useContext(UserContext);
   const history = useHistory();
@@ -118,6 +120,9 @@ function Tuwueet({
       if (action === 'like') setIsLiked(true);
       else setIsLiked(false);
     });
+    addSocketListener(socket, 'commentNum', ({ commentNum }) => {
+      setComments(commentNum);
+    });
   }, []);
 
   return (
@@ -135,7 +140,7 @@ function Tuwueet({
             <>
               <div onClick={handleCommentButton}>
                 <img src={comment} alt="Comment" />
-                <span>{commentsNum}</span>
+                <span>{commentsNumUpdated || comments}</span>
               </div>
               <div onClick={handleLikeButton}>
                 {!isLiked ? (

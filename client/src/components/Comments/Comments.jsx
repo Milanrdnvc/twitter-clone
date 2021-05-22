@@ -1,12 +1,16 @@
 import Tuwueet from '../shared components/Tuwueet';
 import SubmitComment from './SubmitComment';
 import Comment from './Comment';
-import io from 'socket.io-client';
-import { POST, GET, getAuthToken, validateToken } from '../../helpers';
-import { useState, useEffect } from 'react';
+import UserContext from '../../context/UserContext';
+import {
+  POST,
+  GET,
+  getAuthToken,
+  validateToken,
+  addSocketListener,
+} from '../../helpers';
+import { useState, useEffect, useContext } from 'react';
 import { CommentsHeader, CommentsWrapper } from '../styled/CommentsStyles';
-
-const socket = io('http://localhost:5000', { transports: ['websocket'] });
 
 function Comments({
   match: {
@@ -15,10 +19,11 @@ function Comments({
 }) {
   const [Comments, setComments] = useState(null);
   const [TuwueetComponent, setTuwueetComponent] = useState(null);
+  const { socket } = useContext(UserContext);
 
-  function emitCommentsNum(commentsNum) {
-    socket.emit('commentsNum', {
-      commentsNum,
+  function emitCommentNum(commentNum) {
+    socket.emit('commentNum', {
+      commentNum,
     });
   }
 
@@ -78,6 +83,7 @@ function Comments({
     });
     setComments(allComments.reverse());
     updateTuwueetCommentsNumber(allComments.length, token);
+    emitCommentNum(allComments.length);
   }
 
   async function updateTuwueetCommentsNumber(commentsNum, token) {
@@ -99,6 +105,7 @@ function Comments({
     ).data.tuwueet;
     const userId = user.data.id;
     const isLiked = Boolean(tuwueet.likes.find(user => user.userId === userId));
+    console.log(commentsNum);
     setTuwueetComponent(
       <Tuwueet
         text={tuwueet.text}
@@ -107,7 +114,7 @@ function Comments({
         createdAt={tuwueet.createdAt}
         id={tuwueet._id}
         likesNum={tuwueet.likes.length}
-        commentsNum={commentsNum}
+        commentsNumUpdated={commentsNum}
         liked={isLiked}
         pfp={tuwueet.pfp}
         loggedIn={true}
@@ -136,8 +143,13 @@ function Comments({
       .then(res => renderComments(res[0], res[1]))
       .catch(err => console.error(err));
     getTuwueet(id);
-    socket.on('commentsNum', commentsNum => {
-      updateTuwueetCommentsNumber(commentsNum);
+    addSocketListener(socket, 'commentNum', ({ commentNum }) => {
+      (async function () {
+        const token = getAuthToken();
+        const validToken = (await validateToken(token)).data;
+        if (!validToken) return;
+        updateTuwueetCommentsNumber(commentNum, token);
+      })();
     });
   }, []);
 

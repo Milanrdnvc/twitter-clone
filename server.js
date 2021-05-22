@@ -60,6 +60,9 @@ mongoose.connect(
       addSocketListener(socket, 'comment', data => {
         broadcast(socket, 'comment', data);
       });
+      addSocketListener(socket, 'commentNum', data => {
+        broadcast(socket, 'commentNum', data);
+      });
     });
   }
 );
