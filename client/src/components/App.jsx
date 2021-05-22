@@ -6,9 +6,12 @@ import Profile from './Profile/Profile';
 import Comments from './Comments/Comments';
 import AppWrapper from './styled/AppStyles';
 import UserContext from '../context/UserContext';
+import io from 'socket.io-client';
 import { getAuthToken, validateToken, GET } from '../helpers';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+
+const socket = io('http://localhost:5000', { transports: ['websocket'] });
 
 function App() {
   const [userData, setUserData] = useState({
@@ -48,7 +51,13 @@ function App() {
   return (
     <AppWrapper>
       <UserContext.Provider
-        value={{ userData, setUserData, profilePicture, setProfilePicture }}
+        value={{
+          userData,
+          setUserData,
+          profilePicture,
+          setProfilePicture,
+          socket,
+        }}
       >
         <Sidebar logout={logout} />
         <Switch>

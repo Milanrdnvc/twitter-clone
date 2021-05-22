@@ -1,7 +1,6 @@
 import imageIcon from '../../pictures/image.svg';
 import UserContext from '../../context/UserContext';
 import Tuwueet from '../shared components/Tuwueet';
-import io from 'socket.io-client';
 import { useState, useRef, useContext, useEffect } from 'react';
 import { getAuthToken, validateToken, POST, uploadImage } from '../../helpers';
 import {
@@ -14,13 +13,11 @@ import {
   TuwueetBtn,
 } from '../styled/HomeStyles';
 
-const socket = io('http://localhost:5000', { transports: ['websocket'] });
-
 function CreateTuwueet({ loadTuwueets, loggedIn, setTuwueets }) {
   const [text, setText] = useState('');
   const [encodedImg, setEncodedImg] = useState(null);
+  const { userData, profilePicture, socket } = useContext(UserContext);
   const textInput = useRef(null);
-  const { userData, profilePicture } = useContext(UserContext);
 
   function emitTuwueet(tuwueet) {
     socket.emit('tuwueet', {
@@ -70,7 +67,7 @@ function CreateTuwueet({ loadTuwueets, loggedIn, setTuwueets }) {
   }
 
   useEffect(() => {
-    socket.on('tuwueet', tuwueet => {
+    socket.on('tuwueet', ({ tuwueet }) => {
       setTuwueets(prev => {
         const Tuwueets = prev;
         return [

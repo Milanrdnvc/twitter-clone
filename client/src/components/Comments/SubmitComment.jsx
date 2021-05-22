@@ -1,7 +1,6 @@
 import imageIcon from '../../pictures/image.svg';
 import UserContext from '../../context/UserContext';
 import Comment from '../Comments/Comment';
-import io from 'socket.io-client';
 import { useState, useContext, useRef, useEffect } from 'react';
 import {
   SubmitCommentWrapper,
@@ -11,12 +10,10 @@ import {
 } from '../styled/CommentsStyles';
 import { POST, getAuthToken, validateToken, uploadImage } from '../../helpers';
 
-const socket = io('http://localhost:5000', { transports: ['websocket'] });
-
 function SubmitComment({ tuwueetId, renderComments, setComments }) {
   const [text, setText] = useState('');
   const [encodedImg, setEncodedImg] = useState(null);
-  const { userData, profilePicture } = useContext(UserContext);
+  const { userData, profilePicture, socket } = useContext(UserContext);
   const commentInput = useRef(null);
 
   function emitComment(comment) {
@@ -102,8 +99,7 @@ function SubmitComment({ tuwueetId, renderComments, setComments }) {
   }
 
   useEffect(() => {
-    socket.on('comment', comment => {
-      console.log(comment);
+    socket.on('comment', ({ comment }) => {
       setComments(prev => {
         const Comments = prev;
         return [

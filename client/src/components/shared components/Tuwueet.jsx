@@ -3,7 +3,6 @@ import filledLike from '../../pictures/filledLike.svg';
 import comment from '../../pictures/comment.svg';
 import UserContext from '../../context/UserContext';
 import relativeDate from 'tiny-relative-date';
-import io from 'socket.io-client';
 import { getAuthToken, validateToken, POST } from '../../helpers';
 import { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -13,8 +12,6 @@ import {
   TuwueetPfp,
   TuwueetOptions,
 } from '../styled/HomeStyles';
-
-const socket = io('http://localhost:5000', { transports: ['websocket'] });
 
 function Tuwueet({
   text,
@@ -31,14 +28,15 @@ function Tuwueet({
 }) {
   const [likes, setLikes] = useState(likesNum);
   const [isLiked, setIsLiked] = useState(liked);
-  const { userData } = useContext(UserContext);
+  const { userData, socket } = useContext(UserContext);
   const history = useHistory();
   const date = relativeDate(createdAt);
 
-  function emitLike(likeNum) {
+  function emitLike(likeNum, action) {
     socket.emit('like', {
       likeNum,
       tuwueetId: id,
+      action,
     });
   }
 
@@ -60,7 +58,7 @@ function Tuwueet({
     if (action === 'unlike') setIsLiked(false);
     else setIsLiked(true);
     setLikes(likesNumber.length);
-    emitLike(likesNumber.length);
+    emitLike(likesNumber.length, action);
   }
 
   async function handleLikeButton() {
@@ -109,9 +107,11 @@ function Tuwueet({
   }
 
   useEffect(() => {
-    socket.on('like', ({ likeNum, tuwueetId }) => {
+    socket.on('like', ({ likeNum, tuwueetId, action }) => {
       if (tuwueetId !== id) return;
       setLikes(likeNum);
+      if (action === 'like') setIsLiked(true);
+      else setIsLiked(false);
     });
   }, []);
 

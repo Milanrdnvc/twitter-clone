@@ -27,6 +27,14 @@ app.post('/uploadImage', auth, async (req, res) => {
   }
 });
 
+function addSocketListener(socket, name, callback) {
+  socket.on(name, callback);
+}
+
+function broadcast(socket, name, data) {
+  socket.broadcast.emit(name, data);
+}
+
 mongoose.connect(
   process.env.MONGODB_CONNECTION_STRING,
   {
@@ -43,14 +51,14 @@ mongoose.connect(
     });
     const io = socket(server);
     io.on('connection', socket => {
-      socket.on('tuwueet', ({ tuwueet }) => {
-        socket.broadcast.emit('tuwueet', tuwueet);
+      addSocketListener(socket, 'tuwueet', data => {
+        broadcast(socket, 'tuwueet', data);
       });
-      socket.on('like', ({ likeNum, tuwueetId }) => {
-        socket.broadcast.emit('like', { likeNum, tuwueetId });
+      addSocketListener(socket, 'like', data => {
+        broadcast(socket, 'like', data);
       });
-      socket.on('comment', ({ comment }) => {
-        socket.broadcast.emit('comment', comment);
+      addSocketListener(socket, 'comment', data => {
+        broadcast(socket, 'comment', data);
       });
     });
   }

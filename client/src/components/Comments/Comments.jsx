@@ -16,6 +16,12 @@ function Comments({
   const [Comments, setComments] = useState(null);
   const [TuwueetComponent, setTuwueetComponent] = useState(null);
 
+  function emitCommentsNum(commentsNum) {
+    socket.emit('commentsNum', {
+      commentsNum,
+    });
+  }
+
   async function getTuwueet(id) {
     const token = getAuthToken();
     const validToken = validateToken(token);
@@ -130,6 +136,9 @@ function Comments({
       .then(res => renderComments(res[0], res[1]))
       .catch(err => console.error(err));
     getTuwueet(id);
+    socket.on('commentsNum', commentsNum => {
+      updateTuwueetCommentsNumber(commentsNum);
+    });
   }, []);
 
   return (
