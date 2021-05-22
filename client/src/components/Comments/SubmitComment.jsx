@@ -8,7 +8,13 @@ import {
   SubmitCommentOptions,
   SubmitCommentImagePreview,
 } from '../styled/CommentsStyles';
-import { POST, getAuthToken, validateToken, uploadImage } from '../../helpers';
+import {
+  POST,
+  getAuthToken,
+  validateToken,
+  uploadImage,
+  addSocketListener,
+} from '../../helpers';
 
 function SubmitComment({ tuwueetId, renderComments, setComments }) {
   const [text, setText] = useState('');
@@ -99,7 +105,7 @@ function SubmitComment({ tuwueetId, renderComments, setComments }) {
   }
 
   useEffect(() => {
-    socket.on('comment', ({ comment }) => {
+    addSocketListener(socket, 'comment', ({ comment }) => {
       setComments(prev => {
         const Comments = prev;
         return [

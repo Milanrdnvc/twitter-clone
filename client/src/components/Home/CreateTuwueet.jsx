@@ -2,7 +2,13 @@ import imageIcon from '../../pictures/image.svg';
 import UserContext from '../../context/UserContext';
 import Tuwueet from '../shared components/Tuwueet';
 import { useState, useRef, useContext, useEffect } from 'react';
-import { getAuthToken, validateToken, POST, uploadImage } from '../../helpers';
+import {
+  getAuthToken,
+  validateToken,
+  POST,
+  uploadImage,
+  addSocketListener,
+} from '../../helpers';
 import {
   CreateTuwueetWrapper,
   CreateTuwueetTextInput,
@@ -67,7 +73,7 @@ function CreateTuwueet({ loadTuwueets, loggedIn, setTuwueets }) {
   }
 
   useEffect(() => {
-    socket.on('tuwueet', ({ tuwueet }) => {
+    addSocketListener(socket, 'tuwueet', ({ tuwueet }) => {
       setTuwueets(prev => {
         const Tuwueets = prev;
         return [

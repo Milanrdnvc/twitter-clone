@@ -3,7 +3,12 @@ import filledLike from '../../pictures/filledLike.svg';
 import comment from '../../pictures/comment.svg';
 import UserContext from '../../context/UserContext';
 import relativeDate from 'tiny-relative-date';
-import { getAuthToken, validateToken, POST } from '../../helpers';
+import {
+  getAuthToken,
+  validateToken,
+  POST,
+  addSocketListener,
+} from '../../helpers';
 import { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
@@ -107,7 +112,7 @@ function Tuwueet({
   }
 
   useEffect(() => {
-    socket.on('like', ({ likeNum, tuwueetId, action }) => {
+    addSocketListener(socket, 'like', ({ likeNum, tuwueetId, action }) => {
       if (tuwueetId !== id) return;
       setLikes(likeNum);
       if (action === 'like') setIsLiked(true);

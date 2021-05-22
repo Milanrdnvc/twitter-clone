@@ -9,6 +9,10 @@ export function getAuthToken() {
   return token;
 }
 
+export function addSocketListener(socket, name, callback) {
+  socket.on(name, callback);
+}
+
 export async function validateToken(token) {
   let data;
   try {
