@@ -110,7 +110,7 @@ function SubmitComment({ tuwueetId, renderComments, setComments }) {
         const Comments = prev;
         return [
           <Comment
-            username={comment.createdBy}
+            username={comment.username}
             img={comment.img}
             createdAt={comment.createdAt}
             text={comment.text}
