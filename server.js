@@ -54,17 +54,8 @@ mongoose.connect(
       addSocketListener(socket, 'tuwueet', data => {
         broadcast(socket, 'tuwueet', data);
       });
-      addSocketListener(socket, 'like', data => {
-        broadcast(socket, 'like', data);
-      });
       addSocketListener(socket, 'comment', data => {
         broadcast(socket, 'comment', data);
-      });
-      addSocketListener(socket, 'commentNum', data => {
-        broadcast(socket, 'commentNum', data);
-      });
-      addSocketListener(socket, 'notification', data => {
-        broadcast(socket, 'notification', data);
       });
     });
   }

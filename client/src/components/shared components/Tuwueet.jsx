@@ -3,13 +3,8 @@ import filledLike from '../../pictures/filledLike.svg';
 import comment from '../../pictures/comment.svg';
 import UserContext from '../../context/UserContext';
 import relativeDate from 'tiny-relative-date';
-import {
-  getAuthToken,
-  validateToken,
-  POST,
-  addSocketListener,
-} from '../../helpers';
-import { useContext, useState, useEffect } from 'react';
+import { getAuthToken, validateToken, POST } from '../../helpers';
+import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   TuwueetWrapper,
@@ -26,28 +21,16 @@ function Tuwueet({
   id,
   likesNum,
   commentsNum,
-  commentsNumUpdated,
   liked,
   pfp,
   userId,
   loggedIn,
 }) {
   const [likes, setLikes] = useState(likesNum);
-  const [comments, setComments] = useState(commentsNum);
   const [isLiked, setIsLiked] = useState(liked);
-  const { userData, socket } = useContext(UserContext);
+  const { userData } = useContext(UserContext);
   const history = useHistory();
   const date = relativeDate(createdAt);
-
-  function emitLike(likeNum, action, likedBy, tuwueetUserId) {
-    socket.emit('like', {
-      likeNum,
-      tuwueetId: id,
-      action,
-      likedBy,
-      tuwueetUserId,
-    });
-  }
 
   async function toggleLikeTuwueet(action, token) {
     const updatedLikes = (
@@ -67,7 +50,6 @@ function Tuwueet({
     if (action === 'unlike') setIsLiked(false);
     else setIsLiked(true);
     setLikes(likesNumber.length);
-    emitLike(likesNumber.length, action, userData.user.id, userId);
   }
 
   async function handleLikeButton() {
@@ -115,24 +97,6 @@ function Tuwueet({
     history.push(`/comments/${id}`);
   }
 
-  useEffect(() => {
-    addSocketListener(
-      socket,
-      'like',
-      ({ likeNum, tuwueetId, action, likedBy, tuwueetUserId }) => {
-        if (tuwueetId !== id) return;
-        setLikes(likeNum);
-        console.log(tuwueetUserId !== userData.user.id);
-        if (likedBy !== userData.user.id) return;
-        if (action === 'like') setIsLiked(true);
-        else setIsLiked(false);
-      }
-    );
-    addSocketListener(socket, 'commentNum', ({ commentNum }) => {
-      setComments(commentNum);
-    });
-  }, []);
-
   return (
     <TuwueetWrapper>
       <TuwueetPfp src={pfp} />
@@ -148,7 +112,7 @@ function Tuwueet({
             <>
               <div onClick={handleCommentButton}>
                 <img src={comment} alt="Comment" />
-                <span>{commentsNumUpdated || comments}</span>
+                <span>{commentsNum}</span>
               </div>
               <div onClick={handleLikeButton}>
                 {!isLiked ? (
