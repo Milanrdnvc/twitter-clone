@@ -39,11 +39,13 @@ function Tuwueet({
   const history = useHistory();
   const date = relativeDate(createdAt);
 
-  function emitLike(likeNum, action) {
+  function emitLike(likeNum, action, likedBy, tuwueetUserId) {
     socket.emit('like', {
       likeNum,
       tuwueetId: id,
       action,
+      likedBy,
+      tuwueetUserId,
     });
   }
 
@@ -65,7 +67,7 @@ function Tuwueet({
     if (action === 'unlike') setIsLiked(false);
     else setIsLiked(true);
     setLikes(likesNumber.length);
-    emitLike(likesNumber.length, action);
+    emitLike(likesNumber.length, action, userData.user.id, userId);
   }
 
   async function handleLikeButton() {
@@ -114,12 +116,18 @@ function Tuwueet({
   }
 
   useEffect(() => {
-    addSocketListener(socket, 'like', ({ likeNum, tuwueetId, action }) => {
-      if (tuwueetId !== id) return;
-      setLikes(likeNum);
-      if (action === 'like') setIsLiked(true);
-      else setIsLiked(false);
-    });
+    addSocketListener(
+      socket,
+      'like',
+      ({ likeNum, tuwueetId, action, likedBy, tuwueetUserId }) => {
+        if (tuwueetId !== id) return;
+        setLikes(likeNum);
+        console.log(tuwueetUserId !== userData.user.id);
+        if (likedBy !== userData.user.id) return;
+        if (action === 'like') setIsLiked(true);
+        else setIsLiked(false);
+      }
+    );
     addSocketListener(socket, 'commentNum', ({ commentNum }) => {
       setComments(commentNum);
     });

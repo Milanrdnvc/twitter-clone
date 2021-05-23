@@ -105,7 +105,7 @@ router.post('/sendNotification', auth, async (req, res) => {
     notifications.push(newNotification);
     user.notifications = notifications;
     await user.save();
-    res.json({ notifications });
+    res.json({ notifications, userId: tuwueet.userId });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
