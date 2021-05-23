@@ -14,7 +14,6 @@ import {
   uploadImage,
 } from '../../helpers';
 import { useState, useContext, useEffect } from 'react';
-import e from 'cors';
 
 function Profile() {
   const [openEditProfile, setOpenEditProfile] = useState(false);
