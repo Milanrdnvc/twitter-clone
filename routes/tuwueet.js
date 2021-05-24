@@ -64,7 +64,9 @@ router.post('/comment', auth, async (req, res) => {
     const { tuwueetId, text, img, username, createdAt, userImg } = req.body;
     if (!tuwueetId) res.status(400).json({ msg: 'Tuwueet ID not provided' });
     if (!text)
-      res.status(400).json({ msg: 'Your comment must include some text' });
+      return res
+        .status(400)
+        .json({ msg: 'Your comment must include some text' });
     const tuwueet = await Tuwueet.findOne({ _id: tuwueetId });
     const newComment = {
       tuwueetId,
