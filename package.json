@@ -7,7 +7,8 @@
     "server": "node server.js",
     "devServer": "nodemon server.js",
     "client": "npm start --prefix client",
-    "devStart": "concurrently \"npm run devServer\" \"npm run client\""
+    "devStart": "concurrently \"npm run devServer\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Milan Radinović",
   "license": "MIT",

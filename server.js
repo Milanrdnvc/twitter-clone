@@ -4,6 +4,7 @@ const socket = require('socket.io');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const auth = require('./middleware/auth');
+const path = require('path');
 const { cloudinary } = require('./utils/cloudinary');
 
 const app = express();
@@ -13,6 +14,13 @@ app.use(express.json({ limit: '50mb' }));
 app.use(cors());
 app.use('/users', require('./routes/user'));
 app.use('/tuwueets', require('./routes/tuwueet'));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  app.get('*', (_, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 app.post('/uploadImage', auth, async (req, res) => {
   try {
