@@ -15,7 +15,7 @@ import {
 } from '../../helpers';
 import { useState, useContext, useEffect } from 'react';
 
-function Profile() {
+function Profile({ openProfile }) {
   const [openEditProfile, setOpenEditProfile] = useState(false);
   const [bio, setBio] = useState(null);
   const [location, setLocation] = useState(null);
@@ -93,6 +93,8 @@ function Profile() {
   useEffect(() => {
     getProfileInfo();
   }, []);
+
+  if (!openProfile) return null;
 
   return (
     <>

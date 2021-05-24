@@ -55,6 +55,7 @@ export const ProfilePfp = styled.section`
     bottom: -5px;
     right: -10px;
     cursor: pointer;
+    margin: 0;
   }
 `;
 
@@ -93,7 +94,6 @@ export const Details = styled.section`
   }
 
   img {
-    margin-bottom: 1rem;
     border-radius: 50%;
   }
 

@@ -1,9 +1,12 @@
 import ReactDOM from 'react-dom';
+import edit from '../../pictures/edit.svg';
 import {
   EditProfileWrapper,
   Details,
   EditDetails,
   EditDetailsForm,
+  ProfilePfp,
+  EditButton,
 } from '../styled/ProfileStyles';
 
 function EditProfile({
@@ -18,6 +21,19 @@ function EditProfile({
   joined,
 }) {
   if (!open) return null;
+
+  function handleFileInputChange(e) {
+    const file = e.target.files[0];
+    previewFile(file);
+  }
+
+  async function previewFile(file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      updateProfile({ encodedImg: reader.result, bio, location, website });
+    };
+  }
 
   async function handleEditProfileSubmit(e) {
     e.preventDefault();
@@ -39,13 +55,26 @@ function EditProfile({
     <EditProfileWrapper>
       <span onClick={() => setOpen(false)}>&times;</span>
       <Details>
-        <img src={profilePicture} alt="Profile picture" width="70px" />
+        <ProfilePfp>
+          <img
+            src={profilePicture}
+            alt="Profile picture"
+            width="100px"
+            height="100px"
+          />
+          <EditButton>
+            <input type="file" onChange={handleFileInputChange} />
+            <img src={edit} alt="Edit" width="25px" />
+          </EditButton>
+        </ProfilePfp>
         <span>{username}</span>
         <small>Joined {new Date(joined).toDateString()}</small>
         <small>{bio}</small>
         <small>{location}</small>
         <small>
-          <a href={website || '#'}>My Website</a>
+          <a href={website || '#'} target="_blank">
+            My Website
+          </a>
         </small>
       </Details>
       <EditDetails>

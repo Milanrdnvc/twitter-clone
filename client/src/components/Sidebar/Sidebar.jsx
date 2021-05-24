@@ -26,8 +26,8 @@ function Sidebar({ logout }) {
   const [website, setWebsite] = useState(null);
   const [joined, setJoined] = useState(null);
   const [styles, setStyles] = useState({ visibility: 'visible' });
-  const { profilePicture, setProfilePicture } = useContext(UserContext);
-  const { userData } = useContext(UserContext);
+  const { profilePicture, setProfilePicture, userData } =
+    useContext(UserContext);
   const history = useHistory();
 
   async function updateProfile({ encodedImg, bio, location, website }) {

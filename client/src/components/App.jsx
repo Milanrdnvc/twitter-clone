@@ -69,7 +69,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/comments/:id" component={Comments} />
         </Switch>
-        {userData.user && <Profile />}
+        {userData.user && <Profile openProfile={true} />}
       </UserContext.Provider>
     </AppWrapper>
   );
