@@ -12,7 +12,7 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 const ENDPOINT = 'https://tranquil-tor-92287.herokuapp.com/';
-const socket = io('http://localhost:5000', { transports: ['websocket'] });
+const socket = io(ENDPOINT, { transports: ['websocket'] });
 
 function App() {
   const [userData, setUserData] = useState({
