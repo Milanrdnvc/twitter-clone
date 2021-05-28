@@ -11,6 +11,7 @@ import { getAuthToken, validateToken, GET } from '../helpers';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
+const ENDPOINT = 'https://tranquil-tor-92287.herokuapp.com/';
 const socket = io('http://localhost:5000', { transports: ['websocket'] });
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
     user: null,
   });
   const [profilePicture, setProfilePicture] = useState(
-    'https://res.cloudinary.com/tuwuitter/image/upload/v1621165721/original_m8lw8t.jpg'
+    'https://res.cloudinary.com/tuwuitter/image/upload/v1622209257/original_l0ejrb.jpg'
   );
   const history = useHistory();
 
