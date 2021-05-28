@@ -51,6 +51,7 @@ function CreateTuwueet({ loadTuwueets, loggedIn, setTuwueets }) {
     const tuwueetText = text;
     setEncodedImg(null);
     setText('');
+    textInput.current.innerText = '';
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
@@ -70,7 +71,6 @@ function CreateTuwueet({ loadTuwueets, loggedIn, setTuwueets }) {
     });
     emitTuwueet(tuwueetRes.data.newTuwueet);
     loadTuwueets();
-    textInput.current.innerText = '';
   }
 
   useEffect(() => {

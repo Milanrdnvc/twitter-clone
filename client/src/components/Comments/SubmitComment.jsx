@@ -44,15 +44,19 @@ function SubmitComment({ tuwueetId, renderComments, setComments }) {
   async function postComment(e) {
     e.preventDefault();
     e.target.reset();
+    const img = encodedImg;
+    const tuwueetText = text;
+    setEncodedImg(null);
+    setText('');
+    commentInput.current.innerText = '';
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
     const createdAt = new Date();
     let uploadedImg;
-    if (encodedImg)
-      uploadedImg = (await uploadImage(encodedImg, token)).data.url;
+    if (encodedImg) uploadedImg = (await uploadImage(img, token)).data.url;
     const comment = {
-      text,
+      text: tuwueetText,
       img: uploadedImg || 'no img',
       username: userData.user.username,
       tuwueetId,
@@ -79,10 +83,7 @@ function SubmitComment({ tuwueetId, renderComments, setComments }) {
       )
     ).data.tuwueet;
     emitComment(comment);
-    setEncodedImg(null);
-    setText('');
     renderComments(comments.data, token);
-    commentInput.current.innerText = '';
     if (tuwueet.userId !== userData.user.id)
       sendCommentNotification(tuwueet, token);
   }
