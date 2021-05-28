@@ -47,14 +47,17 @@ function CreateTuwueet({ loadTuwueets, loggedIn, setTuwueets }) {
   async function postTuwueet(e) {
     e.preventDefault();
     e.target.reset();
+    const img = encodedImg;
+    const tuwueetText = text;
+    setEncodedImg(null);
+    setText('');
     const token = getAuthToken();
     const validToken = (await validateToken(token)).data;
     if (!validToken) return;
     let uploadedImg;
-    if (encodedImg)
-      uploadedImg = (await uploadImage(encodedImg, token)).data.url;
+    if (encodedImg) uploadedImg = (await uploadImage(img, token)).data.url;
     const tuwueet = {
-      text,
+      text: tuwueetText,
       img: uploadedImg,
       username: userData.user.username,
       pfp: profilePicture,
@@ -66,8 +69,6 @@ function CreateTuwueet({ loadTuwueets, loggedIn, setTuwueets }) {
       },
     });
     emitTuwueet(tuwueetRes.data.newTuwueet);
-    setEncodedImg(null);
-    setText('');
     loadTuwueets();
     textInput.current.innerText = '';
   }
