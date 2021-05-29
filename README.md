@@ -4,7 +4,7 @@ Tuwuitter is a basic Twitter clone. It's a social media app that that allows you
 
 ![image](https://user-images.githubusercontent.com/61325920/120070514-352c1280-c08b-11eb-8620-fc5baafe4349.png)
 
-[Go to website](https://tranquil-tor-92287.herokuapp.com/){:target="_blank" rel="noopener"}
+[Go to website](https://tranquil-tor-92287.herokuapp.com/)
 
 ## Installation
 
@@ -21,11 +21,11 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## Author
 
 **Milan Radinović**
-[github/Milanrdnvc](https://github.com/Milanrdnvc){:target="_blank" rel="noopener"}
+[github/Milanrdnvc](https://github.com/Milanrdnvc)
 
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/){:target="_blank" rel="noopener"}
+[MIT](https://choosealicense.com/licenses/mit/)
 
 
 
