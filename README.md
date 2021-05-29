@@ -1,4 +1,4 @@
-# Tuwwitter
+# Tuwuitter
 
 Tuwuitter is a full-stack Twitter clone. It's a social media app that that allows you to create your own profile, post new tuwueets, and like and comment on other people's tuwueets.
 
