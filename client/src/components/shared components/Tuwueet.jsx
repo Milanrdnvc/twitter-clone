@@ -13,7 +13,6 @@ import {
   TuwueetPfp,
   TuwueetOptions,
 } from '../styled/HomeStyles';
-import { ProfileInfoWrapper } from '../styled/ProfileStyles';
 
 function Tuwueet({
   text,

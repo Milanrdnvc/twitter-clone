@@ -175,3 +175,17 @@ export const ProfileInfoWrapper = styled.div`
     cursor: pointer;
   }
 `;
+
+export const ProfileInfoData = styled.div`
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  p,
+  a {
+    text-align: center;
+    color: var(--color-primary);
+    font-size: var(--font-small);
+  }
+`;
