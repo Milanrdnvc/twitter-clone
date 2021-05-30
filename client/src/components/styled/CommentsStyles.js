@@ -143,6 +143,10 @@ export const CommentContent = styled.div`
     cursor: pointer;
   }
 
+  strong:hover {
+    text-decoration: underline;
+  }
+
   img {
     width: 100%;
     border-radius: 20px;

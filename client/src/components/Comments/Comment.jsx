@@ -1,7 +1,13 @@
 import relativeDate from 'tiny-relative-date';
+import { useState } from 'react';
 import { CommentWrapper, CommentContent } from '../styled/CommentsStyles';
 
 function Comment({ username, img, createdAt, text, userPfp }) {
+  const [openProfileInfo, setOpenProfileInfo] = useState(false);
+  const [bio, setBio] = useState('');
+  const [location, setLocation] = useState('');
+  const [website, setWebsite] = useState('');
+  const [joined, setJoined] = useState('');
   const date = relativeDate(createdAt);
 
   return (
