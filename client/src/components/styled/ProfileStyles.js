@@ -156,3 +156,5 @@ export const EditButton = styled.div`
     z-index: 10;
   }
 `;
+
+export const ProfileInfoWrapper = styled.div``;

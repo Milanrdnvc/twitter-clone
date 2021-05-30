@@ -1,3 +1,4 @@
+import ProfileInfo from '../shared components/ProfileInfo';
 import like from '../../pictures/like.svg';
 import filledLike from '../../pictures/filledLike.svg';
 import comment from '../../pictures/comment.svg';
@@ -12,6 +13,7 @@ import {
   TuwueetPfp,
   TuwueetOptions,
 } from '../styled/HomeStyles';
+import { ProfileInfoWrapper } from '../styled/ProfileStyles';
 
 function Tuwueet({
   text,
@@ -28,6 +30,8 @@ function Tuwueet({
 }) {
   const [likes, setLikes] = useState(likesNum);
   const [isLiked, setIsLiked] = useState(liked);
+  const [openProfileInfo, setOpenProfileInfo] = useState(false);
+  const [ProfileInfoComponent, setProfileInfoComponent] = useState(null);
   const { userData } = useContext(UserContext);
   const history = useHistory();
   const date = relativeDate(createdAt);
@@ -116,38 +120,52 @@ function Tuwueet({
     const location = profileInfo.location;
     const website = profileInfo.website;
     const joined = new Date(profileInfo.joined).toDateString();
+    setProfileInfoComponent(
+      <ProfileInfo
+        open={openProfileInfo}
+        setOpen={setOpenProfileInfo}
+        bio={bio}
+        location={location}
+        website={website}
+        joined={joined}
+      />
+    );
   }
 
   return (
-    <TuwueetWrapper>
-      <TuwueetPfp src={pfp} />
-      <TuwueetInfo>
-        <p>
-          <strong onClick={showProfileInfo}>{username}</strong> <em>{date}</em>
-          <br />
-          {text}
-        </p>
-        {img !== 'no img' && <img src={img} alt="Tuwueet post" />}
-        <TuwueetOptions>
-          {loggedIn && (
-            <>
-              <div onClick={handleCommentButton}>
-                <img src={comment} alt="Comment" />
-                <span>{commentsNum}</span>
-              </div>
-              <div onClick={handleLikeButton}>
-                {!isLiked ? (
-                  <img src={like} alt="Like" />
-                ) : (
-                  <img src={filledLike} alt="Filled like" />
-                )}
-                <span>{likes}</span>
-              </div>
-            </>
-          )}
-        </TuwueetOptions>
-      </TuwueetInfo>
-    </TuwueetWrapper>
+    <>
+      <TuwueetWrapper>
+        <TuwueetPfp src={pfp} />
+        <TuwueetInfo>
+          <p>
+            <strong onClick={showProfileInfo}>{username}</strong>{' '}
+            <em>{date}</em>
+            <br />
+            {text}
+          </p>
+          {img !== 'no img' && <img src={img} alt="Tuwueet post" />}
+          <TuwueetOptions>
+            {loggedIn && (
+              <>
+                <div onClick={handleCommentButton}>
+                  <img src={comment} alt="Comment" />
+                  <span>{commentsNum}</span>
+                </div>
+                <div onClick={handleLikeButton}>
+                  {!isLiked ? (
+                    <img src={like} alt="Like" />
+                  ) : (
+                    <img src={filledLike} alt="Filled like" />
+                  )}
+                  <span>{likes}</span>
+                </div>
+              </>
+            )}
+          </TuwueetOptions>
+        </TuwueetInfo>
+      </TuwueetWrapper>
+      {ProfileInfoComponent}
+    </>
   );
 }
 
