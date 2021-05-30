@@ -95,6 +95,7 @@ function Comments({
         text={tuwueet.text}
         img={tuwueet.img}
         username={tuwueet.username}
+        userId={tuwueet.userId}
         createdAt={tuwueet.createdAt}
         id={tuwueet._id}
         likesNum={tuwueet.likes.length}

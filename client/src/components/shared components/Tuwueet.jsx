@@ -109,7 +109,7 @@ function Tuwueet({
       const validToken = (await validateToken(token)).data;
       if (!validToken) return;
       const profileData = (
-        await GET('/users/profileInfo', {
+        await GET(`/users/profileInfo/${userId}`, {
           headers: {
             'X-Auth-Token': token,
           },
