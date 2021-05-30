@@ -4,8 +4,10 @@ import { ProfileInfoWrapper } from '../styled/ProfileStyles';
 function ProfileInfo({ open, setOpen, bio, location, website }) {
   if (!open) return null;
   return ReactDOM.createPortal(
-    <ProfileInfoWrapper></ProfileInfoWrapper>,
-    document.querySelector('profile-info')
+    <ProfileInfoWrapper>
+      <span onClick={() => setOpen(false)}>&times;</span>
+    </ProfileInfoWrapper>,
+    document.querySelector('#profile-info')
   );
 }
 

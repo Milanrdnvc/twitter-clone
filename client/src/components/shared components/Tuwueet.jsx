@@ -31,7 +31,10 @@ function Tuwueet({
   const [likes, setLikes] = useState(likesNum);
   const [isLiked, setIsLiked] = useState(liked);
   const [openProfileInfo, setOpenProfileInfo] = useState(false);
-  const [ProfileInfoComponent, setProfileInfoComponent] = useState(null);
+  const [bio, setBio] = useState('');
+  const [location, setLocation] = useState('');
+  const [website, setWebsite] = useState('');
+  const [joined, setJoined] = useState('');
   const { userData } = useContext(UserContext);
   const history = useHistory();
   const date = relativeDate(createdAt);
@@ -116,20 +119,11 @@ function Tuwueet({
       return profileData;
     }
     const profileInfo = await getProfileInfo();
-    const bio = profileInfo.bio;
-    const location = profileInfo.location;
-    const website = profileInfo.website;
-    const joined = new Date(profileInfo.joined).toDateString();
-    setProfileInfoComponent(
-      <ProfileInfo
-        open={openProfileInfo}
-        setOpen={setOpenProfileInfo}
-        bio={bio}
-        location={location}
-        website={website}
-        joined={joined}
-      />
-    );
+    setBio(profileInfo.bio);
+    setLocation(profileInfo.location);
+    setWebsite(profileInfo.website);
+    setJoined(new Date(profileInfo.joined).toDateString());
+    setOpenProfileInfo(true);
   }
 
   return (
@@ -164,7 +158,14 @@ function Tuwueet({
           </TuwueetOptions>
         </TuwueetInfo>
       </TuwueetWrapper>
-      {ProfileInfoComponent}
+      <ProfileInfo
+        open={openProfileInfo}
+        setOpen={setOpenProfileInfo}
+        bio={bio}
+        location={location}
+        website={website}
+        joined={joined}
+      />
     </>
   );
 }
