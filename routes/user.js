@@ -126,6 +126,20 @@ router.get('/profileInfo', auth, async (req, res) => {
   }
 });
 
+router.get('/profileInfo/:id', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.json({
+      bio: user.bio,
+      location: user.location,
+      website: user.website,
+      joined: user.createdAt,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 router.get('/allNotifications', auth, async (req, res) => {
   try {
     const notifications = (await User.findById(req.user)).notifications;
