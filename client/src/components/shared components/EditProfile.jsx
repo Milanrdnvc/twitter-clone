@@ -58,7 +58,7 @@ function EditProfile({
         <ProfilePfp>
           <img
             src={profilePicture}
-            alt="Profile picture"
+            alt="Profile"
             width="100px"
             height="100px"
           />
@@ -72,7 +72,7 @@ function EditProfile({
         <small>{bio}</small>
         <small>{location}</small>
         <small>
-          <a href={website || '#'} target="_blank">
+          <a href={website || '#'} target="_blank" rel="noreferrer">
             My Website
           </a>
         </small>
