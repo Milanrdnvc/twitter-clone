@@ -64,6 +64,7 @@ function Comments({
           text={comment.text}
           userPfp={comment.userImg}
           key={idx}
+          tuwueetId={id}
         />
       );
     });
