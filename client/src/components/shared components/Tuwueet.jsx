@@ -3,7 +3,7 @@ import filledLike from '../../pictures/filledLike.svg';
 import comment from '../../pictures/comment.svg';
 import UserContext from '../../context/UserContext';
 import relativeDate from 'tiny-relative-date';
-import { getAuthToken, validateToken, POST } from '../../helpers';
+import { getAuthToken, validateToken, POST, GET } from '../../helpers';
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
@@ -97,12 +97,33 @@ function Tuwueet({
     history.push(`/comments/${id}`);
   }
 
+  async function showProfileInfo() {
+    async function getProfileInfo() {
+      const token = getAuthToken();
+      const validToken = (await validateToken(token)).data;
+      if (!validToken) return;
+      const profileData = (
+        await GET('/users/profileInfo', {
+          headers: {
+            'X-Auth-Token': token,
+          },
+        })
+      ).data;
+      return profileData;
+    }
+    const profileInfo = await getProfileInfo();
+    const bio = profileInfo.bio;
+    const location = profileInfo.location;
+    const website = profileInfo.website;
+    const joined = new Date(profileInfo.joined).toDateString();
+  }
+
   return (
     <TuwueetWrapper>
       <TuwueetPfp src={pfp} />
       <TuwueetInfo>
         <p>
-          <strong>{username}</strong> <em>{date}</em>
+          <strong onClick={showProfileInfo}>{username}</strong> <em>{date}</em>
           <br />
           {text}
         </p>
