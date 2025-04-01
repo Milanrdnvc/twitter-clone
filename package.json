@@ -1,32 +1,18 @@
 {
-  "name": "twitter-clone-server",
+  "name": "twitter-clone",
   "version": "1.0.0",
-  "description": "",
+  "description": "Tuwuitter is a full-stack Twitter clone. It's a social media app that that allows you to create your own profile, post new tuwueets, and like and comment on other people's tuwueets.",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "server": "node server.js",
-    "devServer": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "devStart": "concurrently \"npm run devServer\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch --env-file=.env server.js"
   },
-  "author": "Milan Radinović",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
-    "bcryptjs": "^2.4.3",
-    "cloudinary": "^1.25.1",
-    "concurrently": "^5.3.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.9",
-    "socket.io": "^4.1.2",
-    "socket.io-client": "^4.1.2",
-    "tiny-relative-date": "^1.3.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.6"
+    "express": "^5.1.0",
+    "mongoose": "^8.13.1"
   }
 }

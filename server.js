@@ -1,70 +1,17 @@
-require('dotenv').config();
-const express = require('express');
-const socket = require('socket.io');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const auth = require('./middleware/auth');
-const path = require('path');
-const { cloudinary } = require('./utils/cloudinary');
+import express from "express";
+import mongoose from "mongoose";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json({ limit: '50mb' }));
-app.use(cors());
-app.use('/users', require('./routes/user'));
-app.use('/tuwueets', require('./routes/tuwueet'));
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-  app.get('*', (_, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
-
-app.post('/uploadImage', auth, async (req, res) => {
-  try {
-    const fileStr = req.body.data;
-    if (!fileStr) return res.status(400).json({ msg: 'No image provided' });
-    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-      upload_preset: 'tuwuitter',
-    });
-    res.status(200).json({ url: uploadedResponse.url });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-function addSocketListener(socket, name, callback) {
-  socket.on(name, callback);
-}
-
-function broadcast(socket, name, data) {
-  socket.broadcast.emit(name, data);
-}
-
-mongoose.connect(
-  process.env.MONGODB_CONNECTION_STRING,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  },
-  err => {
-    if (err) throw err;
-    console.log('Connected to MongoDB');
-    const server = app.listen(PORT, () => {
+// Connect to database (MongoDB Atlas)
+mongoose
+  .connect(process.env.MONGODB_CONNECTION_STRING)
+  .then(() => {
+    app.listen(process.env.PORT, () => {
       console.log(`Server started on port ${PORT}`);
     });
-    const io = socket(server);
-    io.on('connection', socket => {
-      addSocketListener(socket, 'tuwueet', data => {
-        broadcast(socket, 'tuwueet', data);
-      });
-      addSocketListener(socket, 'comment', data => {
-        broadcast(socket, 'comment', data);
-      });
-    });
-  }
-);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
