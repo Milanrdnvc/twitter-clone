@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const tuwueetSchema = new mongoose.Schema(
   {
@@ -19,7 +19,6 @@ const tuwueetSchema = new mongoose.Schema(
     },
     pfp: {
       type: String,
-      required: true,
     },
     likes: {
       type: Array,
@@ -35,4 +34,5 @@ const tuwueetSchema = new mongoose.Schema(
   }
 );
 
-module.exports = Tuwueet = mongoose.model('tuwueet', tuwueetSchema);
+const Tuwueet = mongoose.model("tuwueet", tuwueetSchema);
+export default Tuwueet;
