@@ -1,28 +1,27 @@
 import Tuwueet from "../models/tuwueet.js";
+import asyncHandler from "express-async-handler";
 
-export async function createTuwueet(req, res, next) {
-  try {
-    const { text, img, username, pfp, id } = req.body;
+const createTuwueet = asyncHandler(async (req, res) => {
+  const { text, img, username, pfp, id } = req.body;
 
-    if (!text || !username || !id)
-      return res
-        .status(400)
-        .json({ msg: "Text and username are required (and id for now)" });
-
-    const newTuwueet = new Tuwueet({
-      text,
-      img: img || "no img",
-      userId: id,
-      username: username,
-      likes: [],
-      comments: [],
-      pfp: pfp || "no pfp",
-    });
-
-    await newTuwueet.save();
-
-    res.json({ newTuwueet });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  if (!text || !username || !id) {
+    res.status(400);
+    throw new Error("Text and username are required (and id for now)");
   }
-}
+
+  const newTuwueet = new Tuwueet({
+    text,
+    img: img || "no img",
+    userId: id,
+    username: username,
+    likes: [],
+    comments: [],
+    pfp: pfp || "no pfp",
+  });
+
+  await newTuwueet.save();
+
+  res.json({ newTuwueet });
+});
+
+export { createTuwueet };

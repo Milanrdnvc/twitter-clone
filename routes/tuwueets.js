@@ -6,6 +6,10 @@ const router = express.Router();
 
 router.post("/create", createTuwueet);
 
+router.get("/", (req, res) => {
+  res.json({ msg: "tuwueet get test" });
+});
+
 // router.post("/like", auth, async (req, res) => {
 //   try {
 //     const { userId, tuwueetId } = req.body;

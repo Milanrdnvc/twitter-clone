@@ -1,17 +1,23 @@
 import express from "express";
 import mongoose from "mongoose";
-import tuwueet from "./routes/tuwueet.js";
+import tuwueets from "./routes/tuwueets.js";
+import users from "./routes/users.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware for parsing incoming data
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
-// Router
-app.use("/api/tuwueet", tuwueet);
-// app.use("/api/user", user);
+// API routes
+app.use("/api/tuwueets", tuwueets);
+app.use("/api/users", users);
+
+// Error handling middleware
+app.use(notFound);
+app.use(errorHandler);
 
 // Connect to database (MongoDB Atlas)
 mongoose
