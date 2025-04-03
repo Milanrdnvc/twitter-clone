@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import tuwueets from "./routes/tuwueets.js";
 import users from "./routes/users.js";
+import cookieParser from "cookie-parser";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
@@ -10,6 +11,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware for parsing incoming data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // API routes
 app.use("/api/tuwueets", tuwueets);

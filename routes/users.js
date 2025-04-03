@@ -1,46 +1,22 @@
 import express from "express";
-import { authUser, registerUser } from "../controllers/userController.js";
-
-// const User = require("../models/user");
-// const Tuwueet = require("../models/tuwueet");
-// const bcrypt = require("bcryptjs");
-// const jwt = require("jsonwebtoken");
-// const auth = require("../middleware/auth");
+import {
+  authUser,
+  registerUser,
+  logoutUser,
+} from "../controllers/userController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/auth", authUser);
-
 router.post("/register", registerUser);
 
-router.get("/", (req, res) => {
-  res.json({ message: "user get test" });
-});
+router.post("/auth", authUser);
 
-// router.post('/login', async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-//     if (!email || !password)
-//       return res.status(400).json({ msg: 'Please fill in all the fields' });
-//     const user = await User.findOne({ email: email });
-//     if (!user)
-//       return res
-//         .status(400)
-//         .json({ msg: "Account with this email doesn't exist" });
-//     const isMatch = await bcrypt.compare(password, user.password);
-//     if (!isMatch) return res.status(400).json({ msg: 'Invalid password' });
-//     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-//     res.json({
-//       token,
-//       user: {
-//         id: user._id,
-//         username: user.username,
-//       },
-//     });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
+router.post("/logout", logoutUser);
+
+router.get("/profile", protect, (req, res) => {
+  res.json({ msg: "user profile" });
+});
 
 // router.post('/tokenIsValid', async (req, res) => {
 //   try {
