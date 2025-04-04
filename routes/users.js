@@ -3,6 +3,10 @@ import {
   authUser,
   registerUser,
   logoutUser,
+  editProfile,
+  sendNotification,
+  profileInfo,
+  allNotifications,
 } from "../controllers/userController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -14,9 +18,13 @@ router.post("/auth", authUser);
 
 router.post("/logout", logoutUser);
 
-router.get("/profile", protect, (req, res) => {
-  res.json({ msg: "user profile" });
-});
+router.post("/editProfile", protect, editProfile);
+
+router.post("/sendNotification", protect, sendNotification);
+
+router.get("/profileInfo", profileInfo);
+
+router.get("/allNotifications", protect, allNotifications);
 
 // router.post('/tokenIsValid', async (req, res) => {
 //   try {
@@ -32,55 +40,6 @@ router.get("/profile", protect, (req, res) => {
 //   }
 // });
 
-// router.post('/editProfile', auth, async (req, res) => {
-//   try {
-//     const { pfp, bio, location, website } = req.body;
-//     const user = await User.findOneAndUpdate(
-//       { _id: req.user },
-//       {
-//         pfp,
-//         bio,
-//         location,
-//         website,
-//       },
-//       { new: true }
-//     );
-//     res.json({ user });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-
-// router.post('/sendNotification', auth, async (req, res) => {
-//   try {
-//     const newNotification = req.body;
-//     const tuwueet = await Tuwueet.findById(newNotification.tuwueetId);
-//     const user = await User.findById(tuwueet.userId);
-//     const notifications = user.notifications;
-//     notifications.push(newNotification);
-//     user.notifications = notifications;
-//     await user.save();
-//     res.json({ notifications, userId: tuwueet.userId });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-
-// router.get('/profileInfo', auth, async (req, res) => {
-//   try {
-//     const user = await User.findById(req.user);
-//     res.json({
-//       pfp: user.pfp,
-//       bio: user.bio,
-//       location: user.location,
-//       website: user.website,
-//       joined: user.createdAt,
-//     });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-
 // router.get('/profileInfo/:id', auth, async (req, res) => {
 //   try {
 //     const user = await User.findById(req.params.id);
@@ -90,15 +49,6 @@ router.get("/profile", protect, (req, res) => {
 //       website: user.website,
 //       joined: user.createdAt,
 //     });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-
-// router.get('/allNotifications', auth, async (req, res) => {
-//   try {
-//     const notifications = (await User.findById(req.user)).notifications;
-//     res.json({ notifications });
 //   } catch (err) {
 //     res.status(500).json({ error: err.message });
 //   }
