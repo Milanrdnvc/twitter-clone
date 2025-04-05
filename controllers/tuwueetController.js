@@ -1,6 +1,31 @@
 import Tuwueet from "../models/tuwueet.js";
 import asyncHandler from "express-async-handler";
 
+const getAllTuwueets = asyncHandler(async (_, res) => {
+  const tuwueets = await Tuwueet.find();
+  res.json({ tuwueets });
+});
+
+const allComments = asyncHandler(async (req, res) => {
+  const { tuwueetId } = req.body;
+  if (!tuwueetId)
+    return res.status(400).json({ msg: "Tuwueet ID not provided" });
+  const tuwueets = await Tuwueet.findOne({ _id: tuwueetId });
+  const comments = tuwueets.comments;
+  res.json({ comments });
+});
+
+const getTuwueet = asyncHandler(async (req, res) => {
+  const tuwueet = await Tuwueet.findOne({ _id: req.params.id });
+
+  if (!tuwueet) {
+    res.status(400);
+    throw new Error("Tuwueet with that ID doesn't exist");
+  }
+
+  res.json({ tuwueet });
+});
+
 const comment = asyncHandler(async (req, res) => {
   const { tuwueetId, text, img, username, createdAt, userImg } = req.body;
 
@@ -79,4 +104,11 @@ const createTuwueet = asyncHandler(async (req, res) => {
   res.json({ newTuwueet });
 });
 
-export { createTuwueet, like, comment };
+export {
+  createTuwueet,
+  like,
+  comment,
+  getTuwueet,
+  allComments,
+  getAllTuwueets,
+};
