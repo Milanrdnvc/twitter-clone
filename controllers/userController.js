@@ -8,7 +8,8 @@ const allNotifications = asyncHandler(async (req, res) => {
 });
 
 const profileInfo = asyncHandler(async (req, res) => {
-  // ???
+  // does this get the info of me (then I can get the id with req.user._id) or does it get the info of arbitrary user
+  // (then I need to send the id with the request, but how do I get that id from the front-end?)
   // const user = await User.findById(req.userId);
   // if (!user) throw new Error("No such user exists");
   // res.json({

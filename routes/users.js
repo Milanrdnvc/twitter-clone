@@ -49,6 +49,7 @@ router.get("/allNotifications", protect, allNotifications);
 // });
 
 // router.get('/', auth, async (req, res) => {
+// same question as the profileInfo route
 //   try {
 //     const user = await User.findById(req.user);
 //     res.json({
