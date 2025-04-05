@@ -1,75 +1,22 @@
 import express from "express";
-import { createTuwueet } from "../controllers/tuwueetController.js";
-// import auth from "../middleware/auth.js";
+import {
+  createTuwueet,
+  like,
+  comment,
+} from "../controllers/tuwueetController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/create", createTuwueet);
+router.post("/create", protect, createTuwueet);
 
 router.get("/", (req, res) => {
   res.json({ msg: "tuwueet get test" });
 });
 
-// router.post("/like", auth, async (req, res) => {
-//   try {
-//     const { userId, tuwueetId } = req.body;
-//     if (!userId) return res.status(400).json({ msg: "User ID not provided" });
-//     if (!tuwueetId)
-//       return res.status(400).json({ msg: "Tuwueet ID not provided" });
-//     const tuwueet = await Tuwueet.findOne({ _id: tuwueetId });
-//     const likes = tuwueet.likes;
-//     likes.push({ userId });
-//     tuwueet.likes = likes;
-//     await tuwueet.save();
-//     res.json({ likes });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
+router.post("/like", protect, like);
 
-// router.post("/unlike", auth, async (req, res) => {
-//   try {
-//     const { tuwueetId, userId } = req.body;
-//     if (!userId) return res.status(400).json({ msg: "User ID not provided" });
-//     if (!tuwueetId)
-//       return res.status(400).json({ msg: "Tuwueet ID not provided" });
-//     const tuwueet = await Tuwueet.findOne({ _id: tuwueetId });
-//     const likes = tuwueet.likes;
-//     const filteredLikes = likes.filter((user) => user.userId !== userId);
-//     tuwueet.likes = filteredLikes;
-//     await tuwueet.save();
-//     res.json({ filteredLikes });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-
-// router.post("/comment", auth, async (req, res) => {
-//   try {
-//     const { tuwueetId, text, img, username, createdAt, userImg } = req.body;
-//     if (!tuwueetId) res.status(400).json({ msg: "Tuwueet ID not provided" });
-//     if (!text)
-//       return res
-//         .status(400)
-//         .json({ msg: "Your comment must include some text" });
-//     const tuwueet = await Tuwueet.findOne({ _id: tuwueetId });
-//     const newComment = {
-//       tuwueetId,
-//       userImg,
-//       text,
-//       createdAt,
-//       img: img || "no img",
-//       createdBy: username,
-//     };
-//     const comments = tuwueet.comments;
-//     comments.push(newComment);
-//     tuwueet.comments = comments;
-//     await tuwueet.save();
-//     res.json({ comments });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
+router.post("/comment", protect, comment);
 
 // router.post("/", auth, async (req, res) => {
 //   try {
