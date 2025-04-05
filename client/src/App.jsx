@@ -1,5 +1,12 @@
+import Home from "./components/Home";
+import AppWrapper from "./styled/AppStyles";
+
 function App() {
-  return <div>hello world</div>;
+  return (
+    <AppWrapper>
+      <Home />
+    </AppWrapper>
+  );
 }
 
 export default App;
