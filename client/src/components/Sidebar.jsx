@@ -3,6 +3,7 @@ import { FaTwitter, FaHome } from "react-icons/fa";
 import Home from "@mui/icons-material/Home";
 import Notifications from "@mui/icons-material/Notifications";
 import Logout from "@mui/icons-material/Logout";
+import "../styles/sidebar.css";
 
 function Sidebar() {
   return (
