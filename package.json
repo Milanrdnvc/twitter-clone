@@ -17,7 +17,6 @@
     "express": "^5.1.0",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.13.1",
-    "styled-components": "^6.1.17"
+    "mongoose": "^8.13.1"
   }
 }

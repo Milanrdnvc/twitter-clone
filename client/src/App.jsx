@@ -1,11 +1,10 @@
-import Home from "./components/Home";
-import AppWrapper from "./styled/AppStyles";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
-    <AppWrapper>
-      <Home />
-    </AppWrapper>
+    <>
+      <Sidebar />
+    </>
   );
 }
 
