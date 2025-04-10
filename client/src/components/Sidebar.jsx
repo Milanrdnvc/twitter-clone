@@ -6,7 +6,7 @@ import { IoLogOut } from "react-icons/io5";
 
 function Sidebar() {
   return (
-    <aside className="w-[250px] p-4 border-r border-gray-800 hidden md:flex flex-col">
+    <aside className="w-[250px] p-4 border-r border-gray-800 hidden lg:flex flex-col">
       <FaTwitter className="text-3xl mb-4 text-pink-500 cursor-pointer" />
       <nav className="flex flex-col gap-4">
         <a href="#" className="flex items-center gap-3 hover:text-pink-500">
