@@ -6,7 +6,7 @@ import "./styles/styles.css";
 
 function App() {
   return (
-    <div className="flex h-screen w-screen text-white bg-[#15202b] overflow-hidden">
+    <div className="flex max-w-7xl mx-auto min-h-screen text-white bg-[#15202b]">
       <Sidebar />
       <Feed />
       <Profile />
