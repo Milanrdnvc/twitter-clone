@@ -6,7 +6,7 @@ import { CgProfile } from "react-icons/cg";
 
 function MobileMenu() {
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-black border-t border-gray-800 p-4 flex justify-around">
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#15202b] border-t border-gray-800 p-4 flex justify-around">
       <a href="#" className="text-blue-400">
         <RiHome7Fill className="text-3xl relative top-[2px] text-pink-500" />
       </a>
