@@ -4,7 +4,7 @@ function Feed() {
   return (
     <main className="flex-1 flex flex-col border-x border-gray-800 h-full">
       {/* Sticky Top Nav */}
-      <div className="p-4 border-b border-gray-800 font-bold text-xl sticky top-0 bg-black z-10">
+      <div className="p-4 border-b border-gray-800 font-bold text-xl sticky top-0 z-10">
         Home
       </div>
 
@@ -15,7 +15,7 @@ function Feed() {
           <div className="w-12 h-12 rounded-full bg-gray-700 mr-4" />
           <div className="flex-1">
             <textarea
-              className="w-full bg-black text-white placeholder-gray-500 resize-none outline-none"
+              className="w-full  text-white placeholder-gray-500 resize-none outline-none"
               placeholder="What’s happening?"
               rows="2"
             ></textarea>
@@ -26,7 +26,7 @@ function Feed() {
                 <span>📊</span>
                 <span>😊</span>
               </div>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 py-1 rounded-full">
+              <button className="bg-pink-500 hover:bg-pink-600 text-white font-bold px-4 py-1 rounded-full cursor-pointer">
                 Post
               </button>
             </div>
