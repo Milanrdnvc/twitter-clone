@@ -18,7 +18,7 @@ function Sidebar() {
           <span className="text-base">Notifications</span>
         </a>
         <a href="#" className="flex items-center gap-3 hover:text-pink-500">
-          <IoLogOut className="text-3xl relative top-[2px] text-pink-500" />
+          <IoLogOut className="text-3xl relative top-[2px] left-[1.2px] text-pink-500" />
           <span className="text-base">Log Out</span>
         </a>
       </nav>
