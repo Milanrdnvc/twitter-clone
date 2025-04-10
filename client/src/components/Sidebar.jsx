@@ -1,30 +1,28 @@
 import React from "react";
-import { FaTwitter, FaHome } from "react-icons/fa";
-import Home from "@mui/icons-material/Home";
-import Notifications from "@mui/icons-material/Notifications";
-import Logout from "@mui/icons-material/Logout";
-import "../styles/sidebar.css";
+import { FaTwitter } from "react-icons/fa";
+import { RiHome7Fill } from "react-icons/ri";
+import { IoIosNotifications } from "react-icons/io";
+import { IoLogOut } from "react-icons/io5";
 
 function Sidebar() {
   return (
-    <div className="sidebar">
-      <FaTwitter />
-
-      <div className="sidebar-option active">
-        <Home />
-        <h2>Home</h2>
-      </div>
-
-      <div className="sidebar-option">
-        <Notifications />
-        <h2>Notifications</h2>
-      </div>
-
-      <div className="sidebar-option">
-        <Logout />
-        <h2>Logout</h2>
-      </div>
-    </div>
+    <aside className="w-[250px] p-4 border-r border-gray-800 hidden md:flex flex-col">
+      <FaTwitter className="text-3xl mb-4 text-pink-500 cursor-pointer" />
+      <nav className="flex flex-col gap-4">
+        <a href="#" className="flex items-center gap-3 hover:text-pink-500">
+          <RiHome7Fill className="text-3xl relative top-[2px] text-pink-500" />
+          <span className="text-base">Home</span>
+        </a>
+        <a href="#" className="flex items-center gap-3 hover:text-pink-500">
+          <IoIosNotifications className="text-3xl relative top-[2px] right-[2px] text-pink-500" />
+          <span className="text-base">Notifications</span>
+        </a>
+        <a href="#" className="flex items-center gap-3 hover:text-pink-500">
+          <IoLogOut className="text-3xl relative top-[2px] text-pink-500" />
+          <span className="text-base">Log Out</span>
+        </a>
+      </nav>
+    </aside>
   );
 }
 
