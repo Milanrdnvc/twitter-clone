@@ -4,7 +4,7 @@ function Feed() {
   return (
     <main className="flex-1 flex flex-col border-x border-gray-800 h-full">
       {/* Sticky Top Nav */}
-      <div className="p-4 border-b border-gray-800 font-bold text-xl sticky top-0 z-10">
+      <div className="p-4 border-b border-gray-800 font-bold text-xl sticky top-0 z-10 bg-[#15202b]">
         Home
       </div>
 
