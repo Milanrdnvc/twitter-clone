@@ -12,7 +12,7 @@ function Feed() {
       <div className="flex-1 overflow-y-auto">
         <CreateTuwueet />
 
-        {[...Array(30)].map((_, i) => (
+        {[...Array(20)].map((_, i) => (
           <Tuwueet key={i} test={i} />
         ))}
       </div>
