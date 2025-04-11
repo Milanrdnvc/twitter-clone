@@ -13,7 +13,7 @@ function CreateTuwueet() {
         ></textarea>
         <div className="flex justify-between items-center mt-2">
           <div className="flex gap-4 text-blue-500">
-            <FaImage className="text-xl relative top-[2px] left-[1.2px] text-pink-500 cursor-pointer" />
+            <FaImage className="text-xl text-pink-500 cursor-pointer" />
           </div>
           <button className="bg-pink-500 hover:bg-pink-600 text-white font-bold px-4 py-1 rounded-full cursor-pointer">
             Post

@@ -1,4 +1,6 @@
 import React from "react";
+import { CiHeart } from "react-icons/ci";
+import { FaComment } from "react-icons/fa";
 
 function Tuwueet({ test }) {
   return (
@@ -9,10 +11,11 @@ function Tuwueet({ test }) {
           <span className="font-bold text-white">User {test}</span> · 1h
         </div>
         <div>This is tweet #{test + 1}!</div>
-        <div className="flex gap-4 mt-2 text-gray-500 text-sm">
-          <span>💬</span>
-          <span>🔁</span>
-          <span>❤️</span>
+        <div className="flex gap-3 mt-2 text-sm">
+          <CiHeart className="text-xl text-pink-500 cursor-pointer" />
+          <span>10</span>
+          <FaComment className="text-pink-500 cursor-pointer relative top-[3px]" />
+          <span>10</span>
         </div>
       </div>
     </div>
