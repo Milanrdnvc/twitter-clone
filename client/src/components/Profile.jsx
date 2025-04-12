@@ -22,7 +22,7 @@ function Profile() {
         <div className="text-sm text-gray-400 mb-4">📅 Joined January 2020</div>
 
         {/* Edit Profile Button */}
-        <button className="w-full bg-pink-500 border border-gray-600 hover:bg-pink-600 text-white py-1 rounded-full font-semibold cursor-pointer">
+        <button className="w-full bg-pink-500 hover:bg-pink-600 text-white py-1 rounded-full font-semibold cursor-pointer">
           Edit profile
         </button>
       </div>
