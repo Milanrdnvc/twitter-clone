@@ -4,36 +4,33 @@ function LogIn() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)] text-[var(--color-primary)] px-4">
       <div className="bg-[var(--color-bg-secondary)] p-8 rounded-xl shadow-xl w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-center text-[var(--color-fg)]">
-          Welcome back
+        <h1 className="text-3xl font-bold mb-6 text-center text-pink-500">
+          Log In
         </h1>
 
         <form className="flex flex-col gap-4">
           <input
             type="email"
             placeholder="Email"
-            className="bg-[var(--color-bg-tertiary)] text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-fg)]"
+            className="bg-[var(--color-bg-tertiary)] text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
           />
           <input
             type="password"
             placeholder="Password"
-            className="bg-[var(--color-bg-tertiary)] text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-fg)]"
+            className="bg-[var(--color-bg-tertiary)] text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
           />
 
           <button
             type="submit"
-            className="mt-4 bg-[var(--color-fg)] text-black font-semibold py-2 rounded-lg hover:opacity-90 transition"
+            className="mt-4 bg-pink-500 hover:bg-pink-600 cursor-pointer font-semibold py-2 rounded-lg"
           >
             Log In
           </button>
         </form>
 
-        <p className="text-center text-sm text-[var(--color-secondary)] mt-4">
+        <p className="text-center text-sm mt-4">
           Don't have an account?{" "}
-          <a
-            href="/register"
-            className="text-[var(--color-fg)] hover:underline"
-          >
+          <a href="/register" className="text-pink-500 hover:underline">
             Register
           </a>
         </p>

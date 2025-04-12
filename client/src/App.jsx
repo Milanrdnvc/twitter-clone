@@ -2,6 +2,8 @@ import Sidebar from "./components/Sidebar";
 import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 import MobileMenu from "./components/MobileMenu";
+import Register from "./components/Register";
+import LogIn from "./components/LogIn";
 import "./styles/styles.css";
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
 
       <MobileMenu />
     </div>
+    // <Register />
+    // <LogIn />
   );
 }
 
