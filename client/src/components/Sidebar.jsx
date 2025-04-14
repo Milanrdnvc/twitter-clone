@@ -1,13 +1,30 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useLogoutMutation } from "../slices/usersApiSlice";
+import { logout } from "../slices/authSlice";
+import { Link, useNavigate } from "react-router-dom";
 import { FaTwitter } from "react-icons/fa";
 import { RiHome7Fill } from "react-icons/ri";
 import { IoIosNotifications } from "react-icons/io";
 import { IoLogOut } from "react-icons/io5";
 
 function Sidebar() {
-  const userInfo = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const [logoutApiCall] = useLogoutMutation();
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  async function logoutHandler() {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <aside className="w-[250px] p-4 border-r border-gray-800 hidden lg:flex flex-col">
@@ -23,15 +40,24 @@ function Sidebar() {
           <IoIosNotifications className="text-3xl relative top-[2px] right-[2px] text-pink-500" />
           <span className="text-base font-bold">Notifications</span>
         </Link>
-        <Link
-          to="/login"
-          className="flex items-center gap-3 hover:text-pink-500"
-        >
-          <IoLogOut className="text-3xl relative top-[2px] left-[1.2px] text-pink-500" />
-          <span className="text-base font-bold">
-            {userInfo ? "Log Out" : "Log In"}
-          </span>
-        </Link>
+        {userInfo ? (
+          <Link
+            to="#"
+            className="flex items-center gap-3 hover:text-pink-500"
+            onClick={logoutHandler}
+          >
+            <IoLogOut className="text-3xl relative top-[2px] left-[1.2px] text-pink-500" />
+            <span className="text-base font-bold">Log Out</span>
+          </Link>
+        ) : (
+          <Link
+            to="/login"
+            className="flex items-center gap-3 hover:text-pink-500"
+          >
+            <IoLogOut className="text-3xl relative top-[2px] left-[1.2px] text-pink-500" />
+            <span className="text-base font-bold">Log In</span>
+          </Link>
+        )}
       </nav>
     </aside>
   );
