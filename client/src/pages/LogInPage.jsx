@@ -18,6 +18,8 @@ function LogIn() {
 
   useEffect(() => {
     if (userInfo) {
+      console.log(userInfo);
+
       navigate("/");
     }
   }, [navigate, userInfo]);
