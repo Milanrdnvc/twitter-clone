@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
-import { logout } from "../slices/authSlice";
+import { clearCredentials } from "../slices/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { FaTwitter } from "react-icons/fa";
 import { RiHome7Fill } from "react-icons/ri";
@@ -19,7 +19,7 @@ function Sidebar() {
   async function logoutHandler() {
     try {
       await logoutApiCall().unwrap();
-      dispatch(logout());
+      dispatch(clearCredentials());
       navigate("/");
     } catch (err) {
       console.log(err);
