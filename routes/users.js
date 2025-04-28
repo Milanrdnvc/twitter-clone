@@ -12,9 +12,9 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/register", registerUser);
-router.post("/auth", authUser);
-router.post("/logout", logoutUser);
+router.post("/register", registerUser); // [✔]
+router.post("/auth", authUser); // [✔]
+router.post("/logout", logoutUser); // [✔]
 router.post("/editProfile", protect, editProfile);
 router.post("/sendNotification", protect, sendNotification);
 router.get("/profileInfo", profileInfo);
