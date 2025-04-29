@@ -17,7 +17,7 @@ router.post("/auth", authUser); // [✔]
 router.post("/logout", logoutUser); // [✔]
 router.post("/editProfile", protect, editProfile);
 router.post("/sendNotification", protect, sendNotification);
-router.get("/profileInfo", profileInfo);
+router.get("/profileInfo", protect, profileInfo);
 router.get("/allNotifications", protect, allNotifications);
 
 // router.post('/tokenIsValid', async (req, res) => {

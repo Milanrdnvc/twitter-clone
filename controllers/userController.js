@@ -12,13 +12,15 @@ const profileInfo = asyncHandler(async (req, res) => {
   // (then I need to send the id with the request, but how do I get that id from the front-end?)
   // const user = await User.findById(req.userId);
   // if (!user) throw new Error("No such user exists");
-  // res.json({
-  //   pfp: user.pfp,
-  //   bio: user.bio,
-  //   location: user.location,
-  //   website: user.website,
-  //   joined: user.createdAt,
-  // });
+
+  // for now, it's for the current logged in user
+  res.json({
+    pfp: req.user.pfp,
+    bio: req.user.bio,
+    location: req.user.location,
+    website: req.user.website,
+    joined: req.user.createdAt,
+  });
 });
 
 const sendNotification = asyncHandler(async (req, res) => {
