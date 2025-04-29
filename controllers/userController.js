@@ -88,9 +88,13 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { email, password, passwordCheck, username, pfp } = req.body;
+  const { email, password, confirmPassword, username, pfp } = req.body;
 
-  if (!email || !password || !passwordCheck || !username) {
+  console.log(req.body);
+
+  if (!email || !password || !confirmPassword || !username) {
+    console.log("test");
+
     res.status(400);
     throw new Error("Please fill in all the fields");
   }
@@ -100,7 +104,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("Password must be at least 5 characters in length");
   }
 
-  if (password !== passwordCheck) {
+  if (password !== confirmPassword) {
     res.status(400);
     throw new Error("Passwords don't match");
   }

@@ -31,11 +31,13 @@ function LogIn() {
         email,
         password,
       }).unwrap();
+
       dispatch(
         setCredentials({
           ...res,
         })
       );
+
       navigate("/");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -62,6 +64,8 @@ function LogIn() {
             className="bg-[var(--color-bg-tertiary)] text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
             onChange={(e) => setPassword(e.target.value)}
           />
+
+          {isLoading && <h2>Loading...</h2>}
 
           <button
             type="submit"
