@@ -15,10 +15,10 @@ const profileInfo = asyncHandler(async (req, res) => {
 
   // for now, it's for the current logged in user
   res.json({
-    pfp: req.user.pfp,
-    bio: req.user.bio,
-    location: req.user.location,
-    website: req.user.website,
+    pfp: req.user.pfp || "N/A",
+    bio: req.user.bio || "N/A",
+    location: req.user.location || "N/A",
+    website: req.user.website || "N/A",
     joined: req.user.createdAt,
   });
 });
