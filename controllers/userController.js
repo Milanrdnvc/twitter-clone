@@ -71,6 +71,10 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      bio: null,
+      location: null,
+      website: null,
+      createdAt: user.createdAt,
     });
   } else {
     res.status(401);
@@ -129,6 +133,10 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      bio: null,
+      location: null,
+      website: null,
+      createdAt: user.createdAt,
     });
   } else {
     res.status(400);
