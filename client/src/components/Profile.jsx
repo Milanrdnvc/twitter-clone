@@ -20,10 +20,6 @@ function Profile() {
     website: userInfo?.website,
   });
 
-  const handleChangeBio = (e) => {
-    setProfile({ ...profile, [e.target.name]: e.target.value });
-  };
-
   useEffect(() => {
     if (data && !userInfo) {
       setProfile({
@@ -46,7 +42,9 @@ function Profile() {
           <textarea
             name="bio"
             value={profile.bio}
-            onChange={handleChangeBio}
+            onChange={(e) =>
+              setProfile({ ...profile, [e.target.name]: e.target.value })
+            }
             rows="3"
             className="text-sm text-gray-300 mb-2 bg-gray-800 rounded p-1 w-full"
           />
@@ -58,7 +56,9 @@ function Profile() {
           <input
             name="location"
             value={profile.location}
-            onChange={handleChangeBio}
+            onChange={(e) =>
+              setProfile({ ...profile, [e.target.name]: e.target.value })
+            }
             className="text-sm text-gray-400 mb-2 bg-gray-800 rounded p-1 w-full"
           />
         ) : (
@@ -71,7 +71,9 @@ function Profile() {
           <input
             name="website"
             value={profile.website}
-            onChange={handleChangeBio}
+            onChange={(e) =>
+              setProfile({ ...profile, [e.target.name]: e.target.value })
+            }
             className="text-sm text-blue-400 mb-2 bg-gray-800 rounded p-1 w-full"
           />
         ) : (
