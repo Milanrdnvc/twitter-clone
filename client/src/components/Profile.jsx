@@ -9,7 +9,11 @@ import { toast } from "react-toastify";
 
 function Profile() {
   const { userInfo } = useSelector((state) => state.userProfile);
-  const { username } = useSelector((state) => state.auth.userInfo);
+  const { username } = useSelector((state) =>
+    state.auth.userInfo ? state.auth.userInfo : { username: "Guest" }
+  );
+
+  const loggedIn = useSelector((state) => state.auth.userInfo);
 
   const dispatch = useDispatch();
 
@@ -121,12 +125,14 @@ function Profile() {
           📅 Joined {userInfo?.joined}
         </div>
 
-        <button
-          className="w-full bg-pink-500 hover:bg-pink-600 text-white py-1 rounded-full font-semibold cursor-pointer"
-          onClick={handleEditProfile}
-        >
-          {editMode ? "Save" : "Edit Profile"}
-        </button>
+        {!!loggedIn && (
+          <button
+            className="w-full bg-pink-500 hover:bg-pink-600 text-white py-1 rounded-full font-semibold cursor-pointer"
+            onClick={handleEditProfile}
+          >
+            {editMode ? "Save" : "Edit Profile"}
+          </button>
+        )}
       </div>
     </aside>
   );

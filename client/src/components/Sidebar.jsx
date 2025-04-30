@@ -7,6 +7,7 @@ import { FaTwitter } from "react-icons/fa";
 import { RiHome7Fill } from "react-icons/ri";
 import { IoIosNotifications } from "react-icons/io";
 import { IoLogOut } from "react-icons/io5";
+import { clearProfile } from "../slices/userProfileSlice";
 
 function Sidebar() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -20,6 +21,7 @@ function Sidebar() {
     try {
       await logoutApiCall().unwrap();
       dispatch(clearCredentials());
+      dispatch(clearProfile());
       navigate("/");
     } catch (err) {
       console.log(err);

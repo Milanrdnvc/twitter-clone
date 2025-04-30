@@ -14,9 +14,13 @@ const userProfileSlice = createSlice({
       state.userInfo = action.payload;
       localStorage.setItem("userProfileInfo", JSON.stringify(action.payload));
     },
+    clearProfile: (state) => {
+      state.userInfo = null;
+      localStorage.removeItem("userProfileInfo");
+    },
   },
 });
 
-export const { editProfile } = userProfileSlice.actions;
+export const { editProfile, clearProfile } = userProfileSlice.actions;
 
 export default userProfileSlice.reducer;
