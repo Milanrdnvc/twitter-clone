@@ -46,12 +46,11 @@ const sendNotification = asyncHandler(async (req, res) => {
 });
 
 const editProfile = asyncHandler(async (req, res) => {
-  const { pfp, bio, location, website } = req.body;
+  const { bio, location, website } = req.body;
 
   const user = await User.findOneAndUpdate(
     { _id: req.user._id },
     {
-      pfp,
       bio,
       location,
       website,
@@ -59,7 +58,7 @@ const editProfile = asyncHandler(async (req, res) => {
     { new: true }
   );
 
-  res.json({ user });
+  res.json({ bio: user.bio, location: user.location, website: user.website });
 });
 
 const authUser = asyncHandler(async (req, res) => {

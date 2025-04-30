@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useProfileQuery } from "../slices/usersApiSlice";
+import {
+  useEditProfileMutation,
+  useProfileQuery,
+} from "../slices/usersApiSlice";
 import { editProfile } from "../slices/userProfileSlice";
+import { toast } from "react-toastify";
 
 function Profile() {
   const { userInfo } = useSelector((state) => state.userProfile);
@@ -13,12 +17,36 @@ function Profile() {
     skip: !!userInfo,
   });
 
+  const [editProfileM, { isLoadingEdit, error }] = useEditProfileMutation();
+
   const [editMode, setEditMode] = useState(false);
   const [profile, setProfile] = useState({
     bio: userInfo?.bio,
     location: userInfo?.location,
     website: userInfo?.website,
   });
+
+  const handleEditProfile = async () => {
+    if (editMode) {
+      try {
+        const res = await editProfileM({
+          bio: profile.bio,
+          location: profile.location,
+          website: profile.website,
+        }).unwrap();
+
+        dispatch(
+          editProfile({
+            ...res,
+          })
+        );
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+
+    setEditMode((prev) => !prev);
+  };
 
   useEffect(() => {
     if (data && !userInfo) {
@@ -95,7 +123,7 @@ function Profile() {
 
         <button
           className="w-full bg-pink-500 hover:bg-pink-600 text-white py-1 rounded-full font-semibold cursor-pointer"
-          onClick={() => setEditMode(!editMode)}
+          onClick={handleEditProfile}
         >
           {editMode ? "Save" : "Edit Profile"}
         </button>
