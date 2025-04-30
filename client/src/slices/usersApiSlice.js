@@ -24,6 +24,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+
     profile: builder.query({
       query: (_) => ({
         url: `${USERS_URL}/profileInfo`,
