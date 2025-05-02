@@ -122,7 +122,13 @@ function Profile() {
         )}
 
         <div className="text-sm text-gray-400 mb-4">
-          📅 Joined {userInfo?.joined}
+          📅 Joined{" "}
+          {userInfo &&
+            new Date(userInfo.joined).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
         </div>
 
         {!!loggedIn && (
