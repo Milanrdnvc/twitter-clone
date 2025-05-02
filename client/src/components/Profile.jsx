@@ -53,7 +53,7 @@ function Profile() {
   };
 
   useEffect(() => {
-    if (data && !userInfo) {
+    if (data && !userInfo && loggedIn) {
       setProfile({
         bio: data.bio,
         location: data.location,

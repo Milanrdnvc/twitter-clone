@@ -22,6 +22,8 @@ function Sidebar() {
       await logoutApiCall().unwrap();
       dispatch(clearCredentials());
       dispatch(clearProfile());
+      console.log("test");
+
       navigate("/");
     } catch (err) {
       console.log(err);
