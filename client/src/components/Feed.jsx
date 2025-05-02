@@ -3,6 +3,8 @@ import CreateTuwueet from "./CreateTuwueet";
 import Tuwueet from "./Tuwueet";
 
 function Feed() {
+  // Fetch all tuwueets
+
   return (
     <main className="flex-1 flex flex-col border-x border-gray-800 h-full">
       <div className="p-4 border-b border-gray-800 font-bold text-xl sticky top-0 z-10 bg-[#15202b]">
