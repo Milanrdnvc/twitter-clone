@@ -58,7 +58,12 @@ const editProfile = asyncHandler(async (req, res) => {
     { new: true }
   );
 
-  res.json({ bio: user.bio, location: user.location, website: user.website });
+  res.json({
+    bio: user.bio,
+    location: user.location,
+    website: user.website,
+    joined: user.createdAt,
+  });
 });
 
 const authUser = asyncHandler(async (req, res) => {
