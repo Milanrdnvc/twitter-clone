@@ -11,11 +11,11 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/create", protect, createTuwueet); // [...]
+router.post("/create", protect, createTuwueet); // [✔]
 router.post("/like", protect, like);
 router.post("/comment", protect, comment);
+router.get("/all", getAllTuwueets); // [✔]
 router.get("/:id", getTuwueet);
 router.get("/allComments", allComments);
-router.get("/all", getAllTuwueets);
 
 export default router;

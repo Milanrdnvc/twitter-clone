@@ -11,7 +11,13 @@ export const tuwueetsApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    getAll: builder.query({
+      query: (_) => ({
+        url: `${TUWUEETS_URL}/all`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateMutation } = tuwueetsApiSlice;
+export const { useCreateMutation, useGetAllQuery } = tuwueetsApiSlice;
