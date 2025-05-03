@@ -32,13 +32,6 @@ function Tuwueet({ text, created, username, likes, comments }) {
       <div className="flex-1">
         <div className="text-sm text-gray-400">
           <span className="font-bold text-white">{username} </span> ·{" "}
-          {/* {new Date(created).toLocaleString("en-US", {
-            month: "long",
-            day: "numeric",
-            hour: "numeric",
-            minute: "2-digit",
-            hour12: true,
-          })} */}
           {timeAgo(created)}
         </div>
         <div>{text}</div>
