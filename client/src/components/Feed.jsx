@@ -17,6 +17,8 @@ function Feed() {
       <div className="flex-1 overflow-y-auto">
         <CreateTuwueet />
 
+        {isLoading && <p>Loading...</p>}
+
         {data?.tuwueets
           .map((tuwueet) => (
             <Tuwueet
