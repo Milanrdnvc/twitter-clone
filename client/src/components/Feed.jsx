@@ -17,7 +17,7 @@ function Feed() {
       <div className="flex-1 overflow-y-auto">
         <CreateTuwueet />
 
-        {data?.tuwueets.map((tuwueet, i) => (
+        {data?.tuwueets.map((tuwueet) => (
           <Tuwueet
             key={tuwueet._id}
             text={tuwueet.text}
