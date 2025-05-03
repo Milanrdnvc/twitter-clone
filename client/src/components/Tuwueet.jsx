@@ -2,7 +2,7 @@ import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaComment } from "react-icons/fa";
 
-function Tuwueet({ text, created, username, likes, comments }) {
+function Tuwueet({ text, created, username, likes, comments, id }) {
   const timeAgo = (date) => {
     const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
     const deltaSeconds = Math.floor((new Date() - new Date(date)) / 1000);
@@ -26,6 +26,8 @@ function Tuwueet({ text, created, username, likes, comments }) {
     return "just now";
   };
 
+  const handleLike = async () => {};
+
   return (
     <div className="flex p-4 border-b border-gray-800">
       <div className="w-12 h-12 rounded-full bg-gray-700 mr-4" />
@@ -36,7 +38,10 @@ function Tuwueet({ text, created, username, likes, comments }) {
         </div>
         <div>{text}</div>
         <div className="flex gap-3 mt-2 text-sm">
-          <CiHeart className="text-xl text-pink-500 cursor-pointer" />
+          <CiHeart
+            className="text-xl text-pink-500 cursor-pointer"
+            onClick={handleLike}
+          />
           <span>{likes.length}</span>
           <FaComment className="text-pink-500 cursor-pointer relative top-[3px]" />
           <span>{comments.length}</span>

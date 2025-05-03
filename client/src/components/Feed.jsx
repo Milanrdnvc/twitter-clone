@@ -28,6 +28,7 @@ function Feed() {
               username={tuwueet.username}
               likes={tuwueet.likes}
               comments={tuwueet.comments}
+              id={tuwueet._id}
             />
           ))
           .reverse()}
