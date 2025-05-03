@@ -17,16 +17,18 @@ function Feed() {
       <div className="flex-1 overflow-y-auto">
         <CreateTuwueet />
 
-        {data?.tuwueets.map((tuwueet) => (
-          <Tuwueet
-            key={tuwueet._id}
-            text={tuwueet.text}
-            created={tuwueet.createdAt}
-            username={tuwueet.username}
-            likes={tuwueet.likes}
-            comments={tuwueet.comments}
-          />
-        ))}
+        {data?.tuwueets
+          .map((tuwueet) => (
+            <Tuwueet
+              key={tuwueet._id}
+              text={tuwueet.text}
+              created={tuwueet.createdAt}
+              username={tuwueet.username}
+              likes={tuwueet.likes}
+              comments={tuwueet.comments}
+            />
+          ))
+          .reverse()}
       </div>
     </main>
   );
