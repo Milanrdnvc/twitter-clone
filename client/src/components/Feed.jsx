@@ -6,7 +6,7 @@ import { useGetAllQuery } from "../slices/tuwueetsApiSlice";
 function Feed() {
   const { data, isLoading } = useGetAllQuery();
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <main className="flex-1 flex flex-col border-x border-gray-800 h-full">

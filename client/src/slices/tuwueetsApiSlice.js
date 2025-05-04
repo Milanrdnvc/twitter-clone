@@ -27,4 +27,5 @@ export const tuwueetsApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useCreateMutation, useGetAllQuery } = tuwueetsApiSlice;
+export const { useCreateMutation, useLikeMutation, useGetAllQuery } =
+  tuwueetsApiSlice;

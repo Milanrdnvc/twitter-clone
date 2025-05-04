@@ -60,6 +60,8 @@ const comment = asyncHandler(async (req, res) => {
 const like = asyncHandler(async (req, res) => {
   const { tuwueetId, like } = req.body;
 
+  console.log(like);
+
   if (!tuwueetId) {
     res.status(400);
     throw new Error("Tuwueet ID not provided");
@@ -69,12 +71,15 @@ const like = asyncHandler(async (req, res) => {
   const likes = tuwueet.likes;
 
   if (like) {
-    likes.push({ userId: req.user._id });
+    likes.push(req.user._id);
     tuwueet.likes = likes;
     await tuwueet.save();
     res.json({ likes });
   } else {
-    const filteredLikes = likes.filter((user) => user.userId !== userId);
+    const filteredLikes = likes.filter(
+      (user) => String(user) !== String(req.user._id)
+    );
+
     tuwueet.likes = filteredLikes;
     await tuwueet.save();
     res.json({ filteredLikes });

@@ -1,8 +1,16 @@
 import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaComment } from "react-icons/fa";
+import { useLikeMutation } from "../slices/tuwueetsApiSlice";
+import { toast } from "react-toastify";
+import { FaHeart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 function Tuwueet({ text, created, username, likes, comments, id }) {
+  const { userInfo } = useSelector((state) => state.auth);
+
+  console.log(likes);
+
   const timeAgo = (date) => {
     const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
     const deltaSeconds = Math.floor((new Date() - new Date(date)) / 1000);
@@ -26,7 +34,18 @@ function Tuwueet({ text, created, username, likes, comments, id }) {
     return "just now";
   };
 
-  const handleLike = async () => {};
+  const [like, { isLoading, error }] = useLikeMutation();
+
+  const handleLike = async (toLike) => {
+    try {
+      const res = await like({
+        tuwueetId: id,
+        like: toLike,
+      }).unwrap();
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
 
   return (
     <div className="flex p-4 border-b border-gray-800">
@@ -38,10 +57,18 @@ function Tuwueet({ text, created, username, likes, comments, id }) {
         </div>
         <div>{text}</div>
         <div className="flex gap-3 mt-2 text-sm">
-          <CiHeart
-            className="text-xl text-pink-500 cursor-pointer"
-            onClick={handleLike}
-          />
+          {likes.includes(userInfo?._id) ? (
+            <FaHeart
+              className="text-xl text-pink-500 cursor-pointer"
+              onClick={() => handleLike(false)}
+            />
+          ) : (
+            <CiHeart
+              className="text-xl text-pink-500 cursor-pointer"
+              onClick={() => handleLike(true)}
+            />
+          )}
+
           <span>{likes.length}</span>
           <FaComment className="text-pink-500 cursor-pointer relative top-[3px]" />
           <span>{comments.length}</span>
