@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { FaImage } from "react-icons/fa6";
 import { useCreateMutation } from "../slices/tuwueetsApiSlice";
+import { toast } from "react-toastify";
 
 function CreateTuwueet() {
   const [text, setText] = useState("");
@@ -33,7 +34,7 @@ function CreateTuwueet() {
         <textarea
           value={text}
           className="w-full  text-white placeholder-gray-500 resize-none outline-none"
-          placeholder="What’s happening?"
+          placeholder="What's happening?"
           rows="2"
           onChange={(e) => setText(e.target.value)}
         ></textarea>

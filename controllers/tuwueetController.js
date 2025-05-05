@@ -60,8 +60,6 @@ const comment = asyncHandler(async (req, res) => {
 const like = asyncHandler(async (req, res) => {
   const { tuwueetId, like } = req.body;
 
-  console.log(like);
-
   if (!tuwueetId) {
     res.status(400);
     throw new Error("Tuwueet ID not provided");

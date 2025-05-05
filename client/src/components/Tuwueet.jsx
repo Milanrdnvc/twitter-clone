@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
 import { FaComment } from "react-icons/fa";
 import { useLikeMutation } from "../slices/tuwueetsApiSlice";
@@ -70,7 +71,9 @@ function Tuwueet({ text, created, username, likes, comments, id }) {
           )}
 
           <span>{likes.length}</span>
-          <FaComment className="text-pink-500 cursor-pointer relative top-[3px]" />
+          <Link to={`/comments/${id}`}>
+            <FaComment className="text-pink-500 cursor-pointer relative top-[3px]" />
+          </Link>
           <span>{comments.length}</span>
         </div>
       </div>
