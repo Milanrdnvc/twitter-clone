@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 function Tuwueet({ text, created, username, likes, comments, id }) {
   const { userInfo } = useSelector((state) => state.auth);
 
-  console.log(likes);
+  // console.log(likes);
 
   const timeAgo = (date) => {
     const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });

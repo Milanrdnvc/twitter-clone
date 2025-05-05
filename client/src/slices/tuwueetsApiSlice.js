@@ -18,6 +18,13 @@ export const tuwueetsApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    comment: builder.mutation({
+      query: (data) => ({
+        url: `${TUWUEETS_URL}/comment`,
+        method: "POST",
+        body: data,
+      }),
+    }),
     getAll: builder.query({
       query: (_) => ({
         url: `${TUWUEETS_URL}/all`,
@@ -36,6 +43,7 @@ export const tuwueetsApiSlice = apiSlice.injectEndpoints({
 export const {
   useCreateMutation,
   useLikeMutation,
+  useCommentMutation,
   useGetAllQuery,
   useGetTuwueetQuery,
 } = tuwueetsApiSlice;
