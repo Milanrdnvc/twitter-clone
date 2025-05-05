@@ -1,37 +1,33 @@
 import Tuwueet from "../components/Tuwueet";
 import Comment from "../components/Comment";
 import { useParams } from "react-router-dom";
+import { useGetTuwueetQuery } from "../slices/tuwueetsApiSlice";
 
 function CommentPage() {
   const { id } = useParams();
 
-  console.log(id);
+  const { data, isLoading } = useGetTuwueetQuery({ id });
 
   return (
     <div className="max-w-2xl mx-auto p-4 text-white">
-      {/* Tuwueet */}
-      {/* <div className="border-b border-gray-800 pb-4 mb-6">
-        <div className="flex gap-4">
-          <div className="w-12 h-12 bg-gray-700 rounded-full" />
-          <div>
-            <div className="font-bold">John Doe</div>
-            <div className="mt-2">This is the tuwueet content.</div>
-          </div>
-        </div>
-        <div className="text-sm text-gray-500 mt-2">
-          April 3, 2025 at 09:18 AM
-        </div>
-      </div> */}
-      {/* <Tuwueet /> */}
+      {data && (
+        <Tuwueet
+          key={data.tuwueet._id}
+          text={data.tuwueet.text}
+          created={data.tuwueet.createdAt}
+          username={data.tuwueet.username}
+          likes={data.tuwueet.likes}
+          comments={data.tuwueet.comments}
+          id={data.tuwueet._id}
+        />
+      )}
 
-      {/* Comments Section */}
       <div className="mb-6">
         <h2 className="text-lg font-bold mb-4">Comments</h2>
         <Comment />
         {/* ... */}
       </div>
 
-      {/* Add Comment Form */}
       <div>
         <textarea
           className="w-full bg-gray-800 p-3 rounded text-white placeholder-gray-400 resize-none"
