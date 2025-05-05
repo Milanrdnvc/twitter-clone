@@ -1,16 +1,39 @@
 import { useState } from "react";
 import Tuwueet from "../components/Tuwueet";
 import Comment from "../components/Comment";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useGetTuwueetQuery } from "../slices/tuwueetsApiSlice";
+import {
+  useGetTuwueetQuery,
+  useCommentMutation,
+} from "../slices/tuwueetsApiSlice";
+import { toast } from "react-toastify";
 
 function CommentPage() {
+  const { userInfo } = useSelector((state) => state.auth);
   const [text, setText] = useState("");
   const { id } = useParams();
 
-  const { data, isLoading } = useGetTuwueetQuery({ id });
+  const { data } = useGetTuwueetQuery({ id });
 
-  const handleCreateComment = async () => {};
+  const [comment, { isLoading, error }] = useCommentMutation();
+
+  const handleCreateComment = async () => {
+    try {
+      const res = await comment({
+        tuwueetId: id,
+        text,
+        img: "N/A",
+        username: userInfo?.username,
+        createdAt: new Date(),
+        userImg: "N/A",
+      }).unwrap();
+
+      setText("");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
 
   return (
     <div className="max-w-2xl mx-auto p-4 text-white">
@@ -34,6 +57,7 @@ function CommentPage() {
 
       <div>
         <textarea
+          value={text}
           className="w-full bg-gray-800 p-3 rounded text-white placeholder-gray-400 resize-none"
           rows="3"
           placeholder="Write a comment..."
