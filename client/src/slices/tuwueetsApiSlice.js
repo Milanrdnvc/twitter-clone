@@ -37,6 +37,12 @@ export const tuwueetsApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getAllComments: builder.query({
+      query: (data) => ({
+        url: `${TUWUEETS_URL}/${data.id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -46,4 +52,5 @@ export const {
   useCommentMutation,
   useGetAllQuery,
   useGetTuwueetQuery,
+  useGetAllCommentsQuery,
 } = tuwueetsApiSlice;

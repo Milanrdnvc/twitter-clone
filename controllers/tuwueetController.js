@@ -7,11 +7,16 @@ const getAllTuwueets = asyncHandler(async (_, res) => {
 });
 
 const allComments = asyncHandler(async (req, res) => {
-  const { tuwueetId } = req.body;
-  if (!tuwueetId)
-    return res.status(400).json({ msg: "Tuwueet ID not provided" });
-  const tuwueets = await Tuwueet.findOne({ _id: tuwueetId });
-  const comments = tuwueets.comments;
+  const tuwueetId = req.params.id;
+
+  const tuwueet = await Tuwueet.findOne({ _id: tuwueetId });
+
+  if (!tuwueet) {
+    res.status(400);
+    throw new Error("Tuwueet with that ID doesn't exist");
+  }
+
+  const comments = tuwueet.comments;
   res.json({ comments });
 });
 
