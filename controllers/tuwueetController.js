@@ -17,6 +17,7 @@ const allComments = asyncHandler(async (req, res) => {
   }
 
   const comments = tuwueet.comments;
+
   res.json({ comments });
 });
 

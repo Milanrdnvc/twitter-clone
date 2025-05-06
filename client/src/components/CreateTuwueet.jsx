@@ -9,7 +9,6 @@ function CreateTuwueet() {
   const { username } = useSelector((state) =>
     state.auth.userInfo ? state.auth.userInfo : { username: "Guest" }
   );
-
   const [create, { isLoading, error }] = useCreateMutation();
 
   const handleCreateTuwueet = async () => {
