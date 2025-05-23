@@ -40,16 +40,14 @@ function CommentPage() {
 
   return (
     <div className="max-w-2xl mx-auto p-4 text-white">
-      <div className="h-full flex flex-col">
-        <div className="flex items-center gap-4 p-4 border-b border-gray-800 sticky top-0 bg-[#15202b] z-10">
-          <button
-            onClick={() => navigate("/")}
-            className="text-white text-xl hover:text-pink-500"
-          >
-            <IoArrowBack className="cursor-pointer" />
-          </button>
-          <h1 className="text-xl font-bold">Tuwueet</h1>
-        </div>
+      <div className="flex items-center gap-4 p-4 border-b border-gray-800 sticky top-0 bg-[#15202b] z-10">
+        <button
+          onClick={() => navigate("/")}
+          className="text-white text-xl hover:text-pink-500"
+        >
+          <IoArrowBack className="cursor-pointer" />
+        </button>
+        <h1 className="text-xl font-bold">Tuwueet</h1>
       </div>
 
       {data && (
