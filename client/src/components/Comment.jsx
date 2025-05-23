@@ -3,7 +3,7 @@ import { timeAgo } from "../utils/date";
 
 function Comment({ createdBy, text, created }) {
   return (
-    <div className="mb-4 border-b border-gray-800 pb-4">
+    <div className="mb-4 border-b border-gray-800 p-4">
       <div className="flex gap-4">
         <div className="w-10 h-10 bg-gray-700 rounded-full" />
         <div>
