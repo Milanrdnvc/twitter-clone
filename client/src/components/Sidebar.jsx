@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Notifications from "./Notifications";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { clearCredentials } from "../slices/authSlice";
@@ -10,6 +11,7 @@ import { IoLogOut } from "react-icons/io5";
 import { clearProfile } from "../slices/userProfileSlice";
 
 function Sidebar() {
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
 
   const [logoutApiCall] = useLogoutMutation();
@@ -22,7 +24,6 @@ function Sidebar() {
       await logoutApiCall().unwrap();
       dispatch(clearCredentials());
       dispatch(clearProfile());
-      console.log("test");
 
       navigate("/");
     } catch (err) {
@@ -31,39 +32,49 @@ function Sidebar() {
   }
 
   return (
-    <aside className="w-[250px] p-4  hidden lg:flex flex-col">
-      <Link to="/">
-        <FaTwitter className="text-3xl mb-4 text-pink-500 cursor-pointer" />
-      </Link>
-      <nav className="flex flex-col gap-4">
-        <Link to="/" className="flex items-center gap-3 hover:text-pink-500">
-          <RiHome7Fill className="text-3xl relative top-[2px] text-pink-500" />
-          <span className="text-base font-bold">Home</span>
+    <>
+      <Notifications
+        open={notificationsOpen}
+        onClose={() => setNotificationsOpen(false)}
+      />
+      <aside className="w-[250px] p-4  hidden lg:flex flex-col">
+        <Link to="/">
+          <FaTwitter className="text-3xl mb-4 text-pink-500 cursor-pointer" />
         </Link>
-        <Link to="#" className="flex items-center gap-3 hover:text-pink-500">
-          <IoIosNotifications className="text-3xl relative top-[2px] right-[2px] text-pink-500" />
-          <span className="text-base font-bold">Notifications</span>
-        </Link>
-        {userInfo ? (
+        <nav className="flex flex-col gap-4">
+          <Link to="/" className="flex items-center gap-3 hover:text-pink-500">
+            <RiHome7Fill className="text-3xl relative top-[2px] text-pink-500" />
+            <span className="text-base font-bold">Home</span>
+          </Link>
           <Link
             to="#"
             className="flex items-center gap-3 hover:text-pink-500"
-            onClick={logoutHandler}
+            onClick={() => setNotificationsOpen(true)}
           >
-            <IoLogOut className="text-3xl relative top-[2px] left-[1.2px] text-pink-500" />
-            <span className="text-base font-bold">Log Out</span>
+            <IoIosNotifications className="text-3xl relative top-[2px] right-[2px] text-pink-500" />
+            <span className="text-base font-bold">Notifications</span>
           </Link>
-        ) : (
-          <Link
-            to="/login"
-            className="flex items-center gap-3 hover:text-pink-500"
-          >
-            <IoLogOut className="text-3xl relative top-[2px] left-[1.2px] text-pink-500" />
-            <span className="text-base font-bold">Log In</span>
-          </Link>
-        )}
-      </nav>
-    </aside>
+          {userInfo ? (
+            <Link
+              to="#"
+              className="flex items-center gap-3 hover:text-pink-500"
+              onClick={logoutHandler}
+            >
+              <IoLogOut className="text-3xl relative top-[2px] left-[1.2px] text-pink-500" />
+              <span className="text-base font-bold">Log Out</span>
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="flex items-center gap-3 hover:text-pink-500"
+            >
+              <IoLogOut className="text-3xl relative top-[2px] left-[1.2px] text-pink-500" />
+              <span className="text-base font-bold">Log In</span>
+            </Link>
+          )}
+        </nav>
+      </aside>
+    </>
   );
 }
 
