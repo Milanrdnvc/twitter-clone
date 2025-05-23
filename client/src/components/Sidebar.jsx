@@ -31,7 +31,7 @@ function Sidebar() {
   }
 
   return (
-    <aside className="w-[250px] p-4 border-r border-gray-800 hidden lg:flex flex-col">
+    <aside className="w-[250px] p-4  hidden lg:flex flex-col">
       <Link to="/">
         <FaTwitter className="text-3xl mb-4 text-pink-500 cursor-pointer" />
       </Link>
