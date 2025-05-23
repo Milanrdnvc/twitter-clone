@@ -7,7 +7,7 @@ import {
 import { editProfile } from "../slices/userProfileSlice";
 import { toast } from "react-toastify";
 
-function Profile() {
+function Profile({ alwaysVisible = false }) {
   const { userInfo } = useSelector((state) => state.userProfile);
   const { username } = useSelector((state) =>
     state.auth.userInfo ? state.auth.userInfo : { username: "Guest" }
@@ -64,7 +64,12 @@ function Profile() {
   }, [data, userInfo]);
 
   return (
-    <aside className="w-[300px] p-4 hidden lg:flex flex-col h-full overflow-y-auto">
+    <aside
+      className={`w-[300px] p-4 ${
+        alwaysVisible ? "flex" : "hidden lg:flex"
+      } flex-col h-full overflow-y-auto`}
+    >
+      {/* <aside className="w-[300px] p-4 hidden lg:flex flex-col h-full overflow-y-auto"> */}
       <div className="bg-gray-900 p-4 rounded-xl">
         <div className="w-20 h-20 rounded-full bg-gray-700 mx-auto mb-4" />
 
