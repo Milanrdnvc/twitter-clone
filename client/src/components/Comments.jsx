@@ -10,6 +10,7 @@ import {
 } from "../slices/tuwueetsApiSlice";
 import { toast } from "react-toastify";
 import { IoArrowBack } from "react-icons/io5";
+import { useSendNotificationMutation } from "../slices/usersApiSlice";
 
 function CommentPage() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -20,6 +21,7 @@ function CommentPage() {
   const comments = useGetAllCommentsQuery({ id });
   const isLoadingC = comments.isLoading;
   const [comment, { isLoading, error }] = useCommentMutation();
+  const [sendNotification] = useSendNotificationMutation();
 
   const handleCreateComment = async () => {
     try {
@@ -31,6 +33,10 @@ function CommentPage() {
         createdAt: new Date(),
         userImg: "N/A",
       }).unwrap();
+
+      const nRes = await sendNotification({
+        tuwueetId: id,
+      });
 
       setText("");
     } catch (err) {

@@ -1,4 +1,5 @@
 import User from "../models/user.js";
+import Tuwueet from "../models/tuwueet.js";
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 
@@ -36,7 +37,6 @@ const sendNotification = asyncHandler(async (req, res) => {
     tuwueetId,
     sentById: req.user._id,
     sentByUsername: req.user.username,
-    sentByPfp: req.user.pfp,
   });
   user.notifications = notifications;
 
