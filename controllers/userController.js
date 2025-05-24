@@ -25,7 +25,7 @@ const profileInfo = asyncHandler(async (req, res) => {
 });
 
 const sendNotification = asyncHandler(async (req, res) => {
-  const { tuwueetId } = req.body;
+  const { tuwueetId, type } = req.body;
 
   const tuwueet = await Tuwueet.findById(tuwueetId);
   const user = await User.findById(tuwueet.userId);
@@ -35,8 +35,8 @@ const sendNotification = asyncHandler(async (req, res) => {
   const notifications = user.notifications;
   notifications.push({
     tuwueetId,
-    sentById: req.user._id,
     sentByUsername: req.user.username,
+    type,
   });
   user.notifications = notifications;
 

@@ -36,6 +36,7 @@ function CommentPage() {
 
       const nRes = await sendNotification({
         tuwueetId: id,
+        type: "like",
       });
 
       setText("");
