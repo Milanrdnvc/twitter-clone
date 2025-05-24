@@ -16,6 +16,6 @@ router.post("/like", protect, like); // [✔]
 router.post("/comment", protect, comment); // [✔]
 router.get("/all", getAllTuwueets); // [✔]
 router.get("/:id", getTuwueet); // [✔]
-router.get("/allComments/:id", allComments); // [...]
+router.get("/allComments/:id", allComments); // [✔]
 
 export default router;

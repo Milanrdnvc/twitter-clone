@@ -7,11 +7,12 @@ import { toast } from "react-toastify";
 import { FaHeart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { timeAgo } from "../utils/date";
+import { useSendNotificationMutation } from "../slices/usersApiSlice";
 
 function Tuwueet({ text, created, username, likes, comments, id }) {
   const { userInfo } = useSelector((state) => state.auth);
-
   const [like, { isLoading, error }] = useLikeMutation();
+  const [sendNotification] = useSendNotificationMutation();
 
   const handleLike = async (toLike) => {
     try {
@@ -19,6 +20,13 @@ function Tuwueet({ text, created, username, likes, comments, id }) {
         tuwueetId: id,
         like: toLike,
       }).unwrap();
+
+      if (toLike) {
+        const resN = await sendNotification({
+          tuwueetId: id,
+          type: "like",
+        });
+      }
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

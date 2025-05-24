@@ -1,17 +1,33 @@
 import React from "react";
 import Notification from "./Notification";
+import { useAllNotificationsQuery } from "../slices/usersApiSlice";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Notifications({ open, onClose }) {
   if (!open) return null;
+
+  const { userInfo } = useSelector((state) => state.auth);
+  const { data } = useAllNotificationsQuery(userInfo._id);
+
+  console.log(data);
 
   return (
     <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center">
       <div className="bg-[#192734] p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-xl font-bold mb-4">Notifications</h2>
         <ul className="space-y-3">
-          <Notification info={`📢 You have a new follower!`} />
-          <Notification info={` ❤️ Someone liked your tuwueet!`} />
-          <Notification info={`💬 You got a reply!!`} />
+          {data &&
+            data.notifications.map((notification, idx) => {
+              return (
+                <Link to={`/comments/${notification.tuwueetId}`}>
+                  <Notification
+                    info={`You got a ${notification.type} from ${notification.sentByUsername}`}
+                    key={idx}
+                  />
+                </Link>
+              );
+            })}
         </ul>
         <button
           onClick={onClose}

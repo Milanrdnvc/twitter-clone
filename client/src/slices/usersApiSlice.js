@@ -31,17 +31,23 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    sendNotification: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/sendNotification`,
+        method: "POST",
+        body: data,
+      }),
+    }),
     profile: builder.query({
       query: (_) => ({
         url: `${USERS_URL}/profileInfo`,
         method: "GET",
       }),
     }),
-    sendNotification: builder.mutation({
-      query: (data) => ({
-        url: `${USERS_URL}/sendNotification`,
-        method: "POST",
-        body: data,
+    allNotifications: builder.query({
+      query: (_) => ({
+        url: `${USERS_URL}/allNotifications`,
+        method: "GET",
       }),
     }),
   }),
@@ -54,4 +60,5 @@ export const {
   useEditProfileMutation,
   useSendNotificationMutation,
   useProfileQuery,
+  useAllNotificationsQuery,
 } = usersApiSlice;
