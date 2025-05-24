@@ -37,6 +37,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    sendNotification: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/sendNotification`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -45,5 +52,6 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useEditProfileMutation,
+  useSendNotificationMutation,
   useProfileQuery,
 } = usersApiSlice;
