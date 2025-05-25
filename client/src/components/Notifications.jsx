@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function Notifications({ open, onClose }) {
   const { userInfo } = useSelector((state) => state.auth);
-  const { data } = useAllNotificationsQuery(userInfo._id);
+  const { data } = useAllNotificationsQuery(userInfo?._id);
 
   if (!open) return null;
 
