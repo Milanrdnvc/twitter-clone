@@ -5,12 +5,10 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Notifications({ open, onClose }) {
-  if (!open) return null;
-
   const { userInfo } = useSelector((state) => state.auth);
   const { data } = useAllNotificationsQuery(userInfo._id);
 
-  console.log(data);
+  if (!open) return null;
 
   return (
     <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center">
@@ -18,16 +16,18 @@ function Notifications({ open, onClose }) {
         <h2 className="text-xl font-bold mb-4">Notifications</h2>
         <ul className="space-y-3">
           {data &&
-            data.notifications.map((notification, idx) => {
-              return (
-                <Link to={`/comments/${notification.tuwueetId}`}>
-                  <Notification
-                    info={`You got a ${notification.type} from ${notification.sentByUsername}`}
-                    key={idx}
-                  />
-                </Link>
-              );
-            })}
+            data.notifications
+              .map((notification, idx) => {
+                return (
+                  <Link to={`/comments/${notification.tuwueetId}`} key={idx}>
+                    <Notification
+                      info={`You got a ${notification.type} from ${notification.sentByUsername}`}
+                      key={idx}
+                    />
+                  </Link>
+                );
+              })
+              .reverse()}
         </ul>
         <button
           onClick={onClose}
