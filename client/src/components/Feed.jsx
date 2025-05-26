@@ -8,13 +8,17 @@ function Feed() {
   const { data, isLoading, refetch } = useGetAllQuery();
 
   useEffect(() => {
-    socket.on("tuwueet", (data) => {
+    const handleTuwueetUpdates = (data) => {
       refetch();
-    });
+    };
 
-    socket.on("like", (data) => {
-      refetch();
-    });
+    socket.on("tuwueet", handleTuwueetUpdates);
+    socket.on("like", handleTuwueetUpdates);
+
+    return () => {
+      socket.off("tuwueet", handleTuwueetUpdates);
+      socket.off("like", handleTuwueetUpdates);
+    };
   }, []);
 
   return (

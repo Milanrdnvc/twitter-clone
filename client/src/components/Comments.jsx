@@ -25,10 +25,22 @@ function CommentPage() {
   const [sendNotification] = useSendNotificationMutation();
 
   useEffect(() => {
-    socket.on("comment", (data) => {
+    const handleCommentUpdates = (data) => {
       comments.refetch();
       refetch();
-    });
+    };
+
+    const handleLikeUpdates = (data) => {
+      refetch();
+    };
+
+    socket.on("comment", handleCommentUpdates);
+    socket.on("like", handleLikeUpdates);
+
+    return () => {
+      socket.off("comment", handleCommentUpdates);
+      socket.off("like", handleLikeUpdates);
+    };
   }, []);
 
   const handleCreateComment = async () => {
