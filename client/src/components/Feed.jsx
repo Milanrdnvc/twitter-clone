@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import socket, { connectSocket, emitTuwueet } from "../utils/socket";
 import CreateTuwueet from "./CreateTuwueet";
 import Tuwueet from "./Tuwueet";
 import { useGetAllQuery } from "../slices/tuwueetsApiSlice";
 
 function Feed() {
-  const { data, isLoading } = useGetAllQuery();
+  const { data, isLoading, refetch } = useGetAllQuery();
+
+  useEffect(() => {
+    socket.on("tuwueet", (data) => {
+      refetch();
+    });
+
+    socket.on("like", (data) => {
+      refetch();
+    });
+  }, []);
 
   return (
     <main className="flex-1 flex flex-col border-x border-gray-800 h-full">

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import socket, { emitTuwueet } from "../utils/socket";
 import { useSelector } from "react-redux";
 import { FaImage } from "react-icons/fa6";
 import { useCreateMutation } from "../slices/tuwueetsApiSlice";
@@ -21,6 +22,8 @@ function CreateTuwueet() {
       }).unwrap();
 
       setText("");
+
+      emitTuwueet(socket, "my tuwueet");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

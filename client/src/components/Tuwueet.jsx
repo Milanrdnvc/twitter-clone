@@ -1,4 +1,5 @@
 import React from "react";
+import socket, { emitLike } from "../utils/socket";
 import { Link } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
 import { FaComment } from "react-icons/fa";
@@ -27,6 +28,8 @@ function Tuwueet({ text, created, username, likes, comments, id }) {
           type: "like",
         });
       }
+
+      emitLike(socket, "my like");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

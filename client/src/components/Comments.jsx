@@ -1,6 +1,7 @@
-import { useState } from "react";
 import Tuwueet from "../components/Tuwueet";
 import Comment from "../components/Comment";
+import { useState, useEffect } from "react";
+import socket, { emitComment } from "../utils/socket";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -17,11 +18,18 @@ function CommentPage() {
   const [text, setText] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data } = useGetTuwueetQuery({ id });
+  const { data, refetch } = useGetTuwueetQuery({ id });
   const comments = useGetAllCommentsQuery({ id });
   const isLoadingC = comments.isLoading;
   const [comment, { isLoading, error }] = useCommentMutation();
   const [sendNotification] = useSendNotificationMutation();
+
+  useEffect(() => {
+    socket.on("comment", (data) => {
+      comments.refetch();
+      refetch();
+    });
+  }, []);
 
   const handleCreateComment = async () => {
     try {
@@ -40,6 +48,8 @@ function CommentPage() {
       });
 
       setText("");
+
+      emitComment(socket, "my comment");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
