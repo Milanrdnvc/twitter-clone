@@ -45,6 +45,7 @@ function Tuwueet({ text, created, username, likes, comments, id }) {
         </div>
         <div>{text}</div>
         <div className="flex gap-3 mt-2 text-sm">
+          {/* This likes does not always hold up to date data, need to initialize toLike with newest data from the server */}
           {likes.includes(userInfo?._id) ? (
             <FaHeart
               className="text-xl text-pink-500 cursor-pointer"

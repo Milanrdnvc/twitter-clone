@@ -8,21 +8,10 @@ import { toast } from "react-toastify";
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [login, { isLoading, error }] = useLoginMutation();
-
   const { userInfo } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (userInfo) {
-      console.log(userInfo);
-
-      navigate("/");
-    }
-  }, [navigate, userInfo]);
 
   async function submitHandler(e) {
     e.preventDefault();
@@ -43,6 +32,14 @@ function LogIn() {
       toast.error(err?.data?.message || err.error);
     }
   }
+
+  useEffect(() => {
+    if (userInfo) {
+      console.log(userInfo);
+
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)] text-[var(--color-primary)] px-4">

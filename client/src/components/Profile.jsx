@@ -12,17 +12,12 @@ function Profile({ alwaysVisible = false }) {
   const { username } = useSelector((state) =>
     state.auth.userInfo ? state.auth.userInfo : { username: "Guest" }
   );
-
   const loggedIn = useSelector((state) => state.auth.userInfo);
-
   const dispatch = useDispatch();
-
   const { data, isLoading } = useProfileQuery(undefined, {
     skip: !!userInfo,
   });
-
   const [editProfileM, { isLoadingEdit, error }] = useEditProfileMutation();
-
   const [editMode, setEditMode] = useState(false);
   const [profile, setProfile] = useState({
     bio: userInfo?.bio,

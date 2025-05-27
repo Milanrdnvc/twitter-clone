@@ -24,25 +24,6 @@ function CommentPage() {
   const [comment, { isLoading, error }] = useCommentMutation();
   const [sendNotification] = useSendNotificationMutation();
 
-  useEffect(() => {
-    const handleCommentUpdates = (data) => {
-      comments.refetch();
-      refetch();
-    };
-
-    const handleLikeUpdates = (data) => {
-      refetch();
-    };
-
-    socket.on("comment", handleCommentUpdates);
-    socket.on("like", handleLikeUpdates);
-
-    return () => {
-      socket.off("comment", handleCommentUpdates);
-      socket.off("like", handleLikeUpdates);
-    };
-  }, []);
-
   const handleCreateComment = async () => {
     try {
       const res = await comment({
@@ -66,6 +47,25 @@ function CommentPage() {
       toast.error(err?.data?.message || err.error);
     }
   };
+
+  useEffect(() => {
+    const handleCommentUpdates = (data) => {
+      comments.refetch();
+      refetch();
+    };
+
+    const handleLikeUpdates = (data) => {
+      refetch();
+    };
+
+    socket.on("comment", handleCommentUpdates);
+    socket.on("like", handleLikeUpdates);
+
+    return () => {
+      socket.off("comment", handleCommentUpdates);
+      socket.off("like", handleLikeUpdates);
+    };
+  }, []);
 
   return (
     <div className="flex-1 flex flex-col border-x border-gray-800 h-full">

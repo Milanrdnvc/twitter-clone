@@ -13,9 +13,7 @@ import { clearProfile } from "../slices/userProfileSlice";
 function Sidebar() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
-
   const [logoutApiCall] = useLogoutMutation();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

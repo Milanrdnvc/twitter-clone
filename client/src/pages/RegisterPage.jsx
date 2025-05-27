@@ -10,21 +10,10 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [register, { isLoading, error }] = useRegisterMutation();
-
   const { userInfo } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (userInfo) {
-      console.log(userInfo);
-
-      navigate("/");
-    }
-  }, [navigate, userInfo]);
 
   async function submitHandler(e) {
     e.preventDefault();
@@ -47,6 +36,14 @@ function Register() {
       toast.error(err?.data?.message || err.error);
     }
   }
+
+  useEffect(() => {
+    if (userInfo) {
+      console.log(userInfo);
+
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
   return (
     <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)] text-[var(--color-primary)] px-4">
       <div className="bg-[var(--color-bg-secondary)] p-8 rounded-xl shadow-xl w-full max-w-md">
