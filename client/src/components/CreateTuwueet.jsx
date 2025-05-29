@@ -6,6 +6,9 @@ import { useCreateMutation } from "../slices/tuwueetsApiSlice";
 import { toast } from "react-toastify";
 
 function CreateTuwueet() {
+  // const [fileInput, setFileInput] = useState("");
+  // const [selectedFile, setSelectedFile] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
   const [text, setText] = useState("");
   const { username } = useSelector((state) =>
     state.auth.userInfo ? state.auth.userInfo : { username: "Guest" }
@@ -23,10 +26,44 @@ function CreateTuwueet() {
 
       setText("");
 
+      handleSubmitFile();
+
       emitTuwueet(socket, "my tuwueet");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
+  };
+
+  const uploadImage = async (base64EncodedImage) => {
+    try {
+      await fetch("/api/upload", {
+        method: "POST",
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setPreviewSource("");
+    }
+  };
+
+  const handleSubmitFile = () => {
+    if (!previewSource) return;
+    uploadImage(previewSource);
+  };
+
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
   };
 
   return (
@@ -35,14 +72,24 @@ function CreateTuwueet() {
       <div className="flex-1">
         <textarea
           value={text}
-          className="w-full  text-white placeholder-gray-500 resize-none outline-none"
+          className="w-full text-white placeholder-gray-500 resize-none outline-none bg-transparent"
           placeholder="What's happening?"
           rows="2"
           onChange={(e) => setText(e.target.value)}
         ></textarea>
+
         <div className="flex justify-between items-center mt-2">
           <div className="flex gap-4 text-blue-500">
-            <FaImage className="text-xl text-pink-500 cursor-pointer" />
+            <label htmlFor="image-upload" className="cursor-pointer">
+              <FaImage className="text-xl text-pink-500" />
+            </label>
+            <input
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              className="hidden"
+              onChange={handleFileInputChange}
+            />
           </div>
           <button
             className="bg-pink-500 hover:bg-pink-600 text-white font-bold px-4 py-1 rounded-full cursor-pointer"
@@ -51,6 +98,9 @@ function CreateTuwueet() {
             Post
           </button>
         </div>
+        {previewSource && (
+          <img src={previewSource} style={{ height: "300px" }} />
+        )}
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+import { cloudinary } from "./utils/cloudinary.js";
 
 // Initialize server with socket.io
 const app = express();
@@ -33,11 +34,24 @@ io.on("connection", (socket) => {
 });
 
 // Middleware for parsing incoming data
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // API routes
+app.post("/api/upload", async (req, res) => {
+  try {
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.v2.uploader.upload(fileStr, {
+      folder: "tuwuitter",
+    });
+    console.log(uploadedResponse);
+    res.json({ msg: "Image uploaded" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Error uploading the image" });
+  }
+});
 app.use("/api/tuwueets", tuwueets);
 app.use("/api/users", users);
 
