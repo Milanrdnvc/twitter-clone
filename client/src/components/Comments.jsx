@@ -83,6 +83,7 @@ function CommentPage() {
         <Tuwueet
           key={data.tuwueet._id}
           text={data.tuwueet.text}
+          img={data.tuwueet.img}
           created={data.tuwueet.createdAt}
           username={data.tuwueet.username}
           likes={data.tuwueet.likes}
