@@ -1,5 +1,6 @@
 import Tuwueet from "../models/tuwueet.js";
 import asyncHandler from "express-async-handler";
+import { cloudinary } from "../utils/cloudinary.js";
 
 const getAllTuwueets = asyncHandler(async (_, res) => {
   const tuwueets = await Tuwueet.find();
@@ -98,9 +99,13 @@ const createTuwueet = asyncHandler(async (req, res) => {
     throw new Error("Text and username are required");
   }
 
+  const uploadedResponse = await cloudinary.v2.uploader.upload(img, {
+    folder: "tuwuitter",
+  });
+
   const newTuwueet = new Tuwueet({
     text,
-    img: img || "no img",
+    img: uploadedResponse.secure_url,
     userId: req.user._id,
     username: username,
     likes: [],

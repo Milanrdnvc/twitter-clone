@@ -6,8 +6,6 @@ import { useCreateMutation } from "../slices/tuwueetsApiSlice";
 import { toast } from "react-toastify";
 
 function CreateTuwueet() {
-  // const [fileInput, setFileInput] = useState("");
-  // const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [text, setText] = useState("");
   const { username } = useSelector((state) =>
@@ -19,38 +17,16 @@ function CreateTuwueet() {
     try {
       const res = await create({
         text,
-        img: "N/A",
+        img: previewSource,
         username,
         pfp: "N/A",
       }).unwrap();
 
       setText("");
-
-      handleSubmitFile();
-
       emitTuwueet(socket, "my tuwueet");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
-  };
-
-  const uploadImage = async (base64EncodedImage) => {
-    try {
-      await fetch("/api/upload", {
-        method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage }),
-        headers: { "Content-Type": "application/json" },
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setPreviewSource("");
-    }
-  };
-
-  const handleSubmitFile = () => {
-    if (!previewSource) return;
-    uploadImage(previewSource);
   };
 
   const handleFileInputChange = (e) => {
