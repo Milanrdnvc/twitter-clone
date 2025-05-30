@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { timeAgo } from "../utils/date";
 import { useSendNotificationMutation } from "../slices/usersApiSlice";
 
-function Tuwueet({ text, created, username, likes, comments, id }) {
+function Tuwueet({ text, img, created, username, likes, comments, id }) {
   const { userInfo } = useSelector((state) => state.auth);
   const [like, { isLoading, error }] = useLikeMutation();
   const [sendNotification] = useSendNotificationMutation();
@@ -44,6 +44,7 @@ function Tuwueet({ text, created, username, likes, comments, id }) {
           {timeAgo(created)}
         </div>
         <div>{text}</div>
+        <img src={img} style={{ height: "400px" }} />
         <div className="flex gap-3 mt-2 text-sm">
           {/* This likes does not always hold up to date data, need to initialize toLike with newest data from the server */}
           {likes.includes(userInfo?._id) ? (

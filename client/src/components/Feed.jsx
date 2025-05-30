@@ -37,6 +37,7 @@ function Feed() {
             <Tuwueet
               key={tuwueet._id}
               text={tuwueet.text}
+              img={tuwueet.img}
               created={tuwueet.createdAt}
               username={tuwueet.username}
               likes={tuwueet.likes}
