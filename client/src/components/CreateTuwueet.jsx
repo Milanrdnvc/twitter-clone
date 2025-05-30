@@ -23,6 +23,7 @@ function CreateTuwueet() {
       }).unwrap();
 
       setText("");
+      setPreviewSource("");
       emitTuwueet(socket, "my tuwueet");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -68,10 +69,11 @@ function CreateTuwueet() {
             />
           </div>
           <button
+            disabled={isLoading}
             className="bg-pink-500 hover:bg-pink-600 text-white font-bold px-4 py-1 rounded-full cursor-pointer"
             onClick={handleCreateTuwueet}
           >
-            Post
+            {isLoading ? "Posting..." : "Post"}
           </button>
         </div>
         {previewSource && (
