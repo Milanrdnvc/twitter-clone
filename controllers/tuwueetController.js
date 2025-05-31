@@ -99,13 +99,17 @@ const createTuwueet = asyncHandler(async (req, res) => {
     throw new Error("Text and username are required");
   }
 
-  const uploadedResponse = await cloudinary.v2.uploader.upload(img, {
-    folder: "tuwuitter",
-  });
+  let uploadedResponse = null;
+
+  if (img) {
+    uploadedResponse = await cloudinary.v2.uploader.upload(img, {
+      folder: "tuwuitter",
+    });
+  }
 
   const newTuwueet = new Tuwueet({
     text,
-    img: uploadedResponse.secure_url,
+    img: uploadedResponse?.secure_url,
     userId: req.user._id,
     username: username,
     likes: [],

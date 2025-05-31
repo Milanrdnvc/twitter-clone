@@ -44,7 +44,7 @@ function Tuwueet({ text, img, created, username, likes, comments, id }) {
           {timeAgo(created)}
         </div>
         <div>{text}</div>
-        <img src={img} style={{ height: "400px" }} />
+        {img && <img src={img} style={{ height: "400px" }} />}
         <div className="flex gap-3 mt-2 text-sm">
           {/* This likes does not always hold up to date data, need to initialize toLike with newest data from the server */}
           {likes.includes(userInfo?._id) ? (
