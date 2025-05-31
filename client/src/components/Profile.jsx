@@ -8,6 +8,7 @@ import { editProfile } from "../slices/userProfileSlice";
 import { toast } from "react-toastify";
 
 function Profile({ alwaysVisible = false }) {
+  const [previewSource, setPreviewSource] = useState("");
   const { userInfo } = useSelector((state) => state.userProfile);
   const { username } = useSelector((state) =>
     state.auth.userInfo ? state.auth.userInfo : { username: "Guest" }
@@ -47,6 +48,19 @@ function Profile({ alwaysVisible = false }) {
     setEditMode((prev) => !prev);
   };
 
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
   useEffect(() => {
     if (data && !userInfo && loggedIn) {
       setProfile({
@@ -65,7 +79,27 @@ function Profile({ alwaysVisible = false }) {
       } flex-col h-full overflow-y-auto`}
     >
       <div className="bg-gray-900 p-4 rounded-xl">
-        <div className="w-20 h-20 rounded-full bg-gray-700 mx-auto mb-4" />
+        <div className="relative w-20 h-20 mx-auto mb-4">
+          <label htmlFor="pfp-upload">
+            <div className="w-20 h-20 rounded-full bg-gray-700 cursor-pointer overflow-hidden">
+              {previewSource ? (
+                <img
+                  className="w-full h-full object-cover"
+                  src={previewSource}
+                />
+              ) : (
+                <div className="w-full h-full" />
+              )}
+            </div>
+          </label>
+          <input
+            type="file"
+            id="pfp-upload"
+            accept="image/*"
+            className="hidden"
+            onChange={handleFileInputChange}
+          />
+        </div>
 
         <h2 className="text-xl font-bold text-center mb-1">{username}</h2>
 
